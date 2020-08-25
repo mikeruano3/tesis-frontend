@@ -1,19 +1,19 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Ionic Music App
-    </ion-title>
+  <ion-toolbar class="ios hydrated">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ios title-ios hydrated">Cursos</ion-title>
   </ion-toolbar>
 </ion-header>
+
 
 <ion-content>
   <ion-list class="ios list-ios hydrated">
     <ion-list-header class="ios hydrated">
-      <p>Song List</p>
-      <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+      <p>Listado de Cursos</p>
     </ion-list-header>
     
-
     <ion-item *ngFor="let courseItem of courses" class="item-label item ios in-list ion-focusable hydrated">
       <ion-label class="sc-ion-label-ios-h sc-ion-label-ios-s ios hydrated">
         <h2>{{courseItem.name}}</h2>
@@ -31,31 +31,11 @@
     </ion-item>
   </ion-list>
 
-
-  <ion-list class="ios list-ios hydrated">
-    <ion-list-header class="ios hydrated">
-      <p>Configuration</p>
-    </ion-list-header>
-    
-
-    <ion-item class="item-label item ios in-list ion-focusable hydrated">
-      <ion-label class="sc-ion-label-ios-h sc-ion-label-ios-s ios hydrated">
-        <h2>Courses</h2>
-      </ion-label>
-
-      <div class="item-note" item-end>
-        <button ion-button clear [routerLink]="['/courses']">
-          <ion-icon name="create" style="zoom:2.0"></ion-icon>
-        </button>
-      </div>
-    </ion-item>
-  </ion-list>
-
-
   <!-- fab placed to the bottom start -->
   <ion-fab vertical="bottom" horizontal="end" slot="fixed" routerLink="/courses/add-course">
-    <ion-fab-button>
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
+      <ion-fab-button>
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
   </ion-fab>
+
 </ion-content>

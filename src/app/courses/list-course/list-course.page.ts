@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { CourseService } from '../courses/course.service';
+import { Component, OnInit, NgZone } from '@angular/core';
+import { CourseService } from '../course.service';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  selector: 'app-list-course',
+  templateUrl: './list-course.page.html',
+  styleUrls: ['./list-course.page.scss'],
 })
-export class HomePage implements OnInit {
+export class ListCoursePage implements OnInit {
   courses: any = [];
 
   constructor(

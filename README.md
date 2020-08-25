@@ -14,3 +14,7 @@ ionic serve -l
 ng generate page add-course
 ng generate page edit-course
 
+## DOCS
+
+https://www.positronx.io/build-ionic-cordova-angular-crud-mobile-app/
+

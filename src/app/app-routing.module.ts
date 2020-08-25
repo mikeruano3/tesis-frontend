@@ -9,12 +9,12 @@ const routes: Routes = [
   },
   { path: 'home', loadChildren: () => import('./home/home.module').then( m => m.HomePageModule) },
   {
-    path: 'add-course',
-    loadChildren: () => import('./add-course/add-course.module').then( m => m.AddCoursePageModule)
+    path: 'courses',
+    loadChildren: () => import('./courses/list-course/list-course.module').then( m => m.ListCoursePageModule)
   },
   {
-    path: 'edit-course',
-    loadChildren: () => import('./edit-course/edit-course.module').then( m => m.EditCoursePageModule)
+    path: 'users/login',
+    loadChildren: () => import('./users/login/login.module').then( m => m.LoginPageModule)
   },
 ];
 
