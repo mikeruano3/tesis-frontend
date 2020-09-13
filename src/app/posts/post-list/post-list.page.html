@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar class="ios hydrated">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ios title-ios hydrated">Publicaciones</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="post-home">
+  <div *ngFor="let post of posts;" class="post-home">
+    <app-post-card [post]="post"></app-post-card>
+  </div>
+  <!-- fab placed to the bottom start -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" routerLink="/courses/add-course">
+      <ion-fab-button>
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+  </ion-fab>
+
+</ion-content>

@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Usuario
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+  <ion-content class="auth-form">
+    <ion-grid>
+      <ion-row>
+        <ion-col align-self-center>
+          <ion-text class="ios hydrated" style="text-align: center;">
+            <h3>Perfil de usuario</h3>
+          </ion-text>
+          <span class="divider line"></span>
+          
+
+          <ion-button [routerLink]="['/register']" expand="block" color="primary">Registrarse</ion-button>
+  
+          <span class="divider line one-line">o</span>
+  
+          <span class="already">Ya tiene un nombre de usuario?</span>
+  
+          <ion-button [routerLink]="['/login']" expand="block" color="danger">Iniciar sesión</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-content>

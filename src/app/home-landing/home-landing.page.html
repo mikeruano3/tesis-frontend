@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Yo entro a la U
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div slot="fixed" style="position:relative;">
+    <ion-searchbar type="search" debounce="500" color="light"
+      (ionChange)="getItems($event)" placeholder="Buscar carrera" animated>
+    </ion-searchbar>
+  </div>
+  
+  <ion-list class="ios list-ios hydrated" *ngIf="isItemAvailable">
+    
+      <div style="margin-top: 20%;"></div>
+
+      <ion-item *ngIf="findedCouseItems.length < 1">No existen elementos para la búsqueda</ion-item>
+      <ion-item *ngFor="let courseItem of findedCouseItems">{{ courseItem.name }}</ion-item>
+  </ion-list>
+  
+
+  <div *ngIf="!isItemAvailable">
+    <ion-img src="/assets/img/home.jpg"></ion-img>
+    <ion-list class="ios list-ios hydrated">
+      <ion-slides [options]="slideOpts" pager="true" >
+        <ion-slide *ngFor="let course of courseList">
+          <span>
+            <!--<img src="" alt="">-->
+            <p>{{course.name}}</p>
+          </span>
+        </ion-slide>
+      </ion-slides>
+  
+      
+      <ion-list-header class="ios hydrated">
+        <p>Configuration</p>
+      </ion-list-header>
+      
+  
+      <ion-item class="item-label item ios in-list ion-focusable hydrated">
+        <ion-label class="sc-ion-label-ios-h sc-ion-label-ios-s ios hydrated">
+          <h2>Courses</h2>
+        </ion-label>
+  
+        <div class="item-note" item-end>
+          <button ion-button clear [routerLink]="['/courses']">
+            <ion-icon name="create" style="zoom:2.0"></ion-icon>
+          </button>
+        </div>
+      </ion-item>
+    </ion-list>
+  </div>
+
+
+
+</ion-content>
+

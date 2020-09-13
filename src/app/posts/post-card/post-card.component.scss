@@ -1,0 +1,142 @@
+.single-post-home{
+    margin: 0%;
+    padding: 0;
+    width:100%;
+    box-shadow: 1px 1px rgba(160, 160, 160, 0.453);
+}
+
+.avatar-style{
+    margin: 0%;
+    padding: 0%;
+    width: 88%;
+    height: 93%;
+    display: flex;
+    align-items: center;
+}
+
+.user-title-style{
+    margin: 0;
+    margin-top: 1%;
+    margin-bottom: 2%;
+}
+
+.datetime-style{
+    margin: 0;
+    font-size: 12px;
+}
+
+ion-card-header{
+    padding: 2%;
+    margin: 0;
+}
+
+ion-card-title{
+    padding-left: 2%;
+    padding-right: 2%;
+}
+
+ion-card-content{
+    padding-left: 3%;
+    padding-right: 4%;
+    padding-bottom: 0%;
+    text-align: justify;
+}
+
+
+#interaction{
+    padding: 0px;
+    margin: 2%;
+}
+
+// REACTION CONTAINER
+#reaction-container{
+    //position: relative; // IMPORTANTE
+    padding: 0px;
+    margin: 0px;
+}
+
+//REACTION BUTTON
+#react-selector{
+    //--background: url('../../../assets/img/reactions/like.png') no-repeat center center / cover;
+    margin-left: -15%;
+    margin-top: -15%;
+}
+
+ion-fab-list{
+    margin: 0px;
+    padding: 0px;
+    margin-top: -100%;
+    margin-left: -15%;
+}
+
+//LIKE
+#like-selector{
+    --background: url('../../../assets/img/reactions/like.png') no-repeat center center / cover;
+    margin: 0px;
+    padding: 0px;
+}
+#like-selector:hover{
+    --background: url('../../../assets/img/reactions/like.png') no-repeat center center / cover;
+}
+
+//LOVE
+#love-selector{
+    margin: 0px;
+    padding: 0px;
+    --background: url('../../../assets/img/reactions/love.png') no-repeat center center / cover;
+}
+
+//HAHA
+#haha-selector{
+    margin: 0px;
+    padding: 0px;
+    --background: url('../../../assets/img/reactions/haha.png') no-repeat center center / cover;
+}
+
+//WOW
+#wow-selector{
+    margin: 0px;
+    padding: 0px;
+    --background: url('../../../assets/img/reactions/wow.png') no-repeat center center / cover;
+}
+
+//SAD
+#sad-selector{
+    margin: 0px;
+    padding: 0px;
+    --background: url('../../../assets/img/reactions/sad.png') no-repeat center center / cover;
+}
+
+
+//ANGRY
+#angry-selector{
+    margin: 0px;
+    padding: 0px;
+    --background: url('../../../assets/img/reactions/angry.png') no-repeat center center / cover;
+}
+
+
+#comment-input{
+    font-size: 10px;
+}
+
+
+#grouped-reactions-container{
+    padding: 0px;
+    margin: 0px;
+    margin-left: 5%;
+    margin-right: 2%;
+}
+
+.show-reactions-size{
+    width: 10%;
+    height: 10%;
+    margin: 0;
+    padding: 0;
+    margin-left: -3%;
+}
+
+
+.my-custom-class {
+    --background: #222;
+}

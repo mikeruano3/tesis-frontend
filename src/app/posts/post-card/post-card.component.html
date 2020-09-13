@@ -1,0 +1,81 @@
+<ion-card>
+  <ion-row>
+    <!--<img src="https://res.cloudinary.com/og-tech/image/upload/q_40/v1506850322/blog_g3mexb.jpg">-->
+    <ion-card-header>
+      <ion-row>
+        <ion-col size="3">
+          <ion-avatar class="avatar-style" >
+            <img src="/assets/img/profile.jpg">
+          </ion-avatar>
+        </ion-col>
+        <ion-col size="9">
+          <h5 class="user-title-style">{{ processName(post.user) }}</h5>
+          <p  class="datetime-style">{{ substractTime(post.createdAt) }}</p>
+        </ion-col>
+      </ion-row>
+
+      <ion-card-title>{{ post.title }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p >{{ processContent(post) }}
+        <b *ngIf="checkWrapping(post.content)" 
+          >
+          <i>... Ver más</i>
+        </b>
+      </p>
+      
+    </ion-card-content>
+  </ion-row>
+
+  <ion-row id="grouped-reactions-container">
+      <ion-avatar class="show-reactions-size">
+        <img src="/assets/img/reactions/angry.png">
+      </ion-avatar>
+      <ion-avatar class="show-reactions-size">
+        <img src="/assets/img/reactions/like.png">
+      </ion-avatar>
+      <ion-avatar class="show-reactions-size">
+        <img src="/assets/img/reactions/love.png">
+      </ion-avatar>
+      <p style="margin-top: 2%;">120</p>
+      <p style="margin: 2% 0 0 5%; padding: 0; cursor: pointer;" (click)="showComments()">
+        17 Comentarios <ion-icon name="chatbox-ellipses-outline"></ion-icon> 
+      </p>
+  </ion-row>
+
+  <ion-row style="margin: 0%; padding: 0%;">
+    <p style="margin: -2% 0 0 5%; padding: 0;  cursor: pointer;" (click)="showComments()">Ver Comentarios</p>
+  </ion-row>
+  
+  <ion-row id="interaction">
+    <ion-col size="2">
+      <ion-fab id="reaction-container" vertical="top" horizontal="start" >
+        <ion-fab-button size="small" id="react-selector">
+          <ion-icon name="thumbs-up-outline"></ion-icon>
+        </ion-fab-button>
+          <ion-fab-list side="end">
+             <ion-fab-button size="small" id="like-selector"></ion-fab-button>
+             <ion-fab-button size="small" id="love-selector"></ion-fab-button>
+             <ion-fab-button size="small" id="haha-selector"></ion-fab-button>
+             <ion-fab-button size="small" id="wow-selector"></ion-fab-button>
+             <ion-fab-button size="small" id="sad-selector"></ion-fab-button>
+             <ion-fab-button size="small" id="angry-selector"></ion-fab-button>
+          </ion-fab-list>
+      </ion-fab>
+    </ion-col>
+
+    <ion-col size="7">
+      <ion-item  id="comment-input">
+        <ion-input placeholder="Escribe un comentario"></ion-input>
+      </ion-item>
+    </ion-col>
+
+    <ion-col size="3">
+        <ion-button style="margin: 0%; padding: 1%; font-size: 12px; width: 100%;">
+          Send
+          <ion-icon slot="end" name="star"></ion-icon>
+        </ion-button>
+    </ion-col>
+   
+  </ion-row>
+</ion-card>

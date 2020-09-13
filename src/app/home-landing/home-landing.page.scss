@@ -1,0 +1,61 @@
+#container {
+    text-align: center;
+  
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  #container strong {
+    font-size: 20px;
+    line-height: 26px;
+  }
+  
+  #container p {
+    font-size: 16px;
+    line-height: 22px;
+  
+    color: #8c8c8c;
+  
+    margin: 0;
+  }
+  
+  #container a {
+    text-decoration: none;
+  }
+  
+  
+  
+  span{
+    padding-left: 2px!important;
+    padding-right: 2px!important;
+    padding-top: 2px!important;
+    padding-bottom: 2px!important;
+    width: 85px!important;
+    height: 70px!important;
+  
+  }
+  ion-slide:hover{
+    background: rgba(205, 9, 9, 0.43);
+    cursor: pointer;
+  
+  }
+  span img{
+    width: 55px;
+    height: 55px;
+  }
+  
+  ion-slide {
+    width: 90px!important;
+    height: 85px!important;
+    background-color:  #FFF;
+    float: left;
+    margin-left: 1.5px!important;
+    margin-right: 1.5px!important;
+    border-radius: 50px!important;
+  }
+  ion-slides{
+    background-color:  rgba(194, 193, 194, 0.52);
+  }
