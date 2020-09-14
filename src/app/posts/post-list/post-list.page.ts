@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { PostsService } from '../post.service';
+import { PostsService, GenericFilterBody } from '../post.service';
 import { PostSchema } from '../../schemas/post';
 import { substractTimeZone } from 'src/app/shared/functions/localDate';
 import { UserSchema } from 'src/app/schemas/user';
+import { postsKeyword } from 'src/app/schemas/SchemaNameConstants';
 
 @Component({
   selector: 'app-post-list',
@@ -22,7 +23,9 @@ export class PostListPage implements OnInit {
   }
 
   ionViewDidEnter() {
-    this.postsService.findAll().subscribe((res) => {
+    let requestBody:GenericFilterBody = {} as GenericFilterBody
+    requestBody.populate = 'reactions'
+    this.postsService.findAllFilter(postsKeyword, requestBody).subscribe((res) => {
       this.posts = res;
     })
   }

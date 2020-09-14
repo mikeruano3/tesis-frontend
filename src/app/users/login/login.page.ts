@@ -3,6 +3,7 @@ import { AuthService } from '../../auth/auth.service';
 import { TokenStorageService } from '../../auth/token-storage.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { RoleSchema } from 'src/app/schemas/role';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,7 @@ export class LoginPage implements OnInit {
   isLoggedIn = false;
   isLoginFailed = false;
   errorMessage = '';
-  roles: string[] = [];
+  role: RoleSchema;
 
   constructor(private authService: AuthService, 
     private tokenStorage: TokenStorageService,
@@ -31,7 +32,7 @@ export class LoginPage implements OnInit {
   ngOnInit() {
     if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
-      this.roles = this.tokenStorage.getUser().roles;
+      this.role = this.tokenStorage.getUser().role;
     }
   }
 

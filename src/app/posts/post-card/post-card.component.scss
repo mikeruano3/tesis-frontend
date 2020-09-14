@@ -136,6 +136,19 @@ ion-fab-list{
     margin-left: -3%;
 }
 
+.show-reactions-size p{
+    margin: 0;
+    padding: 0;
+    font-size: 8px;
+}
+
+.show-reactions-size img{
+    margin: 0;
+    padding: 0;
+    overflow: hidden; 
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
 
 .my-custom-class {
     --background: #222;

@@ -27,21 +27,32 @@
     </ion-card-content>
   </ion-row>
 
-  <ion-row id="grouped-reactions-container">
-      <ion-avatar class="show-reactions-size">
-        <img src="/assets/img/reactions/angry.png">
-      </ion-avatar>
-      <ion-avatar class="show-reactions-size">
-        <img src="/assets/img/reactions/like.png">
-      </ion-avatar>
-      <ion-avatar class="show-reactions-size">
-        <img src="/assets/img/reactions/love.png">
-      </ion-avatar>
-      <p style="margin-top: 2%;">120</p>
-      <p style="margin: 2% 0 0 5%; padding: 0; cursor: pointer;" (click)="showComments()">
-        17 Comentarios <ion-icon name="chatbox-ellipses-outline"></ion-icon> 
-      </p>
-  </ion-row>
+  <div class="margin:0; padding: 0" *ngIf="_observableReactionList | async as reactionList">
+      <ion-row  id="grouped-reactions-container">
+        <ion-avatar class="show-reactions-size" *ngFor="let orderReaction of reactionService.orderReactions(reactionList); index as i">
+          <img src="/assets/img/reactions/like.png" *ngIf="orderReaction.type == 1">
+          <img src="/assets/img/reactions/love.png" *ngIf="orderReaction.type == 2">
+          <img src="/assets/img/reactions/haha.png" *ngIf="orderReaction.type == 3">
+          <img src="/assets/img/reactions/wow.png" *ngIf="orderReaction.type == 4">
+          <img src="/assets/img/reactions/sad.png" *ngIf="orderReaction.type == 5">
+          <img src="/assets/img/reactions/angry.png" *ngIf="orderReaction.type == 6">
+        </ion-avatar>
+        <p style="margin-top: 2%; margin-left: 1%;">{{reactionList.length}}</p>
+        <p style="margin: 0 0 0 5%; padding: 0; cursor: pointer;" (click)="showComments()">
+          17 Comentarios <ion-icon name="chatbox-ellipses-outline"></ion-icon> 
+        </p> 
+      </ion-row> 
+      
+    </div>
+      <!--
+      <p>Like {{reactionService.countReactionType(reactionList, reactionConstants.reactionLikekey)}}</p>
+      <p>Love {{reactionService.countReactionType(reactionList, reactionConstants.reactionLoveKey)}}</p>
+      <p>Haha {{reactionService.countReactionType(reactionList, reactionConstants.reactionHahaKey)}}</p>
+      <p>Wow {{reactionService.countReactionType(reactionList, reactionConstants.reactionWowKey)}}</p>
+      <p>Sad {{reactionService.countReactionType(reactionList, reactionConstants.reactionSadKey)}}</p>
+      <p>Angry {{reactionService.countReactionType(reactionList, reactionConstants.reactionAngryKey)}}</p>
+      -->
+
 
   <ion-row style="margin: 0%; padding: 0%;">
     <p style="margin: -2% 0 0 5%; padding: 0;  cursor: pointer;" (click)="showComments()">Ver Comentarios</p>
@@ -54,12 +65,18 @@
           <ion-icon name="thumbs-up-outline"></ion-icon>
         </ion-fab-button>
           <ion-fab-list side="end">
-             <ion-fab-button size="small" id="like-selector"></ion-fab-button>
-             <ion-fab-button size="small" id="love-selector"></ion-fab-button>
-             <ion-fab-button size="small" id="haha-selector"></ion-fab-button>
-             <ion-fab-button size="small" id="wow-selector"></ion-fab-button>
-             <ion-fab-button size="small" id="sad-selector"></ion-fab-button>
-             <ion-fab-button size="small" id="angry-selector"></ion-fab-button>
+             <ion-fab-button size="small" id="like-selector" (click)="checkReaction(reactionConstants.reactionLikekey)">
+             </ion-fab-button>
+             <ion-fab-button size="small" id="love-selector" (click)="checkReaction(reactionConstants.reactionLoveKey)">
+             </ion-fab-button>
+             <ion-fab-button size="small" id="haha-selector" (click)="checkReaction(reactionConstants.reactionHahaKey)">
+             </ion-fab-button>
+             <ion-fab-button size="small" id="wow-selector" (click)="checkReaction(reactionConstants.reactionWowKey)">
+             </ion-fab-button>
+             <ion-fab-button size="small" id="sad-selector" (click)="checkReaction(reactionConstants.reactionSadKey)">
+             </ion-fab-button>
+             <ion-fab-button size="small" id="angry-selector" (click)="checkReaction(reactionConstants.reactionAngryKey)">
+             </ion-fab-button>
           </ion-fab-list>
       </ion-fab>
     </ion-col>

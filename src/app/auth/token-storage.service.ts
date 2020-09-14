@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { UserSchema } from '../schemas/user';
 
 const TOKEN_KEY = 'auth-token';
 const USER_KEY = 'auth-user';
@@ -23,12 +24,12 @@ export class TokenStorageService {
     return sessionStorage.getItem(TOKEN_KEY);
   }
 
-  public saveUser(user): void {
+  public saveUser(user:UserSchema): void {
     window.sessionStorage.removeItem(USER_KEY);
     window.sessionStorage.setItem(USER_KEY, JSON.stringify(user));
   }
 
-  public getUser(): any {
-    return JSON.parse(sessionStorage.getItem(USER_KEY));
+  public getUser(): UserSchema {
+    return JSON.parse(sessionStorage.getItem(USER_KEY)) as UserSchema;
   }
 }

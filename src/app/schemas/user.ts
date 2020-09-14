@@ -1,3 +1,5 @@
+import { RoleSchema } from './role'
+
 export class UserSchema {
     _id: string
     username: string
@@ -7,6 +9,6 @@ export class UserSchema {
     profesion: string
     city: string
     image: string
-    role: string
+    role: RoleSchema
     createdAt: string
 }

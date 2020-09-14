@@ -11,8 +11,8 @@ export class PostSchema {
     createdAt: string
     title: string
     content: string
-    files: FileSchema
-    reactions: ReactionSchema
-    comments: CommentSchema
+    files: FileSchema[]
+    reactions: ReactionSchema[]
+    comments: CommentSchema[]
     sharedCount: number
 }
