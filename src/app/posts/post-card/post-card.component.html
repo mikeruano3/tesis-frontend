@@ -39,7 +39,7 @@
         </ion-avatar>
         <p style="margin-top: 2%; margin-left: 1%;">{{reactionList.length}}</p>
         <p style="margin: 0 0 0 5%; padding: 0; cursor: pointer;" (click)="showComments()">
-          17 Comentarios <ion-icon name="chatbox-ellipses-outline"></ion-icon> 
+          {{post.postAsComment.childComments.length}} Comentarios <ion-icon name="chatbox-ellipses-outline"></ion-icon> 
         </p> 
       </ion-row> 
       
@@ -47,10 +47,6 @@
       <!--
       <p>Like {{reactionService.countReactionType(reactionList, reactionConstants.reactionLikekey)}}</p>
       <p>Love {{reactionService.countReactionType(reactionList, reactionConstants.reactionLoveKey)}}</p>
-      <p>Haha {{reactionService.countReactionType(reactionList, reactionConstants.reactionHahaKey)}}</p>
-      <p>Wow {{reactionService.countReactionType(reactionList, reactionConstants.reactionWowKey)}}</p>
-      <p>Sad {{reactionService.countReactionType(reactionList, reactionConstants.reactionSadKey)}}</p>
-      <p>Angry {{reactionService.countReactionType(reactionList, reactionConstants.reactionAngryKey)}}</p>
       -->
 
 
@@ -83,12 +79,15 @@
 
     <ion-col size="7">
       <ion-item  id="comment-input">
-        <ion-input placeholder="Escribe un comentario"></ion-input>
+        <ion-textarea auto-grow="true" id="textbar" type="text" lines="1" 
+          [(ngModel)]="tmpComment" placeholder="Escribe un comentario">
+        </ion-textarea>
       </ion-item>
     </ion-col>
 
     <ion-col size="3">
-        <ion-button style="margin: 0%; padding: 1%; font-size: 12px; width: 100%;">
+        <ion-button style="margin: 0%; padding: 1%; font-size: 12px; width: 100%;"
+          (click)="saveCommentToServer()">
           Send
           <ion-icon slot="end" name="star"></ion-icon>
         </ion-button>

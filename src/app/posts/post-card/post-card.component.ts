@@ -10,6 +10,7 @@ import { ReactionSchema } from 'src/app/schemas/reaction';
 import { REACTIONKEYS } from './post-card.constants';
 import { Observable } from 'rxjs';
 import { ReactionService } from "./reaction.service";
+import { postsKeyword } from 'src/app/schemas/SchemaNameConstants';
 
 @Component({
   selector: 'app-post-card',
@@ -19,6 +20,7 @@ import { ReactionService } from "./reaction.service";
 export class PostCardComponent implements OnInit {
   @Input() post:PostSchema
   maxStringLength = 50
+  tmpComment:string = ''
 
   /** REACTION WORK */
   reactionConstants = REACTIONKEYS; 
@@ -65,10 +67,48 @@ export class PostCardComponent implements OnInit {
     return false
   }
 
+  /*** REACTION WORK */
   showReactions(){
     
-  }  
+  } 
 
+  checkReaction(reactionNumber: number){
+    this.reactionService.orderReactions(this.post.reactions)
+    this.reactionService.checkReaction(this.post, reactionNumber)
+  }
+  /****************** */
+
+  /*** COMMENTS WORK */  
+  saveCommentToServer(){
+    let user = this.tokenStorageService.getUser()
+    let commentData:PostSchema = {} as PostSchema
+    commentData.user = user || undefined
+    commentData.content = this.tmpComment
+    commentData.postAsComment = {
+      parentCommentOrPost: this.post,
+      childComments: undefined,
+      mentionedUser: undefined
+    }
+    this.postsService.saveOne(postsKeyword, commentData).subscribe(resComment => {
+      let responseCommment = resComment as PostSchema
+      let queryUpdate = {
+        "query": {
+          "_id": this.post._id
+        },
+        "data": {
+          "$push": {
+            "postAsComment.childComments": responseCommment._id
+          }
+        }
+      }
+
+      this.postsService.updateOne(postsKeyword, queryUpdate).subscribe((resPost) => {
+        console.log(resPost);
+        //this.addReactionToObs(responseReaction)
+      })
+    })
+  }
+  
   async showComments() {
     const modal = await this.modalController.create({
       component: CommentModalPage,
@@ -80,12 +120,6 @@ export class PostCardComponent implements OnInit {
       }
     });
     return await modal.present();
-  }
-
-  /*** REACTION WORK */
-  checkReaction(reactionNumber: number){
-    this.reactionService.orderReactions(this.post.reactions)
-    this.reactionService.checkReaction(this.post, reactionNumber)
   }
   /****************** */
 

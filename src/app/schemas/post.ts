@@ -2,7 +2,6 @@ import { PostCategorySchema } from './postCategory';
 import { UserSchema } from './user';
 import { FileSchema } from './fileSchema';
 import { ReactionSchema } from './reaction';
-import { CommentSchema } from './comment';
 
 export class PostSchema {
     _id: string
@@ -13,6 +12,10 @@ export class PostSchema {
     content: string
     files: FileSchema[]
     reactions: ReactionSchema[]
-    comments: CommentSchema[]
     sharedCount: number
+    postAsComment: {
+        parentCommentOrPost : PostSchema,
+        childComments : PostSchema,
+        mentionedUser : UserSchema
+    }
 }

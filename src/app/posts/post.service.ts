@@ -4,6 +4,7 @@ import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { postsKeyword } from '../schemas/SchemaNameConstants';
 
 export interface GenericFilterBody {
   query:any,
