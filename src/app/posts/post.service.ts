@@ -7,10 +7,12 @@ import { environment } from 'src/environments/environment';
 import { postsKeyword } from '../schemas/SchemaNameConstants';
 
 export interface GenericFilterBody {
-  query:any,
-  projection:any,
-  sort:any,
+  query:any
+  projection:any
+  sort:any
   populate:any
+  populate2:any
+  populate3:any
 }
 
 @Injectable({

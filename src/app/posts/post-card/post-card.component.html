@@ -38,8 +38,9 @@
           <img src="/assets/img/reactions/angry.png" *ngIf="orderReaction.type == 6">
         </ion-avatar>
         <p style="margin-top: 2%; margin-left: 1%;">{{reactionList.length}}</p>
-        <p style="margin: 0 0 0 5%; padding: 0; cursor: pointer;" (click)="showComments()">
-          {{post.postAsComment.childComments.length}} Comentarios <ion-icon name="chatbox-ellipses-outline"></ion-icon> 
+        <p style="margin: 0 0 0 5%; padding: 0; cursor: pointer;" (click)="showComments()" 
+          *ngIf="_observableCommentList | async as commentList">
+          {{commentList.length}} Comentarios <ion-icon name="chatbox-ellipses-outline"></ion-icon> 
         </p> 
       </ion-row> 
       
@@ -87,7 +88,7 @@
 
     <ion-col size="3">
         <ion-button style="margin: 0%; padding: 1%; font-size: 12px; width: 100%;"
-          (click)="saveCommentToServer()">
+          (click)="saveComment()">
           Send
           <ion-icon slot="end" name="star"></ion-icon>
         </ion-button>

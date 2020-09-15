@@ -11,6 +11,7 @@ import { REACTIONKEYS } from './post-card.constants';
 import { Observable } from 'rxjs';
 import { ReactionService } from "./reaction.service";
 import { postsKeyword } from 'src/app/schemas/SchemaNameConstants';
+import { CommentService } from './comment.service';
 
 @Component({
   selector: 'app-post-card',
@@ -24,22 +25,32 @@ export class PostCardComponent implements OnInit {
 
   /** REACTION WORK */
   reactionConstants = REACTIONKEYS; 
-  reactionService: ReactionService
   _observableReactionList: Observable<ReactionSchema[]>
   /**************** */
+  /** COMMENTS WORK */
+  _observableCommentList: Observable<PostSchema[]>
 
   constructor(
     private postsService: PostsService,
     public modalController: ModalController,
-    public tokenStorageService: TokenStorageService
+    public tokenStorageService: TokenStorageService,
+    public reactionService:ReactionService,
+    public commentService:CommentService
   ) {
   }
 
   ngOnInit() {
     this.reactionService = new ReactionService(this.postsService, 
-      this.tokenStorageService, this.post.reactions)
+      this.tokenStorageService)
+    this.reactionService.assingElementsToObservable(this.post.reactions)
     this._observableReactionList = this.reactionService.getObservableReactionList
+
+    this.commentService = new CommentService(this.postsService, 
+      this.tokenStorageService)
+    this.commentService.assingElementsToObservable(this.post.childComments)
+    this._observableCommentList = this.commentService.getObservableCommentList
   }
+
 
   substractTime(date: string){
     return substractTimeZone(date)
@@ -79,34 +90,9 @@ export class PostCardComponent implements OnInit {
   /****************** */
 
   /*** COMMENTS WORK */  
-  saveCommentToServer(){
-    let user = this.tokenStorageService.getUser()
-    let commentData:PostSchema = {} as PostSchema
-    commentData.user = user || undefined
-    commentData.content = this.tmpComment
-    commentData.postAsComment = {
-      parentCommentOrPost: this.post,
-      childComments: undefined,
-      mentionedUser: undefined
-    }
-    this.postsService.saveOne(postsKeyword, commentData).subscribe(resComment => {
-      let responseCommment = resComment as PostSchema
-      let queryUpdate = {
-        "query": {
-          "_id": this.post._id
-        },
-        "data": {
-          "$push": {
-            "postAsComment.childComments": responseCommment._id
-          }
-        }
-      }
-
-      this.postsService.updateOne(postsKeyword, queryUpdate).subscribe((resPost) => {
-        console.log(resPost);
-        //this.addReactionToObs(responseReaction)
-      })
-    })
+  saveComment(){
+    this.commentService.saveCommentToServer(this.post, this.tmpComment, undefined)
+    this.tmpComment = ''
   }
   
   async showComments() {
@@ -114,9 +100,7 @@ export class PostCardComponent implements OnInit {
       component: CommentModalPage,
       cssClass: 'my-custom-class',
       componentProps: {
-        'firstName': 'Douglas',
-        'lastName': 'Adams',
-        'middleInitial': 'N'
+        parentPost: this.post
       }
     });
     return await modal.present();

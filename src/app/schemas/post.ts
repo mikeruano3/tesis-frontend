@@ -13,9 +13,9 @@ export class PostSchema {
     files: FileSchema[]
     reactions: ReactionSchema[]
     sharedCount: number
+    childComments : PostSchema[]
     postAsComment: {
         parentCommentOrPost : PostSchema,
-        childComments : PostSchema,
         mentionedUser : UserSchema
     }
 }

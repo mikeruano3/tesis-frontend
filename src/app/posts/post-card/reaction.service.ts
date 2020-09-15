@@ -7,6 +7,11 @@ import { REACTIONKEYS, localSavedReaction } from './post-card.constants';
 import { reactionKeyword, postsKeyword } from 'src/app/schemas/SchemaNameConstants';
 import { Observable, BehaviorSubject, from } from 'rxjs';
 import { groupBy, toArray, mergeMap, map, first } from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'
+})
 
 export class ReactionService {
   private _reactionList: ReactionSchema[] = []
@@ -14,10 +19,9 @@ export class ReactionService {
 
   constructor(
     private postsService: PostsService,
-    public tokenStorageService: TokenStorageService,
-    public reactionList: ReactionSchema[] 
+    public tokenStorageService: TokenStorageService 
   ) {
-    this.assingElementsToObservable(reactionList)
+   
   }
 
   /**************** REACTIONS **************** */
@@ -176,7 +180,7 @@ export class ReactionService {
     this._observableReactionList.next(this._reactionList);
   }
 
-  assingElementsToObservable(reactions: ReactionSchema[]){
+  public assingElementsToObservable(reactions: ReactionSchema[]){
     this._reactionList = reactions
     this._observableReactionList.next(this._reactionList);
   }
