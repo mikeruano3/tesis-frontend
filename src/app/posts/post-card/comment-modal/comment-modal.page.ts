@@ -53,7 +53,7 @@ export class CommentModalPage implements OnInit {
   }
 
   saveCommentOfComment(){
-    this.commentService.saveCommentToServer(this.parentPost, this.tmpComment, this.parentPost.user)
+    this.commentService.saveCommentToServer(this.parentPost, this.tmpComment, undefined)
     this.tmpComment = ''
   }
 

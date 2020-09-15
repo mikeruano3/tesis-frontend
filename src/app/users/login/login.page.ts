@@ -25,14 +25,14 @@ export class LoginPage implements OnInit {
   ) {
     this.loginForm = this.fb.group({
       username: [null, Validators.required],
-      password:[null,Validators.compose([Validators.required, Validators.minLength(6)])]
+      password:[null,Validators.compose([Validators.required, Validators.minLength(0)])]
     })
   }
 
   ngOnInit() {
     if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
-      this.role = this.tokenStorage.getUser().role;
+      this.role = this.tokenStorage.getUserData().role;
     }
   }
 
@@ -64,6 +64,10 @@ export class LoginPage implements OnInit {
           this.isLoginFailed = true;
         }
     );
+  }
+
+  logout(){
+    this.tokenStorage.signOut()
   }
 
 }

@@ -32,4 +32,13 @@ export class TokenStorageService {
   public getUser(): UserSchema {
     return JSON.parse(sessionStorage.getItem(USER_KEY)) as UserSchema;
   }
+
+  public getUserData(): UserSchema {
+    let rawData = sessionStorage.getItem(USER_KEY)
+    if(!rawData){
+      return null
+    }
+    let tokenData = JSON.parse(rawData)
+    return tokenData.userData as UserSchema;
+  }
 }

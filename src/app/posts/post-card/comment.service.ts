@@ -24,7 +24,7 @@ export class CommentService {
 
   saveCommentToServer(parentPost: PostSchema, commentContent: any, mentionedUser: UserSchema){
     const tmpComment = commentContent
-    let user = this.tokenStorageService.getUser()
+    let user = this.tokenStorageService.getUserData()
     let commentData:PostSchema = {} as PostSchema
     commentData.user = user || undefined
     commentData.content = tmpComment
@@ -33,6 +33,8 @@ export class CommentService {
       parentCommentOrPost: parentPost,
       mentionedUser: mentionedUser
     }
+    console.log(commentData);
+    
     this.postsService.saveOne(postsKeyword, commentData).subscribe(resComment => {
       console.log(resComment);
       

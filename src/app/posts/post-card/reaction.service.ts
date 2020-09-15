@@ -30,13 +30,11 @@ export class ReactionService {
     console.log(post);
 
     let genericFilterBody: GenericFilterBody
-    let user = this.tokenStorageService.getUser()
+    let user = this.tokenStorageService.getUserData()
     if (user) {
       this.searchLoggedUserReaction(post, user).subscribe(data => {
-        console.log('reaction');
-        console.log(data);
 
-        if (data == []) {
+        if (data.length === 0) {
           this.saveReactionToServer(post, user._id, reactionType)
         } else {
           let reactionData = data[0] as ReactionSchema
