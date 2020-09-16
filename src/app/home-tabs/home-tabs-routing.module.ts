@@ -27,6 +27,10 @@ const routes: Routes = [
         loadChildren: () => import('../posts/post-list/post-list-routing.module').then(m => m.PostListPageRoutingModule)
       },
       {
+        path: 'contact',
+        loadChildren: () => import('../posts/post-editor/post-editor.module').then(m => m.PostEditorPageModule)
+      },
+      {
         path: '',
         redirectTo: '/tablinks/home-landing',
         pathMatch: 'full'

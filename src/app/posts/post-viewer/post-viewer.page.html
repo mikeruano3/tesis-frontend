@@ -1,9 +1,13 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>post-viewer</ion-title>
+  <ion-toolbar class="ios hydrated">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ios title-ios hydrated">Ver Publicación</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
 
+<ion-content class="post-home">
+  <app-post-card [post]="post" [isFullView]=true></app-post-card>
 </ion-content>

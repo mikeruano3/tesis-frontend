@@ -12,6 +12,7 @@ import { Observable } from 'rxjs';
 import { ReactionService } from "./reaction.service";
 import { postsKeyword } from 'src/app/schemas/SchemaNameConstants';
 import { CommentService } from './comment.service';
+import { Router, NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'app-post-card',
@@ -22,6 +23,7 @@ export class PostCardComponent implements OnInit {
   @Input() post:PostSchema
   maxStringLength = 50
   tmpComment:string = ''
+  @Input() isFullView: boolean
 
   /** REACTION WORK */
   reactionConstants = REACTIONKEYS; 
@@ -35,7 +37,8 @@ export class PostCardComponent implements OnInit {
     public modalController: ModalController,
     public tokenStorageService: TokenStorageService,
     public reactionService:ReactionService,
-    public commentService:CommentService
+    public commentService:CommentService,
+    private router: Router
   ) {
   }
 
@@ -57,25 +60,17 @@ export class PostCardComponent implements OnInit {
   }
 
   processName(user: UserSchema){
-    if(user){
-      return user.username
-    }else{
-      return "Anónimo"
-    }
+    return  user ? user.username : "Anónimo"
   }
 
   processContent(post: PostSchema){
-    if(this.checkWrapping(post.content)){
-      return post.content.substring(0, this.maxStringLength)
-    }
-    return post.content
+    return (!this.isFullView && 
+      this.checkWrapping(post.content)) ? post.content.substring(0, this.maxStringLength) : post.content
   }
 
   checkWrapping(content: any){
-    if(content.length > this.maxStringLength){
-      return true
-    }
-    return false
+    return (!this.isFullView 
+      && content.length > this.maxStringLength) ? true : false
   }
 
   /*** REACTION WORK */
@@ -106,5 +101,15 @@ export class PostCardComponent implements OnInit {
     return await modal.present();
   }
   /****************** */
+
+  openPost(post: PostSchema){
+    let navigationExtras: NavigationExtras = {
+      state: {
+        post: post,
+        isFullView: true
+      }
+    };
+    this.router.navigate(['/post-viewer'], navigationExtras);
+  }
 
 }

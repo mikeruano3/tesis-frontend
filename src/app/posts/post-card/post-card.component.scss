@@ -51,8 +51,9 @@ ion-card-content{
 // REACTION CONTAINER
 #reaction-container{
     //position: relative; // IMPORTANTE
-    padding: 0px;
-    margin: 0px;
+    padding: 0%;
+    margin: 0%;
+    margin-left: -10%;
 }
 
 //REACTION BUTTON
@@ -74,6 +75,7 @@ ion-fab-list{
     --background: url('../../../assets/img/reactions/like.png') no-repeat center center / cover;
     margin: 0px;
     padding: 0px;
+    margin-left: -2%;
 }
 #like-selector:hover{
     --background: url('../../../assets/img/reactions/like.png') no-repeat center center / cover;
@@ -83,6 +85,7 @@ ion-fab-list{
 #love-selector{
     margin: 0px;
     padding: 0px;
+    margin-left: -1%;
     --background: url('../../../assets/img/reactions/love.png') no-repeat center center / cover;
 }
 
@@ -90,6 +93,7 @@ ion-fab-list{
 #haha-selector{
     margin: 0px;
     padding: 0px;
+    margin-left: -1%;
     --background: url('../../../assets/img/reactions/haha.png') no-repeat center center / cover;
 }
 
@@ -97,6 +101,7 @@ ion-fab-list{
 #wow-selector{
     margin: 0px;
     padding: 0px;
+    margin-left: -1%;
     --background: url('../../../assets/img/reactions/wow.png') no-repeat center center / cover;
 }
 
@@ -104,6 +109,7 @@ ion-fab-list{
 #sad-selector{
     margin: 0px;
     padding: 0px;
+    margin-left: -1%;
     --background: url('../../../assets/img/reactions/sad.png') no-repeat center center / cover;
 }
 
@@ -112,6 +118,7 @@ ion-fab-list{
 #angry-selector{
     margin: 0px;
     padding: 0px;
+    margin-left: -1%;
     --background: url('../../../assets/img/reactions/angry.png') no-repeat center center / cover;
 }
 

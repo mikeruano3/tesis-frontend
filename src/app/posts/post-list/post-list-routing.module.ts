@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: PostListPage
+  },
+  {
+    path: 'new',
+    loadChildren: () => import('../post-editor/post-editor.module').then(m => m.PostEditorPageModule)
   }
 ];
 
