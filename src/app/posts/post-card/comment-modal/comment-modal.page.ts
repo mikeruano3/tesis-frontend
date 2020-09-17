@@ -1,12 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { PostSchema } from 'src/app/schemas/post';
-import { GenericFilterBody, PostsService } from '../../post.service';
+import { PostsService } from '../../post.service';
 import { postsKeyword } from 'src/app/schemas/SchemaNameConstants';
 import { CommentService } from '../comment.service';
 import { UserSchema } from 'src/app/schemas/user';
 import { Observable } from 'rxjs';
 import { TokenStorageService } from 'src/app/auth/token-storage.service';
+import { GenericFilterBody } from 'src/app/shared/services/data.service';
 
 @Component({
   selector: 'app-comment-modal',

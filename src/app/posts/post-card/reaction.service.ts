@@ -1,5 +1,5 @@
 import { PostSchema } from 'src/app/schemas/post';
-import { GenericFilterBody, PostsService } from '../post.service';
+import { PostsService } from '../post.service';
 import { UserSchema } from 'src/app/schemas/user';
 import { TokenStorageService } from 'src/app/auth/token-storage.service';
 import { ReactionSchema } from 'src/app/schemas/reaction';
@@ -8,6 +8,7 @@ import { reactionKeyword, postsKeyword } from 'src/app/schemas/SchemaNameConstan
 import { Observable, BehaviorSubject, from } from 'rxjs';
 import { groupBy, toArray, mergeMap, map, first } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
+import { GenericFilterBody } from 'src/app/shared/services/data.service';
 
 @Injectable({
   providedIn: 'root'

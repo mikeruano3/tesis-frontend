@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { PostsService, GenericFilterBody } from '../post.service';
+import { PostsService } from '../post.service';
 import { PostSchema } from '../../schemas/post';
 import { substractTimeZone } from 'src/app/shared/functions/localDate';
 import { UserSchema } from 'src/app/schemas/user';
 import { postsKeyword } from 'src/app/schemas/SchemaNameConstants';
+import { GenericFilterBody } from 'src/app/shared/services/data.service';
 
 @Component({
   selector: 'app-post-list',

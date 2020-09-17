@@ -28,7 +28,7 @@ const routes: Routes = [
       },
       {
         path: 'contact',
-        loadChildren: () => import('../posts/post-editor/post-editor.module').then(m => m.PostEditorPageModule)
+        loadChildren: () => import('../career-display/career-item/career-item.module').then(m => m.CareerItemPageModule)
       },
       {
         path: '',

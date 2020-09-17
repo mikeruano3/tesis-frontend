@@ -59,6 +59,18 @@ const routes: Routes = [
     path: 'comment-modal',
     loadChildren: () => import('./posts/post-card/comment-modal/comment-modal.module').then( m => m.CommentModalPageModule)
   },
+  {
+    path: 'career-category',
+    loadChildren: () => import('./career-display/career-category/career-category.module').then( m => m.CareerCategoryPageModule)
+  },
+  {
+    path: 'career-item',
+    loadChildren: () => import('./career-display/career-item/career-item.module').then( m => m.CareerItemPageModule)
+  },
+  {
+    path: 'generic-card-list',
+    loadChildren: () => import('./generic-card-list/generic-card-list.module').then( m => m.GenericCardListPageModule)
+  },
 ];
 
 @NgModule({

@@ -1,0 +1,58 @@
+.full-width{
+    margin: 0%;
+    padding: 0%;
+    width:100%;
+}
+
+.single-post-home{
+    margin: 0%;
+    padding: 0;
+    width:100%;
+    //box-shadow: 1px 1px rgb(0, 0, 0);
+}
+
+.avatar-style{
+    margin: 0%;
+    padding: 0%;
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+}
+
+.user-title-style{
+    margin: 0;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+
+.datetime-style{
+    margin: 0;
+    font-size: 12px;
+}
+
+ion-card{
+    padding: 0%;
+    margin: 0% 0% 2% 0%;
+    height: 100%;
+}
+
+ion-card-header{
+    padding: 0%;
+    margin: 0;
+    padding-bottom: 0%;
+}
+
+ion-card-title{
+    padding: 0 3% 0 3%;
+}
+
+ion-card-content{
+    margin: 0% 1% 0 1%;
+    text-align: justify;
+    width: 100%;
+}
+
+ion-button {
+    text-transform: none;
+}

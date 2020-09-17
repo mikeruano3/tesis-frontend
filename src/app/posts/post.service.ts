@@ -5,15 +5,7 @@ import { catchError, tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { postsKeyword } from '../schemas/SchemaNameConstants';
-
-export interface GenericFilterBody {
-  query:any
-  projection:any
-  sort:any
-  populate:any
-  populate2:any
-  populate3:any
-}
+import { GenericFilterBody } from '../shared/services/data.service';
 
 @Injectable({
   providedIn: 'root'

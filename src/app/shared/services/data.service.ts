@@ -4,28 +4,59 @@ import { catchError, tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
+export interface GenericFilterBody {
+  query:any
+  projection:any
+  sort:any
+  populate:any
+  populate2:any
+  populate3:any
+}
+
+
 @Injectable({
   providedIn: 'root'
 })
 
 export class DataService {
-  public apiKeyword = ''
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
   constructor(private http: HttpClient) { }
-
-  setCollection(name: string){
-    this.apiKeyword = name
+  
+  /*** GENERIC ****/
+  public findAll(collectionId: string): Observable<any[]> {
+    return this.http.get<any[]>(`${environment.apiUrl}/api/collections/${collectionId}/findall`)
+      .pipe(
+        tap(courses => {/*console.log('Fetched!')*/}),
+        catchError(this.handleError<any[]>('Get Posts', []))
+      );
   }
 
-  findAll(): Observable<any[]> {
-    return this.http.get<any[]>(`${environment.apiUrl}/api/collections/${this.apiKeyword}/findall`)
+  public findAllFilter(collectionId: string, requestBody: GenericFilterBody): Observable<any[]> {
+    return this.http.post<any[]>(`${environment.apiUrl}/api/collections/${collectionId}/findbyfilter`,
+        requestBody)
       .pipe(
-        tap(courses => {/*console.log('Courses fetched!')*/}),
+        tap(courses => {/*console.log('Fetched!')*/}),
         catchError(this.handleError<any[]>('Get Posts', []))
+      );
+  }
+
+  public saveOne(collectionId: string, data: any): Observable<any> {
+    return this.http.post<any[]>(`${environment.apiUrl}/api/collections/${collectionId}/insert`, data)
+      .pipe(
+        tap(courses => {/*console.log('Fetched!')*/}),
+        catchError(this.handleError<any[]>('Save', []))
+      );
+  }
+
+  public updateOne(collectionId: string, data: any): Observable<any> {
+    return this.http.put<any[]>(`${environment.apiUrl}/api/collections/${collectionId}/update`, data)
+      .pipe(
+        tap(courses => {/*console.log('Fetched!')*/}),
+        catchError(this.handleError<any[]>('Save', []))
       );
   }
 
@@ -36,4 +67,6 @@ export class DataService {
       return of(result as T);
     };
   }
+
+  /********************* */
 }

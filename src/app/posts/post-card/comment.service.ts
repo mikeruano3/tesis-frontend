@@ -1,5 +1,5 @@
 import { PostSchema } from 'src/app/schemas/post';
-import { GenericFilterBody, PostsService } from '../post.service';
+import { PostsService } from '../post.service';
 import { UserSchema } from 'src/app/schemas/user';
 import { TokenStorageService } from 'src/app/auth/token-storage.service';
 import { ReactionSchema } from 'src/app/schemas/reaction';
