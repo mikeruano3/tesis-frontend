@@ -27,7 +27,7 @@ const routes: Routes = [
       },
       {
         path: 'contact',
-        loadChildren: () => import('../career-display/career-categories/career-categories.module').then(m => m.CareerCategoriesPageModule)
+        loadChildren: () => import('../career-categories/career-categories.module').then(m => m.CareerCategoriesPageModule)
       },
       {
         path: '',
