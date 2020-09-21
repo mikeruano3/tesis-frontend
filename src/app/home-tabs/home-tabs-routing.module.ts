@@ -12,7 +12,6 @@ const routes: Routes = [
         path: 'home-landing',
         loadChildren: () => import('../home-landing/home-landing.module').then(m => m.HomeLandingPageModule)
         //loadChildren: () => import('../career-mgt/career-overview/career-overview.module').then(m => m.CareerOverviewPageModule)
-        
       },
       {
         path: 'course-list',
@@ -28,7 +27,7 @@ const routes: Routes = [
       },
       {
         path: 'contact',
-        loadChildren: () => import('../career-display/career-item/career-item.module').then(m => m.CareerItemPageModule)
+        loadChildren: () => import('../career-display/career-categories/career-categories.module').then(m => m.CareerCategoriesPageModule)
       },
       {
         path: '',
@@ -48,4 +47,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class HomeTabsPageRoutingModule {}
+export class HomeTabsPageRoutingModule { }

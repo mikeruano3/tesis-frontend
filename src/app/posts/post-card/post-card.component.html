@@ -1,8 +1,8 @@
-<ion-card>
+<ion-card style="margin: 4%; padding: 0%;">
   <ion-row>
     <!--<img src="https://res.cloudinary.com/og-tech/image/upload/q_40/v1506850322/blog_g3mexb.jpg">-->
     <ion-card-header>
-      <ion-row>
+      <ion-row *ngIf="showAvatar">
         <ion-col size="3">
           <ion-avatar class="avatar-style" >
             <img src="/assets/img/profile.jpg">
@@ -14,9 +14,15 @@
         </ion-col>
       </ion-row>
 
-      <ion-card-title>{{ post.title }}</ion-card-title>
+      <ion-card-title mode="md" [ngClass]="{'set-margin-top': !showAvatar}">
+        {{ post.title }}
+      </ion-card-title>
+      <p  class="datetime-style" *ngIf="!showAvatar" style="margin-left: 2%;">
+        {{ substractTime(post.createdAt) }}
+      </p>
     </ion-card-header>
-    <ion-card-content style="width: 98%;" (click)="openPost(post)">
+    <ion-card-content style="width: 98%; margin-bottom: 1%;"
+      (click)="openPost(post)">
       <p>
         <span [innerHTML]="processContent(post)"></span>
         <b *ngIf="!isFullView && checkWrapping(post.content)" >
@@ -29,7 +35,8 @@
 
       <ion-row  id="grouped-reactions-container" 
           *ngIf="_observableReactionList | async as reactionList">
-        <ion-avatar class="show-reactions-size" *ngFor="let orderReaction of reactionService.orderReactions(reactionList); index as i">
+       <ng-container *ngIf="showReactCtnr">
+         <ion-avatar class="show-reactions-size" *ngFor="let orderReaction of reactionService.orderReactions(reactionList); index as i">
           <img src="/assets/img/reactions/like.png" *ngIf="orderReaction.type == 1">
           <img src="/assets/img/reactions/love.png" *ngIf="orderReaction.type == 2">
           <img src="/assets/img/reactions/haha.png" *ngIf="orderReaction.type == 3">
@@ -37,11 +44,15 @@
           <img src="/assets/img/reactions/sad.png" *ngIf="orderReaction.type == 5">
           <img src="/assets/img/reactions/angry.png" *ngIf="orderReaction.type == 6">
         </ion-avatar>
+       </ng-container>
+        <ion-avatar *ngIf="!showReactCtnr"  class="show-reactions-size">
+          <img src="/assets/img/reactions/like.png">
+        </ion-avatar>
         <p style="margin-top: 2%; margin-left: 1%;">{{ reactionList.length > 0 ? reactionList.length : ''}}</p>
-        <p style="margin: 0 0 0 5%; padding: 0; cursor: pointer;" (click)="showComments()" 
-          *ngIf="_observableCommentList | async as commentList">
-          {{ commentList.length > 0 ? commentList.length + (commentList.length == 1 ? ' Comentario' : ' Comentarios') : '' }}  
-          <ion-icon name="chatbox-ellipses-outline"></ion-icon> 
+        <p style="margin: 1% 0% 0 5%; padding: 0; cursor: pointer; font-size: 12px;" 
+          (click)="showComments()" >
+          {{ post.childComments?.length > 0 ? post.childComments.length + (post.childComments.length == 1 ? ' Comentario' : ' Comentarios') : '' }}
+          <ion-icon style="margin: 0%" name="chatbox-ellipses-outline"></ion-icon> 
         </p> 
       </ion-row> 
       
@@ -52,12 +63,13 @@
 
 
   <ion-row style="margin: 0%; padding: 0%;">
-    <p style="margin: -2% 0 0 5%; padding: 0;  cursor: pointer;" (click)="showComments()">Ver Comentarios</p>
+    <p style="margin: 0 0 0 5%; padding: 0;  cursor: pointer;" (click)="showComments()">Ver Comentarios</p>
   </ion-row>
   
   <ion-row id="interaction">
     <ion-col size="2">
-      <ion-fab id="reaction-container" vertical="top" horizontal="start" >
+      <ion-fab id="reaction-container" vertical="top" horizontal="start" 
+        *ngIf="showReactCtnr">
         <ion-fab-button size="small" id="react-selector">
           <ion-icon name="thumbs-up-outline"></ion-icon>
         </ion-fab-button>
@@ -76,20 +88,25 @@
              </ion-fab-button>
           </ion-fab-list>
       </ion-fab>
+      <ion-fab-button size="small" *ngIf="!showReactCtnr" class="like-container">
+        <ion-icon name="thumbs-up-outline"
+          (click)="checkReaction(reactionConstants.reactionLikekey)">
+        </ion-icon>
+      </ion-fab-button>
     </ion-col>
 
     <ion-col size="7">
       <ion-item  id="comment-input">
         <ion-textarea auto-grow="true" id="textbar" type="text" lines="1" 
-          [(ngModel)]="tmpComment" placeholder="Escribe un comentario">
+          [(ngModel)]="tmpComment" placeholder="Escribe un comentario" mode="ios">
         </ion-textarea>
       </ion-item>
     </ion-col>
 
     <ion-col size="3">
         <ion-button style="margin: 0%; padding: 1%; font-size: 12px; width: 100%;"
-          (click)="saveComment()">
-          Send
+          (click)="saveComment()" mode="ios" >
+          Enviar
           <ion-icon slot="end" name="star"></ion-icon>
         </ion-button>
     </ion-col>

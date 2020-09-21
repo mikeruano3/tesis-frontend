@@ -15,6 +15,7 @@ import { GenericCardListPage } from './generic-card-list.page';
     IonicModule,
     GenericCardListPageRoutingModule
   ],
-  declarations: [GenericCardListPage]
+  declarations: [GenericCardListPage],
+  exports: [GenericCardListPage]
 })
 export class GenericCardListPageModule {}

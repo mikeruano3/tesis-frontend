@@ -11,6 +11,8 @@ export interface GenericFilterBody {
   populate:any
   populate2:any
   populate3:any
+  limit:any
+  skip:any
 }
 
 

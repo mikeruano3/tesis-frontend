@@ -22,7 +22,11 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-  
+  <ion-row>
+    <ion-button color="primary" (click)="openFileChooser()">Agregar archivo
+      <ion-icon name="document-outline"></ion-icon>
+    </ion-button>
+  </ion-row>
   
   <ckeditor [editor]="Editor" [config]="config" [(ngModel)]="editorData" id="editor"></ckeditor>
 </ion-content>

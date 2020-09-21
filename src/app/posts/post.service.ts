@@ -4,7 +4,6 @@ import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { postsKeyword } from '../schemas/SchemaNameConstants';
 import { GenericFilterBody } from '../shared/services/data.service';
 
 @Injectable({
@@ -22,37 +21,25 @@ export class PostsService {
   /*** GENERIC ****/
   findAll(collectionId: string): Observable<any[]> {
     return this.http.get<any[]>(`${environment.apiUrl}/api/collections/${collectionId}/findall`)
-      .pipe(
-        tap(courses => {/*console.log('Fetched!')*/}),
-        catchError(this.handleError<any[]>('Get Posts', []))
-      );
+      .pipe();
   }
 
   findAllFilter(collectionId: string, requestBody: GenericFilterBody): Observable<any[]> {
     return this.http.post<any[]>(`${environment.apiUrl}/api/collections/${collectionId}/findbyfilter`,
         requestBody)
-      .pipe(
-        tap(courses => {/*console.log('Fetched!')*/}),
-        catchError(this.handleError<any[]>('Get Posts', []))
-      );
+      .pipe();
   }
 
   saveOne(collectionId: string, data: any): Observable<any> {
     return this.http.post<any[]>(`${environment.apiUrl}/api/collections/${collectionId}/insert`, data)
-      .pipe(
-        tap(courses => {/*console.log('Fetched!')*/}),
-        catchError(this.handleError<any[]>('Save', []))
-      );
+      .pipe();
   }
 
   updateOne(collectionId: string, data: any): Observable<any> {
     return this.http.put<any[]>(`${environment.apiUrl}/api/collections/${collectionId}/update`, data)
-      .pipe(
-        tap(courses => {/*console.log('Fetched!')*/}),
-        catchError(this.handleError<any[]>('Save', []))
-      );
+      .pipe();
   }
-
+  
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);

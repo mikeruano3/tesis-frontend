@@ -4,17 +4,15 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { CareerItemPageRoutingModule } from './career-item-routing.module';
-
-import { CareerItemPage } from './career-item.page';
+import { PostCardComponent } from './post-card.component';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    IonicModule,
-    CareerItemPageRoutingModule
+    IonicModule
   ],
-  declarations: [CareerItemPage]
+  declarations: [PostCardComponent],
+  exports: [PostCardComponent]
 })
-export class CareerItemPageModule {}
+export class PostCardComponentModule {}

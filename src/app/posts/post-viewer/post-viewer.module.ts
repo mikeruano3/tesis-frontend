@@ -7,15 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { PostViewerPageRoutingModule } from './post-viewer-routing.module';
 
 import { PostViewerPage } from './post-viewer.page';
-import { PostCardComponent } from '../post-card/post-card.component';
+import { PostCardComponentModule } from '../post-card/post-card.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    PostViewerPageRoutingModule
+    PostViewerPageRoutingModule,
+    PostCardComponentModule
   ],
-  declarations: [PostViewerPage, PostCardComponent]
+  declarations: [PostViewerPage]
 })
 export class PostViewerPageModule {}

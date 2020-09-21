@@ -9,12 +9,31 @@
 
 
 <ion-content class="post-home">
-  <div *ngFor="let post of posts;" class="post-home">
-    <app-post-card [post]="post" [isFullView]=false></app-post-card>
-  </div>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <section>
+    <ion-item>
+      <ion-label>Ordenar por: </ion-label>
+      <ion-select interface="popover" [(ngModel)]="selectedFilter" (ionChange)="setSelectedFilter()">
+        <ion-select-option value="popular">Más Popular</ion-select-option>
+        <ion-select-option value="masreciente">Más reciente</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </section>
+
+  <app-post-card [post]="post" [isFullView]=false *ngFor="let post of posts;" class="post-home"
+    [showAvatar]=true [showReactCtnr]=true></app-post-card>
+
+  <ion-infinite-scroll threshold="100px" id="infinite-scroll" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content loading-spinner="bubbles" loading-text="Cargando datos...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
   <!-- fab placed to the bottom start -->
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed" routerLink="new">
-      <ion-fab-button>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button (click)="showNewPost()">
         <ion-icon name="add"></ion-icon>
       </ion-fab-button>
   </ion-fab>

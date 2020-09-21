@@ -4,10 +4,10 @@ import { UserSchema } from 'src/app/schemas/user';
 import { TokenStorageService } from 'src/app/auth/token-storage.service';
 import { ReactionSchema } from 'src/app/schemas/reaction';
 import { REACTIONKEYS, localSavedReaction } from './post-card.constants';
-import { reactionKeyword, postsKeyword } from 'src/app/schemas/SchemaNameConstants';
 import { Observable, BehaviorSubject, from } from 'rxjs';
 import { groupBy, toArray, mergeMap, map, first } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
+import { APPCONSTANTS } from 'src/app/constants/app-constants';
 
 @Injectable({
   providedIn: 'root'
@@ -15,14 +15,13 @@ import { Injectable } from '@angular/core';
 
 export class CommentService {
   private _commentList: PostSchema[] = []
-  private _observableCommentList: BehaviorSubject<PostSchema[]> = new BehaviorSubject([]);
 
   constructor(
     private postsService: PostsService,
     public tokenStorageService: TokenStorageService 
   ) { }
 
-  saveCommentToServer(parentPost: PostSchema, commentContent: any, mentionedUser: UserSchema){
+  async saveCommentToServer(parentPost: PostSchema, commentContent: any, mentionedUser: UserSchema){
     const tmpComment = commentContent
     let user = this.tokenStorageService.getUserData()
     let commentData:PostSchema = {} as PostSchema
@@ -33,13 +32,14 @@ export class CommentService {
       parentCommentOrPost: parentPost,
       mentionedUser: mentionedUser
     }
-    console.log(commentData);
     
-    this.postsService.saveOne(postsKeyword, commentData).subscribe(resComment => {
-      console.log(resComment);
-      
-      let responseCommment = resComment as PostSchema
-      let queryUpdate = {
+    let resComment = await this.postsService.saveOne(APPCONSTANTS.SCHEMAS.POSTS_SCHEMA, commentData).toPromise()
+    if(!resComment){
+      return
+    }
+
+    let responseCommment = resComment as PostSchema
+    let queryUpdate = {
         "query": {
           "_id": parentPost._id
         },
@@ -48,24 +48,9 @@ export class CommentService {
             "childComments": responseCommment._id
           }
         }
-      }
-
-      this.postsService.updateOne(postsKeyword, queryUpdate).subscribe((resPost) => {
-        console.log(resPost);
-        this.addCommentToObs(commentData)
-      })
-    })
+    }
+    await this.postsService.updateOne(APPCONSTANTS.SCHEMAS.POSTS_SCHEMA, queryUpdate).toPromise()
+    return resComment
   }
 
-  get getObservableCommentList(): Observable<PostSchema[]> { return this._observableCommentList.asObservable() }
-
-  addCommentToObs(post: PostSchema) {
-    this._commentList.push(post);
-    this._observableCommentList.next(this._commentList);
-  }
-
-  public assingElementsToObservable(posts: PostSchema[]){
-    this._commentList = posts
-    this._observableCommentList.next(this._commentList);
-  }
 }

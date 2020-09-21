@@ -4,11 +4,11 @@ import { UserSchema } from 'src/app/schemas/user';
 import { TokenStorageService } from 'src/app/auth/token-storage.service';
 import { ReactionSchema } from 'src/app/schemas/reaction';
 import { REACTIONKEYS, localSavedReaction } from './post-card.constants';
-import { reactionKeyword, postsKeyword } from 'src/app/schemas/SchemaNameConstants';
 import { Observable, BehaviorSubject, from } from 'rxjs';
 import { groupBy, toArray, mergeMap, map, first } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { GenericFilterBody } from 'src/app/shared/services/data.service';
+import { APPCONSTANTS } from 'src/app/constants/app-constants';
 
 @Injectable({
   providedIn: 'root'
@@ -92,7 +92,7 @@ export class ReactionService {
       post: post._id,
       user: user._id
     }
-    return this.postsService.findAllFilter(reactionKeyword, requestBody)
+    return this.postsService.findAllFilter(APPCONSTANTS.SCHEMAS.REACTIONS_SCHEMA, requestBody)
   }
 
   // Services
@@ -104,7 +104,7 @@ export class ReactionService {
       type: type
     }
 
-    this.postsService.saveOne(reactionKeyword, reactionSaveData).subscribe(resReact => {
+    this.postsService.saveOne(APPCONSTANTS.SCHEMAS.REACTIONS_SCHEMA, reactionSaveData).subscribe(resReact => {
       let responseReaction = resReact as ReactionSchema
       let queryUpdate = {
         "query": {
@@ -113,11 +113,12 @@ export class ReactionService {
         "data": {
           "$push": {
             "reactions": responseReaction._id
-          }
+          },
+          "$inc": { "reactionCount": 1 }
         }
       }
 
-      this.postsService.updateOne(postsKeyword, queryUpdate).subscribe((resPost) => {
+      this.postsService.updateOne(APPCONSTANTS.SCHEMAS.POSTS_SCHEMA, queryUpdate).subscribe((resPost) => {
         console.log(resPost);
         this.saveAnonymousReaction(responseReaction, post)
         this.addReactionToObs(responseReaction)
@@ -135,7 +136,7 @@ export class ReactionService {
       }
     }
 
-    this.postsService.updateOne(reactionKeyword, updateData).subscribe((res) => {
+    this.postsService.updateOne(APPCONSTANTS.SCHEMAS.REACTIONS_SCHEMA, updateData).subscribe((res) => {
       console.log(res);
     })
   }

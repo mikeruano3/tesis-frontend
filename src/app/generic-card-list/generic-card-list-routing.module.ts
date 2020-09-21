@@ -5,7 +5,7 @@ import { GenericCardListPage } from './generic-card-list.page';
 
 const routes: Routes = [
   {
-    path: '',
+    path: ':id',
     component: GenericCardListPage
   }
 ];

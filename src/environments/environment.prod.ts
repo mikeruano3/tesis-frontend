@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://localhost:5020'
+  apiUrl: 'https://yo-entro-a-la-u-backend.herokuapp.com',
+  googleApiFolder: '1BhyMhMXeYtJ7RvDxSWPZpIYG-eM9bxFv'
 };

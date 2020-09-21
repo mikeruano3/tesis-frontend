@@ -16,7 +16,8 @@ ng generate page edit-course
 
 ## Production Build
 ionic cordova build browser --release
-
+ionic cordova build android --prod
+ionic cordova build android
 
 ## DOCS
 

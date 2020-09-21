@@ -14,7 +14,7 @@
       <p>Listado de Cursos</p>
     </ion-list-header>
     
-    <ion-item *ngFor="let courseItem of courses" class="item-label item ios in-list ion-focusable hydrated">
+    <ion-item *ngFor="let courseItem of courses; index as i" class="item-label item ios in-list ion-focusable hydrated">
       <ion-label class="sc-ion-label-ios-h sc-ion-label-ios-s ios hydrated">
         <h2>{{courseItem.name}}</h2>
         <h3>{{courseItem.description}}</h3>

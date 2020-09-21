@@ -4,7 +4,9 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:5020'
+  //apiUrl: 'https://yo-entro-a-la-u-backend.herokuapp.com',
+  apiUrl: 'http://localhost:5020',
+  googleApiFolder: '1BhyMhMXeYtJ7RvDxSWPZpIYG-eM9bxFv'
 };
 
 /*

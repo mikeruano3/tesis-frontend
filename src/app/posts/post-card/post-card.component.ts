@@ -10,7 +10,6 @@ import { ReactionSchema } from 'src/app/schemas/reaction';
 import { REACTIONKEYS } from './post-card.constants';
 import { Observable } from 'rxjs';
 import { ReactionService } from "./reaction.service";
-import { postsKeyword } from 'src/app/schemas/SchemaNameConstants';
 import { CommentService } from './comment.service';
 import { Router, NavigationExtras } from '@angular/router';
 
@@ -21,16 +20,17 @@ import { Router, NavigationExtras } from '@angular/router';
 })
 export class PostCardComponent implements OnInit {
   @Input() post:PostSchema
+  @Input() isFullView: boolean
+  @Input() showAvatar: boolean
+  @Input() showReactCtnr: boolean
+
   maxStringLength = 50
   tmpComment:string = ''
-  @Input() isFullView: boolean
 
   /** REACTION WORK */
   reactionConstants = REACTIONKEYS; 
   _observableReactionList: Observable<ReactionSchema[]>
   /**************** */
-  /** COMMENTS WORK */
-  _observableCommentList: Observable<PostSchema[]>
 
   constructor(
     private postsService: PostsService,
@@ -47,11 +47,6 @@ export class PostCardComponent implements OnInit {
       this.tokenStorageService)
     this.reactionService.assingElementsToObservable(this.post.reactions)
     this._observableReactionList = this.reactionService.getObservableReactionList
-
-    this.commentService = new CommentService(this.postsService, 
-      this.tokenStorageService)
-    this.commentService.assingElementsToObservable(this.post.childComments)
-    this._observableCommentList = this.commentService.getObservableCommentList
   }
 
 
@@ -73,11 +68,6 @@ export class PostCardComponent implements OnInit {
       && content.length > this.maxStringLength) ? true : false
   }
 
-  /*** REACTION WORK */
-  showReactions(){
-    
-  } 
-
   checkReaction(reactionNumber: number){
     this.reactionService.orderReactions(this.post.reactions)
     this.reactionService.checkReaction(this.post, reactionNumber)
@@ -85,8 +75,15 @@ export class PostCardComponent implements OnInit {
   /****************** */
 
   /*** COMMENTS WORK */  
-  saveComment(){
-    this.commentService.saveCommentToServer(this.post, this.tmpComment, undefined)
+  async saveComment(){
+    if(this.tmpComment == ''){
+      return
+    }
+    let returnedComment = await this.commentService.saveCommentToServer(this.post, this.tmpComment, undefined)
+    if(!this.post.childComments){
+      this.post.childComments = []
+    }
+    this.post.childComments.push(returnedComment)
     this.tmpComment = ''
   }
   

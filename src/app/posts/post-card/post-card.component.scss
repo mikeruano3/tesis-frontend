@@ -8,8 +8,8 @@
 .avatar-style{
     margin: 0%;
     padding: 0%;
-    width: 88%;
-    height: 93%;
+    width: 90%;
+    height: 100%;
     display: flex;
     align-items: center;
 }
@@ -133,6 +133,7 @@ ion-fab-list{
     margin: 0px;
     margin-left: 5%;
     margin-right: 2%;
+    margin-bottom: -2%;
 }
 
 .show-reactions-size{
@@ -159,4 +160,14 @@ ion-fab-list{
 
 .my-custom-class {
     --background: #222;
+}
+
+.set-margin-top{
+    margin-top: 3%
+}
+
+.like-container{
+    padding: 0%;
+    margin: 0%;
+    margin-left: -10%;
 }

@@ -5,6 +5,8 @@ import { RouteReuseStrategy } from '@angular/router';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { Base64 } from '@ionic-native/base64/ngx';
+import { FileChooser } from '@ionic-native/file-chooser/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -34,6 +36,8 @@ import { authInterceptorProviders } from './auth/auth.interceptor';
   providers: [
     StatusBar,
     SplashScreen,
+    Base64,
+    FileChooser,
     authInterceptorProviders,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],

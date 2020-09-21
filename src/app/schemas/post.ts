@@ -1,4 +1,4 @@
-import { PostCategorySchema } from './postCategory';
+import { CategorySchema } from './category';
 import { UserSchema } from './user';
 import { FileSchema } from './fileSchema';
 import { ReactionSchema } from './reaction';
@@ -6,7 +6,8 @@ import { ReactionSchema } from './reaction';
 export class PostSchema {
     _id: string
     user: UserSchema
-    postCategory: PostCategorySchema
+    postCategory: string
+    postClasification: string
     createdAt: string
     title: string
     content: string
