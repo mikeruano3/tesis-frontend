@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title class="ios title-ios hydrated">{{ props.pageTitle }}</ion-title>
+    <ion-title class="ios title-ios hydrated" *ngIf="props.pageTitle">{{ props.pageTitle }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -62,4 +62,10 @@
       </ion-row>
     </ion-grid>
   </ion-list>
+  <ion-segment style="height: 100%" *ngIf="loadingData">
+      <div class="ion-text-center">
+        <ion-spinner name="bubbles"></ion-spinner>
+      </div>
+  </ion-segment>
+    
 </ion-content>

@@ -54,6 +54,7 @@ export class GenericCardListPage implements OnInit {
   genericList:any[] = []
   isItemAvailable = false
   findedItems:any[] = []
+  loadingData:boolean = false
 
   /******* FILL COMPONENT DATA *********/
   constructor(private route: ActivatedRoute, private router: Router,private dataService: DataService) {
@@ -78,12 +79,13 @@ export class GenericCardListPage implements OnInit {
     this.initData()  
   }
 
-  initData(){
+  async initData(){
     if(this.props.fixedData.length === 0){
-      this.dataService.findAllFilter(this.props.collectionKeyword, this.props.requestBody).subscribe((res) => {
-        this.genericList = res;
-        this.restoreItems()
-      })
+      this.loadingData = true
+      let items = await this.dataService.findAllFilter(this.props.collectionKeyword, this.props.requestBody).toPromise()
+      this.genericList = items;
+      this.restoreItems()
+      this.loadingData = false
     }else{
         this.genericList = this.props.fixedData
         this.restoreItems()

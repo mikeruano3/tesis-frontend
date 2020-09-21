@@ -73,13 +73,13 @@ export class PostListPage implements OnInit {
 
   async masPopular(){
     this.filteredRequestBody = { ...this.requestBody }
-    this.filteredRequestBody.sort = { reactionCount: -1 }
+    this.filteredRequestBody.sort = { reactionCount: -1, pinned: -1 }
     await this.fetchFiltroComun()
   }
 
   async masReciente(){
     this.filteredRequestBody = { ...this.requestBody }
-    this.filteredRequestBody.sort = { createdAt: -1 }
+    this.filteredRequestBody.sort = { createdAt: -1, pinned: -1 }
     await this.fetchFiltroComun()
   }
 
