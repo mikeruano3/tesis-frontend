@@ -38,8 +38,13 @@ export interface GenericCardProps {
   dataFilterProperty:string
   dataFilterPlaceholder:string
 
+  // Links
+  browserlink: string
+
   //redirectTo
   redirectToDesc:string
+  lastParentInfo:CategorySchema
+  lastProps:GenericCardProps
 }
 
 @Component({
@@ -124,12 +129,24 @@ export class GenericCardListPage implements OnInit {
     redirectToAction(item:any){
       let redir:GenericRedirection = new GenericRedirection(this.route, this.router)
       if(this.props.redirectToDesc == APPCONSTANTS.CATEGORIES.CAREERS){
-        redir.redirectToCareersOrderedByCategory(item)
+        redir.redirectToCareersOrderedByCategory(item, this.props)
       }else if(this.props.redirectToDesc == APPCONSTANTS.CATEGORIES.CAREER_DASHBOARDS){
-        redir.redirectToSingleCareerDashboard(item)
+        redir.redirectToSingleCareerDashboard(item, this.props)
       }else if(this.props.redirectToDesc == APPCONSTANTS.CATEGORIES.CAREER_CLASIFFIED_POSTS){
-        redir.redirectToCareerSubmenus(item)
+        redir.redirectToCareerSubmenus(item, this.props)
+
+
+      }else if(this.props.redirectToDesc == APPCONSTANTS.CATEGORIES.CAREER_REDIRECTIONS.MATERIAL_ESTUDIO){
+        redir.redirectToMaterialDeEstudio(item, this.props)
+      }else if(this.props.redirectToDesc == APPCONSTANTS.CATEGORIES.CAREER_REDIRECTIONS.PAGINAS_OFICIALES){
+        redir.redirectToPaginasOficiales(item, this.props)
+      }else if(this.props.redirectToDesc == APPCONSTANTS.CATEGORIES.CAREER_REDIRECTIONS.PENSUM){
+        redir.redirectToPensumCarrera(item, this.props)
       }
     }
+
+  openBrowserLinks(link:string){
+    window.open(link, '_system', 'location=yes'); return false;
+  }
   
 }

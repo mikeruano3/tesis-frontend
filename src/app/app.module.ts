@@ -17,6 +17,10 @@ import { DynamicFormQuestionComponent } from './dynamic-forms/dynamic-form-quest
 import { FormExample } from './dynamic-forms/form-example/form-example.component';
 import { authInterceptorProviders } from './auth/auth.interceptor';
 
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { environment } from '../environments/environment';
+
 @NgModule({
   declarations: [
     AppComponent, 
@@ -31,7 +35,9 @@ import { authInterceptorProviders } from './auth/auth.interceptor';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireStorageModule
   ],
   providers: [
     StatusBar,

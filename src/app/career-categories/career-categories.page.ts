@@ -35,8 +35,11 @@ export class CareerCategoriesPage implements OnInit {
     fixedData:[],
     dataFilterProperty: 'title',
     dataFilterPlaceholder: 'Buscar categoría...',
+    browserlink: null,
 
-    redirectToDesc: APPCONSTANTS.CATEGORIES.CAREERS
+    redirectToDesc: APPCONSTANTS.CATEGORIES.CAREERS,
+    lastParentInfo: null,
+    lastProps: null
   }
 
   returnBody():GenericFilterBody{

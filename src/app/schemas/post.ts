@@ -8,6 +8,7 @@ export class PostSchema {
     user: UserSchema
     postCategory: string
     postClasification: string
+    university:string
     createdAt: string
     title: string
     content: string

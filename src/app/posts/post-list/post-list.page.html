@@ -12,7 +12,12 @@
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-
+  <ion-label class="ion-text-center" position="floating" *ngIf="pageTitle">
+    <h1>{{pageTitle}}</h1>
+  </ion-label>
+  <ion-label class="ion-text-center" position="floating" *ngIf="pageSubTitle">
+    <p>{{pageSubTitle}}</p>
+  </ion-label>
   <section>
     <ion-item>
       <ion-label>Ordenar por: </ion-label>

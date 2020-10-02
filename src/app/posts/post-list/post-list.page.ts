@@ -15,8 +15,9 @@ export class PostListPage implements OnInit {
   requestBody: GenericFilterBody
   posts: PostSchema[] = []
   maxStringLength = 50
-  newPostCategoryId:string = ''
-  newPostClasification:string = ''
+  newPostCategoryId:string = null
+  newPostClasification:string = null
+  newPostUniversity:string = null // !IMPORTANT
   /**** FILTER ****/
   filteredRequestBody: GenericFilterBody
   selectedFilter:string = 'popular'
@@ -24,6 +25,8 @@ export class PostListPage implements OnInit {
   limitHandler:number = undefined
   definedLimit:number = 10
   skipHandler:number = undefined
+  pageTitle:string
+  pageSubTitle:string
 
   constructor(private route: ActivatedRoute, private router: Router,private postsService: PostsService,
       public loadingController: LoadingController) {
@@ -34,6 +37,9 @@ export class PostListPage implements OnInit {
         this.requestBody = navigationState.requestBody as GenericFilterBody
         this.newPostCategoryId = navigationState.newPostCategoryId
         this.newPostClasification = navigationState.newPostClasification
+        this.newPostUniversity = navigationState.newPostUniversity
+        this.pageTitle = navigationState.pageTitle
+        this.pageSubTitle = navigationState.pageSubTitle
       }
     });
    }
@@ -131,7 +137,8 @@ export class PostListPage implements OnInit {
     let navigationExtras: NavigationExtras = {
       state: {
           newPostCategoryId: this.newPostCategoryId,
-          newPostClasification: this.newPostClasification
+          newPostClasification: this.newPostClasification,
+          newPostUniversity: this.newPostUniversity
       }
     };
     this.router.navigate(['/post-editor'], navigationExtras);

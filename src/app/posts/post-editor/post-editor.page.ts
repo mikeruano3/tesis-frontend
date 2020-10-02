@@ -8,6 +8,12 @@ import { APPCONSTANTS } from 'src/app/constants/app-constants';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FileUploadService } from 'src/app/file-upload/upload.service';
 
+export interface newPostProps{
+  newPostCategoryId:string
+  newPostClasification:string
+  newPostUniversity:string
+}
+
 @Component({
   selector: 'app-post-editor',
   templateUrl: './post-editor.page.html',
@@ -18,8 +24,9 @@ export class PostEditorPage implements OnInit {
   editorData:any = ''
   config
   user:UserSchema
-  newPostCategoryId:string = ''
-  newPostClasification:string = ''
+  newPostCategoryId:string = null
+  newPostClasification:string = null
+  newPostUniversity:string = null
 
   constructor(
     private postsService: PostsService,
@@ -33,7 +40,8 @@ export class PostEditorPage implements OnInit {
       if (navigationState) 
       {
         this.newPostCategoryId = navigationState.newPostCategoryId,
-        this.newPostClasification = navigationState.newPostClasification
+        this.newPostClasification = navigationState.newPostClasification,
+        this.newPostUniversity = navigationState.newPostUniversity
       }
     });
   }
@@ -48,6 +56,7 @@ export class PostEditorPage implements OnInit {
     newPost.user = this.user || undefined
     newPost.postCategory = this.newPostCategoryId
     newPost.postClasification = this.newPostClasification
+    newPost.university = this.newPostUniversity
     newPost.title = "TEST... CHANGE"
     newPost.content = tmpContent
     newPost.childComments = [];

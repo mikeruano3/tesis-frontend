@@ -41,12 +41,12 @@
             <img *ngIf="props.imgProperty" [src]="item[props.imgProperty]" />
               <ion-card-header>
                 <ion-row>
-                  <ion-col size="3" *ngIf="props.avatarImgProperty">
+                  <ion-col size="4" *ngIf="props.avatarImgProperty">
                     <ion-avatar class="avatar-style" >
                       <img [src]="item[props.avatarImgProperty]">
                     </ion-avatar>
                   </ion-col>
-                  <ion-col size="9" *ngIf="props.avatarTitleProperty || props.avatarSubtitleProperty">
+                  <ion-col size="8" *ngIf="props.avatarTitleProperty || props.avatarSubtitleProperty">
                     <h5 class="user-title-style" *ngIf="props.avatarTitleProperty"> {{item[props.avatarTitleProperty]}} </h5>
                     <p  class="datetime-style" *ngIf="props.avatarSubtitleProperty"><i> {{item[props.avatarSubtitleProperty]}}</i> </p>
                   </ion-col>
@@ -56,6 +56,15 @@
                 <h3 style="margin: 0%;">{{ item[props.titleProperty] }}</h3>
                 <h6 style="margin: 0%; text-align: justify;">{{ item[props.subtitleProperty] }}</h6>
               </ion-card-title>
+              <ion-grid style="height: 100%" *ngIf="props.browserlink">
+                  <ion-row justify-content-center align-items-center style="height: 100%">
+                    <a style="font-size: 13px;"
+                      class="ion-home color-primary item" href="#" (click)="openBrowserLinks(item[props.browserlink])">
+                        Abrir en el navegador
+                        <ion-icon name="open-outline"></ion-icon>
+                    </a>
+                  </ion-row>
+              </ion-grid>
               <ion-button fill="outline" slot="end">View</ion-button>
           </ion-card>
         </ion-col>
