@@ -37,25 +37,38 @@
     height: 70px!important;
   
   }
-  ion-slide:hover{
-    background: rgba(205, 9, 9, 0.43);
-    cursor: pointer;
-  
-  }
+
   span img{
     width: 55px;
     height: 55px;
   }
-  
-  ion-slide {
-    width: 90px!important;
-    height: 85px!important;
-    background-color:  #FFF;
-    float: left;
-    margin-left: 1.5px!important;
-    margin-right: 1.5px!important;
-    border-radius: 50px!important;
-  }
-  ion-slides{
-    background-color:  rgba(194, 193, 194, 0.52);
-  }
+
+
+ion-slide {
+  background-color:  #FFF;
+  float: left;
+  margin: 0%;
+  padding: 0%;
+  //border-radius: $card-height/2 !important;
+}
+
+ion-slide:hover{
+  background: rgba(205, 9, 9, 0.43);
+  cursor: pointer;
+}
+
+ion-slides{
+  background-color:  rgba(194, 193, 194, 0.52);
+}
+
+ion-card, .card-ios, .card-md{
+  display: flex;
+  flex-direction: column;
+  margin: 2px;
+  background: blue;
+}
+ion-card-content{
+  margin: 0 !important;
+  padding: 3px !important;
+  height: 80px;
+}

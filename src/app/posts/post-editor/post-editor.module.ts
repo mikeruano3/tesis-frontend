@@ -3,12 +3,10 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 //import { CKEditorModule } from '@ckeditor/ckeditor5-build-classic';
-
 import { IonicModule } from '@ionic/angular';
-
 import { PostEditorPageRoutingModule } from './post-editor-routing.module';
-
 import { PostEditorPage } from './post-editor.page';
+import { IonicStorageModule } from '@ionic/storage';
 
 @NgModule({
   imports: [
@@ -17,6 +15,7 @@ import { PostEditorPage } from './post-editor.page';
     IonicModule,
     PostEditorPageRoutingModule,
     CKEditorModule,
+    IonicStorageModule.forRoot()
   ],
   declarations: [PostEditorPage]
 })

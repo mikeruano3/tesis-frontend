@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { CareerCategoriesPageRoutingModule } from './career-categories-routing.module';
 
 import { CareerCategoriesPage } from './career-categories.page';
-import { GenericCardListPageModule } from '../generic-card-list/generic-card-list.module';
+import { GenericCardListPageModule } from '../../generic-card-list/generic-card-list.module';
 
 @NgModule({
   imports: [

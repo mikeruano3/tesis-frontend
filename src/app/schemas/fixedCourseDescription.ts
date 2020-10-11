@@ -30,39 +30,39 @@ export class FixedCourseDescription {
             ...this.template, 
             topImg : '../../assets/img/secciones_carrera/material.jpg',
             title: 'Material de estudio para ingreso',
-            _id: APPCONSTANTS.CATEGORIES.CAREER_SECTIONS.MATERIAL
+            _id: APPCONSTANTS.CATEGORIES.CAREER_SECTIONS.MATERIAL_ESTUDIO
         }
         this.paginasOficiales = {
             ...this.template, 
             topImg : '../../assets/img/secciones_carrera/paginas.jpg',
             title: 'Paginas Oficiales',
-            _id: APPCONSTANTS.CATEGORIES.CAREER_SECTIONS.PAGINAS
+            _id: APPCONSTANTS.CATEGORIES.CAREER_SECTIONS.PAGINAS_OFICIALES
         }
         this.pensumDeEstudios = {
             ...this.template, 
             topImg : '../../assets/img/secciones_carrera/pensum.jpg',
             title: 'Pénsum de Estudios',
-            _id: APPCONSTANTS.CATEGORIES.CAREER_SECTIONS.PENSUM
+            _id: APPCONSTANTS.CATEGORIES.CAREER_SECTIONS.PENSUM_ESTUDIOS
         }
         this.areasDeTrabajo = {
             ...this.template, 
             topImg : '../../assets/img/secciones_carrera/trabajo.jpg',
             title: 'Áreas de trabajo',
-            _id: APPCONSTANTS.CATEGORIES.CAREER_SECTIONS.TRABAJO
+            _id: APPCONSTANTS.CATEGORIES.CAREER_SECTIONS.AREAS_TRABAJO
         }
 
         this.experienciasEgresados = {
             ...this.template, 
             topImg : '../../assets/img/secciones_carrera/experiencias.jpg',
             title: 'Experiencias de Egresados',
-            _id: APPCONSTANTS.CATEGORIES.CAREER_SECTIONS.EXPERIENCIAS
+            _id: APPCONSTANTS.CATEGORIES.CAREER_SECTIONS.EXPERIENCIAS_EGRESADOS
         }
 
         this.recursosUtiles = {
             ...this.template, 
             topImg : '../../assets/img/secciones_carrera/recursos.jpg',
             title: 'Recursos Utiles',
-            _id: APPCONSTANTS.CATEGORIES.CAREER_SECTIONS.RECURSOS
+            _id: APPCONSTANTS.CATEGORIES.CAREER_SECTIONS.RECURSOS_UTILES
         }
 
         this.consejosCarrera = {

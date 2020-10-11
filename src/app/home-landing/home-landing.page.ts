@@ -16,6 +16,9 @@ export class HomeLandingPage implements OnInit {
     initialSlide: 1,
     slidesPerView: 3,
     freeMode: true,
+    navigation: true,
+    watchSlidesProgress: true,
+    slidesOffsetAfter: 3,
     coverflowEffect: {
       rotate: 50,
       stretch: 0,

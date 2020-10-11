@@ -15,7 +15,8 @@ export class GenericRedirection {
     public redirectToCareersOrderedByCategory(parentCategory: CategorySchema, lastProps: GenericCardProps){
         let reqBody:GenericFilterBody = {} as GenericFilterBody
         reqBody.query = {
-            parentCategory: parentCategory._id
+            parentCategory: parentCategory._id,
+            categoryKeyword: APPCONSTANTS.CATEGORIES.CAREERS,
         }
 
         let props:GenericCardProps = {
@@ -94,47 +95,39 @@ export class GenericRedirection {
     public redirectToCareerSubmenus(parentPost:CategorySchema, lastProps:GenericCardProps){
         let query
         switch (parentPost._id) {
-            case APPCONSTANTS.CATEGORIES.CAREER_SECTIONS.MATERIAL:
+            case APPCONSTANTS.CATEGORIES.CAREER_SECTIONS.MATERIAL_ESTUDIO:
                 query = {
                     categoryKeyword: APPCONSTANTS.CATEGORIES.UNIVERSITIES
                 }
-                this.redirectToSelectUniversity(parentPost, APPCONSTANTS.CATEGORIES.CAREER_REDIRECTIONS.MATERIAL_ESTUDIO, query, lastProps)
+                this.redirectToSelectUniversity(parentPost, APPCONSTANTS.HELPER_CARRER_REDIRECTIONS.MATERIAL_ESTUDIO, query, lastProps)
                 break;
-            case APPCONSTANTS.CATEGORIES.CAREER_SECTIONS.PAGINAS:
+            case APPCONSTANTS.CATEGORIES.CAREER_SECTIONS.PAGINAS_OFICIALES:
                 query = {
                     categoryKeyword: APPCONSTANTS.CATEGORIES.UNIVERSITIES
                 }
-                this.redirectToSelectUniversity(parentPost, APPCONSTANTS.CATEGORIES.CAREER_REDIRECTIONS.PAGINAS_OFICIALES, query, lastProps)
+                this.redirectToSelectUniversity(parentPost, APPCONSTANTS.HELPER_CARRER_REDIRECTIONS.PAGINAS_OFICIALES, query, lastProps)
                 break;
-            case APPCONSTANTS.CATEGORIES.CAREER_SECTIONS.EXPERIENCIAS:
-                this.redirectToOpinions(parentPost, lastProps.upperTitle, 'Experiencias de Egresados', lastProps)
+             case APPCONSTANTS.CATEGORIES.CAREER_SECTIONS.PENSUM_ESTUDIOS:
+                query = {
+                    categoryKeyword: APPCONSTANTS.CATEGORIES.UNIVERSITIES
+                }
+                this.redirectToSelectUniversity(parentPost, APPCONSTANTS.HELPER_CARRER_REDIRECTIONS.PENSUM_ESTUDIOS, query, lastProps)
                 break;
+            case APPCONSTANTS.CATEGORIES.CAREER_SECTIONS.AREAS_TRABAJO:
+                this.redirectToAreasTrabajo(parentPost, lastProps)
+                break;                
+            case APPCONSTANTS.CATEGORIES.CAREER_SECTIONS.EXPERIENCIAS_EGRESADOS:
+                this.redirectToExperiencias(parentPost, lastProps)
+                break;
+            case APPCONSTANTS.CATEGORIES.CAREER_SECTIONS.RECURSOS_UTILES:
+                this.redirectToRecursosUtiles(parentPost, lastProps)
+                break;                
             case APPCONSTANTS.CATEGORIES.CAREER_SECTIONS.CONSEJOS:
-                this.redirectToOpinions(parentPost, lastProps.upperTitle, 'Consejos Útiles', lastProps)
+                this.redirectToConsejos(parentPost, lastProps)
                 break;
             default:
                 break;
         }        
-    }
-
-    redirectToOpinions(parentPost:CategorySchema, pageTitle:string, pageSubTitle:string, lastProps: GenericCardProps){
-        let requestBody:GenericFilterBody = {} as GenericFilterBody
-        requestBody.query = {
-            postCategory: parentPost.parentCategory,
-            postClasification: parentPost._id
-        }
-        requestBody.populate = 'reactions'
-        
-        let navigationExtras: NavigationExtras = {
-            state: {
-                requestBody: requestBody,
-                newPostCategoryId: parentPost.parentCategory,
-                newPostClasification: parentPost._id,
-                pageTitle: pageTitle,
-                pageSubTitle: pageSubTitle
-            }
-        };
-        this.router.navigate([this.postListRoute], navigationExtras);
     }
 
     public redirectToSelectUniversity(parentCategory: CategorySchema, nextRedirection:string, requestQuery: any, 
@@ -177,26 +170,26 @@ export class GenericRedirection {
         this.router.navigate([this.genericCardListRoute +'/4' ], navigationExtras);
     }
 
-    redirectToMaterialDeEstudio(parentPost:CategorySchema, lastProps:GenericCardProps){
+    /*** GENERIC CARD LIST  ****/
+
+    public redirectToMaterialDeEstudio(parentCategory:CategorySchema, lastProps:GenericCardProps){
         let material_parentCategory_id = lastProps.lastParentInfo?.parentCategory 
-        let material_university = parentPost._id
+        let material_university = parentCategory._id
         let material_title = lastProps.lastProps.upperTitle
         
         let requestBody:GenericFilterBody = {} as GenericFilterBody
         requestBody.query = {
             postCategory: material_parentCategory_id, // buscar carrera
-            postClasification: APPCONSTANTS.CATEGORIES.CAREER_SECTIONS.MATERIAL,
+            postClasification: APPCONSTANTS.CATEGORIES.CAREER_SECTIONS.MATERIAL_ESTUDIO,
             university: material_university
         }
         requestBody.populate = 'reactions'
-        console.log(requestBody);
-        
         
         let navigationExtras: NavigationExtras = {
             state: {
                 requestBody: requestBody,
                 newPostCategoryId: material_parentCategory_id,
-                newPostClasification: APPCONSTANTS.CATEGORIES.CAREER_SECTIONS.MATERIAL,
+                newPostClasification: APPCONSTANTS.CATEGORIES.CAREER_SECTIONS.MATERIAL_ESTUDIO,
                 newPostUniversity: material_university,
                 pageTitle: 'Material de Estudio',
                 pageSubTitle: material_title
@@ -207,10 +200,12 @@ export class GenericRedirection {
 
     public redirectToPaginasOficiales(parentCategory: CategorySchema, lastProps: GenericCardProps){
         let reqBody:GenericFilterBody = {} as GenericFilterBody
-        
+        let material_university = parentCategory._id
+
         reqBody.query = {
             parentCategory: lastProps?.lastParentInfo?.parentCategory,
-            categoryKeyword: APPCONSTANTS.CATEGORIES.PAGINAS_OFICIALES
+            categoryKeyword: APPCONSTANTS.CATEGORIES.CAREER_SECTIONS.PAGINAS_OFICIALES,
+            university: material_university
         }
 
         let props:GenericCardProps = {
@@ -249,16 +244,18 @@ export class GenericRedirection {
 
     public redirectToPensumCarrera(parentCategory: CategorySchema, lastProps: GenericCardProps){
         let reqBody:GenericFilterBody = {} as GenericFilterBody
-        
+        let material_university = parentCategory._id
+
         reqBody.query = {
             parentCategory: lastProps?.lastParentInfo?.parentCategory,
-            categoryKeyword: APPCONSTANTS.CATEGORIES.PAGINAS_OFICIALES
+            categoryKeyword: APPCONSTANTS.CATEGORIES.CAREER_SECTIONS.PENSUM_ESTUDIOS,
+            university: material_university
         }
 
         let props:GenericCardProps = {
             collectionKeyword: APPCONSTANTS.SCHEMAS.CATEGORIES_SCHEMA,
             requestBody: reqBody,
-            pageTitle: 'Páginas oficiales',
+            pageTitle: 'Pénsum de Estudios',
             colSize:12,
             upperImageSrc: parentCategory.topImg,
             upperTitle: lastProps.lastProps.upperTitle,
@@ -289,5 +286,131 @@ export class GenericRedirection {
         this.router.navigate([this.genericCardListRoute +'/6' ], navigationExtras);
     }
 
+    /**** POST LIST  *****/
 
+    redirectToRecursosUtiles(parentPost:CategorySchema, lastProps:GenericCardProps){
+        let requestBody:GenericFilterBody = {} as GenericFilterBody
+        requestBody.query = {
+            postCategory: parentPost.parentCategory,
+            postClasification:  APPCONSTANTS.CATEGORIES.CAREER_SECTIONS.RECURSOS_UTILES
+        }
+        requestBody.populate = 'reactions'
+        requestBody.populate2 = 'user'
+        
+        let navigationExtras: NavigationExtras = {
+            state: {
+                requestBody: requestBody,
+                newPostCategoryId: parentPost.parentCategory,
+                newPostClasification:  APPCONSTANTS.CATEGORIES.CAREER_SECTIONS.RECURSOS_UTILES,
+                pageTitle: 'Recursos Útiles',
+                pageSubTitle: lastProps.upperTitle
+            }
+        };
+        this.router.navigate([this.postListRoute], navigationExtras);
+    }
+
+    redirectToAreasTrabajo(parentPost:CategorySchema, lastProps:GenericCardProps){
+        let requestBody:GenericFilterBody = {} as GenericFilterBody
+        requestBody.query = {
+            postCategory: parentPost.parentCategory,
+            postClasification:  APPCONSTANTS.CATEGORIES.CAREER_SECTIONS.AREAS_TRABAJO
+        }
+        requestBody.populate = 'reactions'
+        requestBody.populate2 = 'user'
+        
+        let navigationExtras: NavigationExtras = {
+            state: {
+                requestBody: requestBody,
+                newPostCategoryId: parentPost.parentCategory,
+                newPostClasification:  APPCONSTANTS.CATEGORIES.CAREER_SECTIONS.AREAS_TRABAJO,
+                pageTitle: 'Áreas de Trabajo',
+                pageSubTitle: lastProps.upperTitle
+            }
+        };
+        this.router.navigate([this.postListRoute], navigationExtras);
+    }
+
+    redirectToExperiencias(parentPost:CategorySchema, lastProps: GenericCardProps){
+        let requestBody:GenericFilterBody = {} as GenericFilterBody
+        requestBody.query = {
+            postCategory: parentPost.parentCategory,
+            postClasification: APPCONSTANTS.CATEGORIES.CAREER_SECTIONS.EXPERIENCIAS_EGRESADOS
+        }
+        requestBody.populate = 'reactions'
+        requestBody.populate2 = 'user'
+        
+        let navigationExtras: NavigationExtras = {
+            state: {
+                requestBody: requestBody,
+                newPostCategoryId: parentPost.parentCategory,
+                newPostClasification: APPCONSTANTS.CATEGORIES.CAREER_SECTIONS.EXPERIENCIAS_EGRESADOS,
+                pageTitle: 'Experiencias de Egresados',
+                pageSubTitle: lastProps.upperTitle
+            }
+        };
+        this.router.navigate([this.postListRoute], navigationExtras);
+    }
+
+    redirectToConsejos(parentPost:CategorySchema, lastProps: GenericCardProps){
+        let requestBody:GenericFilterBody = {} as GenericFilterBody
+        requestBody.query = {
+            postCategory: parentPost.parentCategory,
+            postClasification: APPCONSTANTS.CATEGORIES.CAREER_SECTIONS.CONSEJOS
+        }
+        requestBody.populate = 'reactions'
+        requestBody.populate2 = 'user'
+        
+        let navigationExtras: NavigationExtras = {
+            state: {
+                requestBody: requestBody,
+                newPostCategoryId: parentPost.parentCategory,
+                newPostClasification: APPCONSTANTS.CATEGORIES.CAREER_SECTIONS.CONSEJOS,
+                pageTitle: 'Consejos sobre la carrera',
+                pageSubTitle: lastProps.upperTitle
+            }
+        };
+        this.router.navigate([this.postListRoute], navigationExtras);
+    }
+
+    /**** CARRER GIVEN A UNIVERSITY LIST ****/
+    public redirectToCareersOrderedByUniversity(parentCategory: CategorySchema, lastProps: GenericCardProps){
+        let reqBody:GenericFilterBody = {} as GenericFilterBody
+        reqBody.query = {
+            categoryKeyword: APPCONSTANTS.CATEGORIES.CAREERS,
+            university: parentCategory
+        }
+
+        let props:GenericCardProps = {
+            collectionKeyword: APPCONSTANTS.SCHEMAS.CATEGORIES_SCHEMA,
+            requestBody: reqBody,
+            pageTitle: 'Carrera',
+            colSize:12,
+            upperImageSrc: parentCategory.topImg,
+            upperTitle: parentCategory.title,
+            upperSubtitle: 'Toca en un item para ver más',
+            
+            link1:null,
+            link2:null,
+
+            avatarImgProperty: null,
+            avatarTitleProperty: null,
+            avatarSubtitleProperty: null,
+            
+            imgProperty: 'topImg',
+            titleProperty: 'title',
+            subtitleProperty: 'subtitle',
+            browserlink: null,
+
+            fixedData:[],
+            dataFilterProperty: 'title',
+            dataFilterPlaceholder: 'Buscar carrera...',
+            redirectToDesc: APPCONSTANTS.CATEGORIES.CAREER_DASHBOARDS,
+            lastParentInfo: parentCategory,
+            lastProps: lastProps
+        }
+        let navigationExtras: NavigationExtras = {
+            state: props
+        };
+        this.router.navigate([this.genericCardListRoute +'/1' ], navigationExtras);
+    }
 }

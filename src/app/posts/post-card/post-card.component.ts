@@ -55,12 +55,16 @@ export class PostCardComponent implements OnInit {
   }
 
   processName(user: UserSchema){
-    return  user ? user.username : "Anónimo"
+    return user && user.username ? user.username : "Anónimo"
   }
 
   processContent(post: PostSchema){
     return (!this.isFullView && 
       this.checkWrapping(post.content)) ? post.content.substring(0, this.maxStringLength) : post.content
+  }
+
+  processProfilePic(user: UserSchema){
+    return user && user.image ? user.image : "/assets/img/profile.jpg"
   }
 
   checkWrapping(content: any){

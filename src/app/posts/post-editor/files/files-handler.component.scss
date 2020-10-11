@@ -1,0 +1,27 @@
+ion-slide {
+    float: left;
+    margin: 0%;
+    padding: 0%;
+    margin-bottom: 25px;
+}
+
+ion-card{
+    display: flex;
+    flex-direction: column;
+    margin: 3px !important;
+    //background: blue;
+}
+
+ion-card-content{
+    margin: 0 !important;
+    padding: 3px !important;
+    height: 80px;
+}
+
+.file-name-style {
+    font-size: 10px;
+}
+
+.link-style {
+    font-size: 10px;
+}

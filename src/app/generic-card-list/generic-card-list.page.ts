@@ -130,17 +130,19 @@ export class GenericCardListPage implements OnInit {
       let redir:GenericRedirection = new GenericRedirection(this.route, this.router)
       if(this.props.redirectToDesc == APPCONSTANTS.CATEGORIES.CAREERS){
         redir.redirectToCareersOrderedByCategory(item, this.props)
+      }else if(this.props.redirectToDesc == APPCONSTANTS.CATEGORIES.CAREER_PER_UNIVERSITY){
+        redir.redirectToCareersOrderedByUniversity(item, this.props)
       }else if(this.props.redirectToDesc == APPCONSTANTS.CATEGORIES.CAREER_DASHBOARDS){
         redir.redirectToSingleCareerDashboard(item, this.props)
       }else if(this.props.redirectToDesc == APPCONSTANTS.CATEGORIES.CAREER_CLASIFFIED_POSTS){
         redir.redirectToCareerSubmenus(item, this.props)
 
 
-      }else if(this.props.redirectToDesc == APPCONSTANTS.CATEGORIES.CAREER_REDIRECTIONS.MATERIAL_ESTUDIO){
+      }else if(this.props.redirectToDesc == APPCONSTANTS.HELPER_CARRER_REDIRECTIONS.MATERIAL_ESTUDIO){
         redir.redirectToMaterialDeEstudio(item, this.props)
-      }else if(this.props.redirectToDesc == APPCONSTANTS.CATEGORIES.CAREER_REDIRECTIONS.PAGINAS_OFICIALES){
+      }else if(this.props.redirectToDesc == APPCONSTANTS.HELPER_CARRER_REDIRECTIONS.PAGINAS_OFICIALES){
         redir.redirectToPaginasOficiales(item, this.props)
-      }else if(this.props.redirectToDesc == APPCONSTANTS.CATEGORIES.CAREER_REDIRECTIONS.PENSUM){
+      }else if(this.props.redirectToDesc == APPCONSTANTS.HELPER_CARRER_REDIRECTIONS.PENSUM_ESTUDIOS){
         redir.redirectToPensumCarrera(item, this.props)
       }
     }

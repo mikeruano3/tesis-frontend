@@ -25,12 +25,23 @@
   <div *ngIf="!isItemAvailable">
     <ion-img src="/assets/img/home.jpg"></ion-img>
     <ion-list class="ios list-ios hydrated">
-      <ion-slides [options]="slideOpts" pager="true" >
+      <ion-slides [options]="slideOpts" pager="true">
         <ion-slide *ngFor="let course of courseList">
-          <span>
-            <!--<img src="" alt="">-->
-            <p>{{course.name}}</p>
-          </span>
+          <ion-card>
+            <ion-card-content>
+              <ion-row>
+                  <a class="link-style" href="#">
+                      Abrir <ion-icon name="open-outline"></ion-icon>
+                  </a>
+                  <p class="file-name-style"  style="margin-left: 1px; cursor: pointer;" >
+                      Borrar <ion-icon name="trash-outline"></ion-icon>
+                  </p>
+              </ion-row>
+              <p class="file-name-style">
+                  <ion-icon name="document-outline"></ion-icon>
+                  test</p>
+            </ion-card-content>
+          </ion-card>
         </ion-slide>
       </ion-slides>
   

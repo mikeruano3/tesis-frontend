@@ -65,7 +65,11 @@ const routes: Routes = [
   },
   {
     path: 'career-categories',
-    loadChildren: () => import('./career-categories/career-categories.module').then( m => m.CareerCategoriesPageModule)
+    loadChildren: () => import('./tabs/career-categories/career-categories.module').then( m => m.CareerCategoriesPageModule)
+  },
+  {
+    path: 'university-categories',
+    loadChildren: () => import('./tabs/university-categories/university-categories.module').then( m => m.UniversityCategoriesPageModule)
   },
 ];
 

@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title class="ios title-ios hydrated">Crear Publicacion</ion-title>
+    <ion-title class="ios title-ios hydrated">Crear Publicación</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -22,13 +22,18 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-  <ion-row>
-    <ion-button color="primary" (click)="openFileChooser()">Agregar archivo
-      <ion-icon name="document-outline"></ion-icon>
-    </ion-button>
-  </ion-row>
-  
+  <ion-list lines="full" class="ion-no-margin">
+    <ion-item>
+      <ion-label position="stacked">Título de la Publicación</ion-label>
+      <ion-input placeholder="Escribir título..." [(ngModel)]="titleData"></ion-input>
+    </ion-item>
+  </ion-list>
   <ckeditor [editor]="Editor" [config]="config" [(ngModel)]="editorData" id="editor"></ckeditor>
+  <ion-grid>
+    <app-files-handler [localStorageRefName]="'newPostHolder'"  style="width: 100%"
+      [uploadFolderName]="'user-uploaded-files'" [uploadedFilesHandler]="uploadedFilesHandler">
+    </app-files-handler>
+  </ion-grid>
 </ion-content>
 
 <ion-footer>
