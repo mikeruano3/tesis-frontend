@@ -57,7 +57,6 @@ export class FilesHandlerComponent implements OnInit {
   ngOnInit(): void {
     this.checkLocalStorageOrCreate(this.localStorageRefName).then( 
       data=>{
-        console.log(data);
         this.uploadedFilesHandler.uploadedFilesShowToUser = data.files
       }
     )
@@ -90,7 +89,6 @@ export class FilesHandlerComponent implements OnInit {
 
     let localFiles:LocalFileReference = await this.checkLocalStorageOrCreate(objectNameToSaveOnLocal)
     if(!!localFiles.files){
-      console.log(localFiles.files);
       localFiles.files.push(newFileMetadata)
       this.storage.set(objectNameToSaveOnLocal, localFiles).catch(err=>{
         this.presentAlert('Ha habido un error con el archivo!', 'No se puede subir el archivo, intente de nuevo!')  
@@ -122,7 +120,7 @@ export class FilesHandlerComponent implements OnInit {
     if(!this.singleFile){
       return
     }
-    console.log(this.singleFile);
+    //console.log(this.singleFile);
     if(this.singleFile.size > 50000000){
       this.presentAlert('El archivo es muy grande!', 'Tamaño máximo de archivos: 50 MB')
       this.clearFile()
@@ -183,5 +181,34 @@ export class FilesHandlerComponent implements OnInit {
   
   openBrowserLinks(link:string){
     window.open(link, '_system', 'location=yes'); return false;
+  }
+
+  async deleteFileFromFirebase(fileMetadata:localFileData, indexToDelete: number){
+    let storageRef = this.afStorage.storage.ref()
+    fileMetadata['isCurrentlyDeleting'] = true
+    var fileRef = storageRef.child(`${fileMetadata.firestoreFolder}/${fileMetadata.firestoreId}`);
+    // Delete the file
+    let result = await fileRef.delete().then(data=>{
+      this.deleteFileFromLocalStorage(indexToDelete)
+      this.presentAlert('ARCHIVO BORRADO!', 'Se ha borrado el archivo!')
+      fileMetadata['isCurrentlyDeleting'] = undefined
+    }).catch( err =>{
+      this.presentAlert('ARCHIVO NO BORRADO!', 'Por favor intente de nuevo!')
+      fileMetadata['isCurrentlyDeleting'] = undefined
+    })    
+  }
+
+  async tryDelete(fileMetadata:localFileData){
+    let index = this.uploadedFilesHandler.
+      uploadedFilesShowToUser.map(function(x) {return x.firestoreId; }).indexOf(fileMetadata.firestoreId)
+    if (index > -1) {
+      this.deleteFileFromFirebase(fileMetadata, index)
+    }
+  }
+
+  async deleteFileFromLocalStorage(index:number){
+    this.uploadedFilesHandler.uploadedFilesShowToUser.splice(index, 1);
+    let newLocal = {files : this.uploadedFilesHandler.uploadedFilesShowToUser} as LocalFileReference
+    this.storage.set(this.localStorageRefName, newLocal);
   }
 }

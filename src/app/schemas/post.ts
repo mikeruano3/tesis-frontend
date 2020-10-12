@@ -12,7 +12,7 @@ export class PostSchema {
     createdAt: string
     title: string
     content: string
-    files: FileSchema[]
+    files: string[]
     reactions: ReactionSchema[]
     sharedCount: number
     childComments : PostSchema[]

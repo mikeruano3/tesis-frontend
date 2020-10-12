@@ -1,4 +1,5 @@
 export interface localFileData{
+    _id: string
     fileName: string
     fileType: string
     firestoreId: string

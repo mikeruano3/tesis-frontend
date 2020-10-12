@@ -34,9 +34,11 @@
                         <a class="link-style" href="#" (click)="openBrowserLinks(uploadedFile.firestoreDownloadLink)">
                             Abrir <ion-icon name="open-outline"></ion-icon>
                         </a>
-                        <p class="file-name-style"  style="margin-left: 1px; cursor: pointer;" >
+                        <p class="file-name-style"  style="margin-left: 1px; cursor: pointer;" 
+                            (click)="tryDelete(uploadedFile)">
                             Borrar <ion-icon name="trash-outline"></ion-icon>
                         </p>
+                        <ion-spinner *ngIf="uploadedFile.isCurrentlyDeleting" name="lines-small"></ion-spinner>
                     </ion-row>
                     <p class="file-name-style">
                         <ion-icon name="document-outline"></ion-icon>

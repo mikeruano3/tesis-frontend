@@ -1,67 +1,85 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Yo entro a la U
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-  <div slot="fixed" style="position:relative;">
-    <ion-searchbar type="search" debounce="500" color="light"
-      (ionChange)="getItems($event)" placeholder="Buscar carrera" animated>
+  <div>
+    <ion-img src="/assets/img/home-landing/campus.jpg" *ngIf="!isCarrerItemAvailable"></ion-img>
+    <ion-title class="ion-text-center upper-title-style"  *ngIf="!isCarrerItemAvailable" mode="md">
+      <h2 style="margin: 0%; width: 100%;"><b>Yo entro a la U</b></h2>
+    </ion-title>
+    <ion-searchbar type="search" debounce="500" color="light" [ngStyle]="{'margin-top': !isCarrerItemAvailable ? '0%' : '10%'}"
+      (ionChange)="getCareerItems($event)" placeholder="Buscar carrera" animated mode="ios">
     </ion-searchbar>
   </div>
   
-  <ion-list class="ios list-ios hydrated" *ngIf="isItemAvailable">
-    
-      <div style="margin-top: 20%;"></div>
-
-      <ion-item *ngIf="findedCouseItems.length < 1">No existen elementos para la búsqueda</ion-item>
-      <ion-item *ngFor="let courseItem of findedCouseItems">{{ courseItem.name }}</ion-item>
+  <ion-list class="ios list-ios hydrated" *ngIf="isCarrerItemAvailable">
+      <ion-item *ngIf="findedCareerItems.length < 1">No existen elementos para la búsqueda</ion-item>
+      <ion-item *ngFor="let careerItem of findedCareerItems" (click)="handleCareerClick(careerItem)">
+        {{ careerItem.title }}</ion-item>
   </ion-list>
-  
 
-  <div *ngIf="!isItemAvailable">
-    <ion-img src="/assets/img/home.jpg"></ion-img>
-    <ion-list class="ios list-ios hydrated">
-      <ion-slides [options]="slideOpts" pager="true">
-        <ion-slide *ngFor="let course of courseList">
+  <div *ngIf="!isCarrerItemAvailable">
+    <!-- ESTO SE MUESTRA AL INICIO Y SI NO HAY ELEMENTOS ENCONTRADOS -->
+  
+    <ion-list class="instagram-bg">
+      <ion-title class="title-style orange-bg"  mode="md">
+        <h4 style="margin: 0%;">Categorías de carreras</h4>
+      </ion-title>
+      <ion-title class="title-style orange-bg"  mode="md">
+        <p style="margin: 0%; font-size: 10px;" (click)="verMasPosts()">Selecciona una categoría...</p>
+      </ion-title>
+      <ion-spinner name="dots" *ngIf="categoryList?.length < 1" style="width: 100%"></ion-spinner>
+      <ion-slides [options]="slideOpts" pager="true" mode="ios" style="width: 100%;" class="orange-bg">
+        <ion-slide *ngFor="let catItem of categoryList" (click)="handleCategoriesClick(catItem)">
           <ion-card>
+            <img [src]="catItem.topImg" />
             <ion-card-content>
               <ion-row>
-                  <a class="link-style" href="#">
-                      Abrir <ion-icon name="open-outline"></ion-icon>
-                  </a>
-                  <p class="file-name-style"  style="margin-left: 1px; cursor: pointer;" >
-                      Borrar <ion-icon name="trash-outline"></ion-icon>
-                  </p>
+                 <h5 style="color: white;">{{catItem.title}}</h5>
               </ion-row>
-              <p class="file-name-style">
-                  <ion-icon name="document-outline"></ion-icon>
-                  test</p>
+            </ion-card-content>
+          </ion-card>
+        </ion-slide>
+      </ion-slides>
+
+      <ion-title class="title-style green-bg"  mode="md">
+        <h4 style="margin: 0%;">Material de Estudio</h4>
+      </ion-title>
+      <ion-title class="title-style green-bg"  mode="md">
+        <p style="margin: 0%; font-size: 10px;" (click)="verMasPosts()">Ver más...</p>
+      </ion-title>
+      <ion-spinner name="dots" *ngIf="materialList?.length < 1" style="width: 100%"></ion-spinner>
+      <ion-slides [options]="slideOpts" pager="true" mode="ios" style="width: 100%;" class="green-bg">
+        <ion-slide *ngFor="let item of materialList" (click)="handlePostClick(item)">
+          <ion-card>
+            <img src="/assets/img/home-landing/material.jpg"/>
+            <ion-card-content style="height: 100px;">
+              <ion-row>
+                <h5 style="color: white;">{{item.title}}</h5>
+                <p style="color: white;" [innerHTML]="item.content"></p>
+              </ion-row>
             </ion-card-content>
           </ion-card>
         </ion-slide>
       </ion-slides>
   
-      
-      <ion-list-header class="ios hydrated">
-        <p>Configuration</p>
-      </ion-list-header>
-      
-  
-      <ion-item class="item-label item ios in-list ion-focusable hydrated">
-        <ion-label class="sc-ion-label-ios-h sc-ion-label-ios-s ios hydrated">
-          <h2>Courses</h2>
-        </ion-label>
-  
-        <div class="item-note" item-end>
-          <button ion-button clear [routerLink]="['/courses']">
-            <ion-icon name="create" style="zoom:2.0"></ion-icon>
-          </button>
-        </div>
-      </ion-item>
+      <ion-title class="title-style stellar-bg"  mode="md">
+        <h4 style="margin: 0%;">Experiencias de egresados</h4>
+      </ion-title>
+      <ion-title class="title-style stellar-bg"  mode="md">
+        <p style="margin: 0%; font-size: 10px;" (click)="verMasPosts()">Ver más...</p>
+      </ion-title>
+      <ion-spinner name="dots" *ngIf="experiencesList?.length < 1" style="width: 100%"></ion-spinner>
+      <ion-slides [options]="slideOpts" pager="true" mode="ios" style="width: 100%;" class="stellar-bg">
+        <ion-slide *ngFor="let item of experiencesList" (click)="handlePostClick(item)">
+          <ion-card>
+            <img src="/assets/img/home-landing/expe.jpg"/>
+            <ion-card-content style="height: 100px;">
+              <ion-row>
+                <h5 style="color: white;">{{item.title}}</h5>
+                <p style="color: white;" [innerHTML]="item.content"></p>
+              </ion-row>
+            </ion-card-content>
+          </ion-card>
+        </ion-slide>
+      </ion-slides>
     </ion-list>
   </div>
 

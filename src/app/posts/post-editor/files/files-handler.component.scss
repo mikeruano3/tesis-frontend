@@ -3,6 +3,7 @@ ion-slide {
     margin: 0%;
     padding: 0%;
     margin-bottom: 25px;
+    height: 100%;
 }
 
 ion-card{
@@ -20,6 +21,7 @@ ion-card-content{
 
 .file-name-style {
     font-size: 10px;
+    word-break: break-all;
 }
 
 .link-style {

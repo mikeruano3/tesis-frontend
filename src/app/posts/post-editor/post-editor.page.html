@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar class="ios hydrated">
     <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
+      <ion-back-button id="ionback-button"></ion-back-button>
     </ion-buttons>
     <ion-title class="ios title-ios hydrated">Crear Publicación</ion-title>
   </ion-toolbar>
@@ -30,7 +30,7 @@
   </ion-list>
   <ckeditor [editor]="Editor" [config]="config" [(ngModel)]="editorData" id="editor"></ckeditor>
   <ion-grid>
-    <app-files-handler [localStorageRefName]="'newPostHolder'"  style="width: 100%"
+    <app-files-handler [localStorageRefName]="localStorageRefName"  style="width: 100%"
       [uploadFolderName]="'user-uploaded-files'" [uploadedFilesHandler]="uploadedFilesHandler">
     </app-files-handler>
   </ion-grid>
@@ -40,7 +40,7 @@
   <ion-toolbar>
     <ion-row>
       <ion-col>
-        <ion-button type="submit" color="primary" expand="block" (click)="savePostToServer()">Publicar</ion-button>
+        <ion-button type="submit" color="primary" expand="block" (click)="savePostTasks()">Publicar</ion-button>
       </ion-col>
     </ion-row>
   </ion-toolbar>

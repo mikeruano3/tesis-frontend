@@ -3,10 +3,11 @@ import { PostSchema } from './post';
 
 export class FileSchema {
     _id: string
-    associatedPost: PostSchema
-    postCategory: CategorySchema
-    createdAt: string
-    title: string
-    description: string
-    link: string
+    postCategory:string
+    associatedPost: string
+    fileName: string
+    fileType: string
+    firestoreId: string
+    firestoreFolder: string
+    firestoreDownloadLink: any
 }

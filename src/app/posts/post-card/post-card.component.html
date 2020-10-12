@@ -14,7 +14,7 @@
         </ion-col>
       </ion-row>
 
-      <ion-card-title mode="md" [ngClass]="{'set-margin-top': !showAvatar}">
+      <ion-card-title mode="md" [ngClass]="{'set-margin-top': !showAvatar}" (click)="openPost(post)">
         {{ post.title }}
       </ion-card-title>
       <p  class="datetime-style" *ngIf="!showAvatar" style="margin-left: 2%;">
@@ -29,6 +29,29 @@
           <i>... Ver más</i>
         </b>
       </p>
+
+      <ion-list  *ngIf="isFullView && post?.files?.length > 0" mode="ios" class="ion-no-padding">
+        <ion-label><h4 style="margin: 0%; padding: 5px;">
+          Archivos Adjuntos <ion-icon name="attach-outline"></ion-icon>
+          <span style="font-size: 10px;">{{' '}}<i>{{(post?.files?.length) + ' Archivos'}}</i>
+          </span>
+        </h4></ion-label>
+        <ion-slides [options]="slideOpts" pager="true">
+          <ion-slide *ngFor="let uploadedFile of post?.files" 
+            class=" border:4px solid white; border-radius:2%;" style="width: 100%; height: 100%;">
+            <ion-label class="ion-no-padding">
+              <a href="#" style="font-size: 12px; margin: 5px; padding: 0%;"
+                (click)="openBrowserLinks(uploadedFile.firestoreDownloadLink)">
+                Abrir <ion-icon name="open-outline"></ion-icon>
+              </a>
+              <p style="font-size: 12px; margin: 5px; padding: 0%; word-break: break-all;">
+                <ion-icon name="document-attach-outline"></ion-icon>
+                {{uploadedFile.fileName}}
+              </p>
+            </ion-label>
+          </ion-slide>
+        </ion-slides>
+      </ion-list>
       
     </ion-card-content>
   </ion-row>

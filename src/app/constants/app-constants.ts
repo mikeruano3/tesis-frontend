@@ -24,6 +24,7 @@ export const APPCONSTANTS = {
     SCHEMAS : {
         POSTS_SCHEMA: 'posts',
         REACTIONS_SCHEMA: 'reactions',
-        CATEGORIES_SCHEMA:'categories'
+        CATEGORIES_SCHEMA:'categories',
+        FILES_SCHEMA: 'files'
     }
 }

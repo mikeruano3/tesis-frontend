@@ -1,74 +1,86 @@
-#container {
-    text-align: center;
-  
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-  
-  #container strong {
-    font-size: 20px;
-    line-height: 26px;
-  }
-  
-  #container p {
-    font-size: 16px;
-    line-height: 22px;
-  
-    color: #8c8c8c;
-  
-    margin: 0;
-  }
-  
-  #container a {
-    text-decoration: none;
-  }
-  
-  
-  
-  span{
-    padding-left: 2px!important;
-    padding-right: 2px!important;
-    padding-top: 2px!important;
-    padding-bottom: 2px!important;
-    width: 85px!important;
-    height: 70px!important;
-  
-  }
+@import url('https://fonts.googleapis.com/css2?family=Prompt&display=swap');
 
-  span img{
-    width: 55px;
-    height: 55px;
-  }
+.upper-title-style{
+  //color: rgb(224, 224, 224); text-shadow: black 0.1em 0.1em 0.2em
+  color: #FFFFFF;
+  text-shadow: 2px 2px 5px #474747;
+  font-family: 'Prompt', sans-serif;
+  margin-top: -35%;
+}
 
+.title-style{
+  color: #FFFFFF;
+  text-shadow: 2px 2px 5px #474747;
+  font-family: 'Prompt', sans-serif;
+}
+
+$slides-height: 30px;
 
 ion-slide {
-  background-color:  #FFF;
   float: left;
   margin: 0%;
   padding: 0%;
+  margin-bottom: $slides-height;
   //border-radius: $card-height/2 !important;
 }
 
 ion-slide:hover{
-  background: rgba(205, 9, 9, 0.43);
+  //background: rgba(205, 9, 9, 0.43);
   cursor: pointer;
 }
 
 ion-slides{
-  background-color:  rgba(194, 193, 194, 0.52);
+  height: 100%;
 }
 
 ion-card, .card-ios, .card-md{
   display: flex;
   flex-direction: column;
   margin: 2px;
-  background: blue;
+  
+  background: #0575E6;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #021B79, #0575E6);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #021B79, #0575E6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
+
 ion-card-content{
   margin: 0 !important;
   padding: 3px !important;
-  height: 80px;
+  height: 50px;
+}
+
+.category-background{
+  background: #56CCF2;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #2F80ED, #56CCF2);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #2F80ED, #56CCF2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.instagram-bg{
+  background: #833ab4;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #fcb045, #fd1d1d, #833ab4);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #fcb045, #fd1d1d, #833ab4); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.stellar-bg{
+  background: #7474BF;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #348AC7, #7474BF);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #348AC7, #7474BF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.orange-bg{
+  background: #fe8c00;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #f83600, #fe8c00);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #f83600, #fe8c00); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */  
+}
+
+.green-bg{
+  background: #ADD100;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #7B920A, #ADD100);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #7B920A, #ADD100); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.pink-bg{
+  background: #e53935;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #e35d5b, #e53935);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #e35d5b, #e53935); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }

@@ -411,6 +411,6 @@ export class GenericRedirection {
         let navigationExtras: NavigationExtras = {
             state: props
         };
-        this.router.navigate([this.genericCardListRoute +'/1' ], navigationExtras);
+        this.router.navigate([this.genericCardListRoute +'/7' ], navigationExtras);
     }
 }

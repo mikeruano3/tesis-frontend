@@ -113,4 +113,25 @@ export class PostCardComponent implements OnInit {
     this.router.navigate(['/post-viewer'], navigationExtras);
   }
 
+  /****** FILES */
+  slideOpts = {
+    initialSlide: 1,
+    slidesPerView: 3,
+    spaceBetween: 0.5,
+    freeMode: true,
+    navigation: true,
+    watchSlidesProgress: true,
+    //slidesOffsetAfter: 100,
+    coverflowEffect: {
+      rotate: 50,
+      stretch: 0,
+      depth: 100,
+      modifier: 1,
+      slideShadows: true,
+    }
+  }
+
+  openBrowserLinks(link:string){
+    window.open(link, '_system', 'location=yes'); return false;
+  }
 }
