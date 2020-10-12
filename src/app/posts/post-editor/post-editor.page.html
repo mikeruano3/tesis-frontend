@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar class="ios hydrated">
+    <ion-buttons slot="start">
+      <ion-back-button id="ionback-button"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ios title-ios hydrated">Crear Publicación</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="2">
+        <ion-avatar>
+          <img src="/assets/img/profile.jpg">
+        </ion-avatar>
+      </ion-col>
+      <ion-col size="8" offset="2">
+          <ion-label><p>Publicando como:</p></ion-label>
+          <ion-label>{{ user?.username ? user.username : 'Anónimo' }}</ion-label>
+          <ion-label><p>{{ user?.fullname ? user.fullname : '' }}</p></ion-label>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-list lines="full" class="ion-no-margin">
+    <ion-item>
+      <ion-label position="stacked">Título de la Publicación</ion-label>
+      <ion-input placeholder="Escribir título..." [(ngModel)]="titleData"></ion-input>
+    </ion-item>
+  </ion-list>
+  <ckeditor [editor]="Editor" [config]="config" [(ngModel)]="editorData" id="editor"></ckeditor>
+  <ion-grid>
+    <app-files-handler [localStorageRefName]="localStorageRefName"  style="width: 100%"
+      [uploadFolderName]="'user-uploaded-files'" [uploadedFilesHandler]="uploadedFilesHandler">
+    </app-files-handler>
+  </ion-grid>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-row>
+      <ion-col>
+        <ion-button type="submit" color="primary" expand="block" (click)="savePostTasks()">Publicar</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

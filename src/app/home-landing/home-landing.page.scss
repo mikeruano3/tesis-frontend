@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Prompt&display=swap');
+
+.upper-title-style{
+  //color: rgb(224, 224, 224); text-shadow: black 0.1em 0.1em 0.2em
+  color: #FFFFFF;
+  text-shadow: 2px 2px 5px #474747;
+  font-family: 'Prompt', sans-serif;
+  margin-top: -35%;
+}
+
+.title-style{
+  color: #FFFFFF;
+  text-shadow: 2px 2px 5px #474747;
+  font-family: 'Prompt', sans-serif;
+}
+
+$slides-height: 30px;
+
+ion-slide {
+  float: left;
+  margin: 0%;
+  padding: 0%;
+  margin-bottom: $slides-height;
+  //border-radius: $card-height/2 !important;
+}
+
+ion-slide:hover{
+  //background: rgba(205, 9, 9, 0.43);
+  cursor: pointer;
+}
+
+ion-slides{
+  height: 100%;
+}
+
+ion-card, .card-ios, .card-md{
+  display: flex;
+  flex-direction: column;
+  margin: 2px;
+  
+  background: #0575E6;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #021B79, #0575E6);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #021B79, #0575E6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+ion-card-content{
+  margin: 0 !important;
+  padding: 3px !important;
+  height: 50px;
+}
+
+.category-background{
+  background: #56CCF2;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #2F80ED, #56CCF2);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #2F80ED, #56CCF2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.instagram-bg{
+  background: #833ab4;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #fcb045, #fd1d1d, #833ab4);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #fcb045, #fd1d1d, #833ab4); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.stellar-bg{
+  background: #7474BF;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #348AC7, #7474BF);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #348AC7, #7474BF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.orange-bg{
+  background: #fe8c00;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #f83600, #fe8c00);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #f83600, #fe8c00); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */  
+}
+
+.green-bg{
+  background: #ADD100;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #7B920A, #ADD100);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #7B920A, #ADD100); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.pink-bg{
+  background: #e53935;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #e35d5b, #e53935);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #e35d5b, #e53935); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}

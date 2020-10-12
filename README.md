@@ -14,7 +14,15 @@ ionic serve -l
 ng generate page add-course
 ng generate page edit-course
 
+## Production Build
+ionic cordova build browser --release
+ionic cordova build android --prod
+ionic cordova build android
+
 ## DOCS
 
 https://www.positronx.io/build-ionic-cordova-angular-crud-mobile-app/
 
+https://bezkoder.com/angular-10-jwt-auth/
+
+https://angular.io/guide/dynamic-form

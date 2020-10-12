@@ -1,0 +1,22 @@
+ckeditor {
+    /** DO NOT ERASE **/
+    -webkit-user-select: text;
+    user-select: text;
+
+    /* Font */
+    font-family: Arial, Verdana, sans-serif;
+    font-size: 12px;
+    /* Text color */
+    color: #222222;
+
+    /* Remove the background color to make it transparent 
+    background-color: none;
+    
+    /**/
+
+  overflow-y: scroll;
+}
+
+.ion-content{
+    --ion-background-color: #ffffff;
+}

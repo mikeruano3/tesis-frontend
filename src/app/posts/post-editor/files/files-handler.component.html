@@ -1,0 +1,50 @@
+<input  class="display-none" type="file"  id="file1" style="display:none"  (change)="handleFileInput($event)"/>
+
+<ion-button color="light" size="small" (click)="clickUpload()" style="text-transform:none!important;">
+    Adjuntar Archivo
+    <ion-icon name="document-outline"></ion-icon>
+</ion-button>
+
+<ion-label *ngIf="singleFile?.name"><p>{{singleFile?.name}}</p></ion-label>
+
+<ion-row *ngIf="!!singleFile">
+    <ion-button color="primary" size="small"(click)="uploadFileToFirebase()">Upload</ion-button>
+    <ion-row>
+        <div *ngIf="uploadState | async; let state">
+            <ion-button color="warning" size="small" (click)="task.pause()" [disabled]="state === 'paused'">
+                Pausar</ion-button>
+            <ion-button color="danger" size="small" (click)="cancelUpload()" [disabled]="!(state === 'paused' || state === 'running')">
+                Cancelar</ion-button>
+            <ion-button color="success" size="small" (click)="task.resume()" [disabled]="state === 'running'">
+                Reanudar</ion-button>
+        </div>
+    </ion-row>
+</ion-row>
+
+<ion-row *ngIf="uploadProgress | async as uploadPer">
+    <ion-progress-bar *ngIf="uploadPer !== 100" style="padding: 2%;" [value]="uploadPer"></ion-progress-bar>
+</ion-row>
+
+<ion-list class="ios list-ios hydrated">
+    <ion-slides [options]="slideOpts" pager="true" >
+        <ion-slide *ngFor="let uploadedFile of uploadedFilesHandler?.uploadedFilesShowToUser">
+            <ion-card>
+                <ion-card-content>
+                    <ion-row>
+                        <a class="link-style" href="#" (click)="openBrowserLinks(uploadedFile.firestoreDownloadLink)">
+                            Abrir <ion-icon name="open-outline"></ion-icon>
+                        </a>
+                        <p class="file-name-style"  style="margin-left: 1px; cursor: pointer;" 
+                            (click)="tryDelete(uploadedFile)">
+                            Borrar <ion-icon name="trash-outline"></ion-icon>
+                        </p>
+                        <ion-spinner *ngIf="uploadedFile.isCurrentlyDeleting" name="lines-small"></ion-spinner>
+                    </ion-row>
+                    <p class="file-name-style">
+                        <ion-icon name="document-outline"></ion-icon>
+                        {{uploadedFile.fileName}}</p>
+                </ion-card-content>
+            </ion-card>
+        </ion-slide>
+    </ion-slides>
+</ion-list>

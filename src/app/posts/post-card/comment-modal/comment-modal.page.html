@@ -1,0 +1,43 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-title>Comentarios</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()">Close</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <ion-list>
+    <ion-item *ngFor="let comment of comments" >
+      <ion-avatar slot="start">
+        <img src="/assets/img/profile.jpg">
+      </ion-avatar>
+      <ion-label>
+        <h2>{{ comment.user?.username ? comment.user.username : 'Anónimo' }}</h2>
+        <p>{{ comment.content }}</p>
+        <!--<p style="float: right; cursor: pointer; font-size: 12px;" (click)="selectComment(comment)">
+          Comentar</p>-->
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-infinite-scroll threshold="100px" id="infinite-scroll" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content loading-spinner="bubbles" loading-text="Cargando datos...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar  mode="ios">
+    <ion-textarea auto-grow="false" id="textbar" type="text" lines="2" 
+      style="margin: 1%; padding: 0%; font-size: 14px; width: 100%;"
+          [(ngModel)]="tmpComment" placeholder="Escribe un comentario">
+    </ion-textarea> 
+    <ion-buttons slot="end">
+      <ion-button id="changeText" (click)="saveCommentOfComment()">
+        Enviar
+        <ion-icon slot="start" name="paper-plane"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>
