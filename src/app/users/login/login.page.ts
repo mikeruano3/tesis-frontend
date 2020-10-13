@@ -40,7 +40,7 @@ export class LoginPage implements OnInit {
         async (resData) => {
           console.log(resData);
           
-          if(resData.status === "true"){
+          if(resData.status === true){
             await this.tokenStorage.saveToken(resData.data.accessToken);
             await this.tokenStorage.saveUserSchema(resData.data.userData);
             
@@ -50,14 +50,14 @@ export class LoginPage implements OnInit {
               this.router.navigate(['/tablinks/users-home'], { state:  { clearHistory: true }} as NavigationExtras);
             })
           }else{
-            this.presentAlert('Alerta', 'No se ha podido iniciar sesión', resData.message)
-            this.errorMessage = resData.message;
+            this.presentAlert('Alerta!', 'No se ha podido iniciar sesión', '')
+            this.errorMessage = resData;
             this.isLoginFailed = true;
           }
         },
         err => {
           this.presentAlert('Alerta', 'No se ha podido iniciar sesión', err.error.message)
-          this.errorMessage = err.error.message;
+          this.errorMessage = err;
           this.isLoginFailed = true;
         }
     );
