@@ -3,35 +3,90 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>Register</ion-title>
+    <ion-title>Registrarse</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <form>
+  <form [formGroup]="registerForm" (ngSubmit)="onFormSubmit()">
     <ion-item lines="full">
-      <ion-label position="floating">First name</ion-label>
-      <ion-input type="text" required></ion-input>
+      <ion-label position="floating">Nombre completo</ion-label>
+      <ion-input type="text" formControlName="fullname" required></ion-input>
     </ion-item>
+    <ion-label class="sc-ion-label-ios-h sc-ion-label-ios-s ios hydrated" color="danger"
+      *ngIf="registerForm.controls.fullname.touched" style="text-align:center;">
+      <h5 *ngIf="registerForm.controls.fullname.hasError('required')">
+        El nombre completo es requerido</h5>
+    </ion-label>
 
     <ion-item lines="full">
-      <ion-label position="floating">Last name</ion-label>
-      <ion-input type="text" required></ion-input>
+      <ion-label position="floating">Email <span style="font-size: 10px">
+        <i>(Se usará para iniciar sesión)</i></span>
+      </ion-label>
+      <ion-input type="text" formControlName="email" required></ion-input>
     </ion-item>
-
-    <ion-item lines="full">
-      <ion-label position="floating">Email</ion-label>
-      <ion-input type="text" required></ion-input>
-    </ion-item>
+    <ion-label class="sc-ion-label-ios-h sc-ion-label-ios-s ios hydrated" color="danger"
+      *ngIf="registerForm.controls.email.touched" style="text-align:center;">
+      <h5 *ngIf="registerForm.controls.email.hasError('required')">
+        El email es requerido</h5>
+    </ion-label>
 
     <ion-item lines="full">
       <ion-label position="floating">Password</ion-label>
-      <ion-input type="password" required></ion-input>
+      <ion-input type="password" formControlName="password" [required] = "!isEditing"></ion-input>
     </ion-item>
+    <ion-label class="sc-ion-label-ios-h sc-ion-label-ios-s ios hydrated" color="danger"
+      *ngIf="registerForm.controls.password.touched" style="text-align:center;">
+      <h5 *ngIf="registerForm.controls.password.hasError('required')">
+        La contraseña es requerida</h5>
+      <h5 *ngIf="registerForm.hasError('minlength', 'password')">
+        La contraseña debe tener al menos 6 caracteres</h5>
+    </ion-label>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Username <span style="font-size: 10px">
+        <i>(Será visible en toda la plataforma)</i></span>
+      </ion-label>
+      <ion-input type="text"  maxlength="15" formControlName="username" required></ion-input>
+    </ion-item>
+    <ion-label class="sc-ion-label-ios-h sc-ion-label-ios-s ios hydrated" color="danger"
+      *ngIf="registerForm.controls.username.touched" style="text-align:center;">
+      <h5 *ngIf="registerForm.controls.username.hasError('required')">
+        El nombre de usuario es requerido</h5>
+    </ion-label>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Profesión</ion-label>
+      <ion-input type="text" formControlName="profession"></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Dirección</ion-label>
+      <ion-input type="text" formControlName="direction"></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Universidad</ion-label>
+      <ion-input type="text" formControlName="university" required></ion-input>
+    </ion-item>
+    <ion-label class="sc-ion-label-ios-h sc-ion-label-ios-s ios hydrated" color="danger"
+      *ngIf="registerForm.controls.university.touched" style="text-align:center;">
+      <h5 *ngIf="registerForm.controls.university.hasError('required')">
+        La universidad es requerida</h5>
+    </ion-label>
+
 
     <ion-row>
       <ion-col>
-        <ion-button type="submit" color="danger" expand="block">Sign Up</ion-button>
+        <ion-text *ngIf="isSignUpFailed && errorMessage" color="danger" style="text-align:center;">
+          <h6>{{ errorMessage }}</h6>
+        </ion-text>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-button type="submit" color="danger" expand="block">{{!isEditing ? 'Registrarse' : 'Actualizar'}}</ion-button>
       </ion-col>
     </ion-row>
   </form>

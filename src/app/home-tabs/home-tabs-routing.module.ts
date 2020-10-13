@@ -11,7 +11,6 @@ const routes: Routes = [
       {
         path: 'home-landing',
         loadChildren: () => import('../home-landing/home-landing.module').then(m => m.HomeLandingPageModule)
-        //loadChildren: () => import('../career-mgt/career-overview/career-overview.module').then(m => m.CareerOverviewPageModule)
       },
       {
         path: 'career-list',
@@ -19,8 +18,7 @@ const routes: Routes = [
       },
       {
         path: 'users-home',
-        //loadChildren: () => import('../users/users-home/users-home-routing.module').then(m => m.UsersHomePageRoutingModule)
-        loadChildren: () => import('../posts/post-list/post-list-routing.module').then(m => m.PostListPageRoutingModule)
+        loadChildren: () => import('../users/users-home/users-home-routing.module').then(m => m.UsersHomePageRoutingModule)
       },
       {
         path: 'universities',
@@ -28,7 +26,8 @@ const routes: Routes = [
       },
       {
         path: 'contact',
-        loadChildren: () => import('../course-mgt/list-course/list-course.module').then(m => m.ListCoursePageModule)
+        loadChildren: () => import('../posts/post-list/post-list-routing.module').then(m => m.PostListPageRoutingModule)
+        //loadChildren: () => import('../course-mgt/list-course/list-course.module').then(m => m.ListCoursePageModule)
       },
       {
         path: '',

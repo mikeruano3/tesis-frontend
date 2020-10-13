@@ -57,7 +57,11 @@ export class PostEditorPage implements OnInit {
   }
 
   ngOnInit() { 
-    this.user = this.tokenStorageService.getUserData()
+    this.getUserData()
+  }
+
+  async getUserData(){
+    this.user = await this.tokenStorageService.getUserSchema()
   }
 
   async savePostTasks(){

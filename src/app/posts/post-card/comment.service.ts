@@ -23,7 +23,7 @@ export class CommentService {
 
   async saveCommentToServer(parentPost: PostSchema, commentContent: any, mentionedUser: UserSchema){
     const tmpComment = commentContent
-    let user = this.tokenStorageService.getUserData()
+    let user = await this.tokenStorageService.getUserSchema()
     let commentData:PostSchema = {} as PostSchema
     commentData.user = user || undefined
     commentData.content = tmpComment

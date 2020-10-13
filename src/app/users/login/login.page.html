@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar class="ios hydrated">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="home"></ion-back-button>
+      <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-title class="ios title-ios hydrated">Log In</ion-title>
   </ion-toolbar>
@@ -11,13 +11,13 @@
   <ion-list lines="full" class="ion-no-margin ion-no-padding ios list-ios list-lines-full list-ios-lines-full hydrated">
     <form [formGroup]="loginForm" (ngSubmit)="onFormSubmit()">
       <ion-item lines="full">
-        <ion-label position="floating">Username</ion-label>
-        <ion-input formControlName="username" type="text" required></ion-input>
+        <ion-label position="floating">Email</ion-label>
+        <ion-input formControlName="email" type="text" required></ion-input>
       </ion-item>
 
       <ion-label class="sc-ion-label-ios-h sc-ion-label-ios-s ios hydrated" 
-        color="danger" *ngIf="loginForm.controls.username.touched" style="text-align:center;">
-          <h5 *ngIf="loginForm.controls.username.hasError('required')">
+        color="danger" *ngIf="loginForm.controls.email.touched" style="text-align:center;">
+          <h5 *ngIf="loginForm.controls.email.hasError('required')">
             El nombre de usuario es requerido</h5>
       </ion-label>
 
@@ -50,9 +50,6 @@
           </a>
         </ion-col>
       </ion-row>
-
-
     </form>
-    <ion-button type="submit" color="danger" (click)="logout()" expand="block">Logout</ion-button>
   </ion-list>
 </ion-content>

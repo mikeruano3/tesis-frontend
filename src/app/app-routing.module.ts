@@ -71,6 +71,10 @@ const routes: Routes = [
     path: 'university-categories',
     loadChildren: () => import('./tabs/university-categories/university-categories.module').then( m => m.UniversityCategoriesPageModule)
   },
+  {
+    path: 'contact',
+    loadChildren: () => import('./tabs/contact/contact.module').then( m => m.ContactPageModule)
+  },
 ];
 
 @NgModule({

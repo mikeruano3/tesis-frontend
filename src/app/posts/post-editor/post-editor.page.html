@@ -25,7 +25,7 @@
   <ion-list lines="full" class="ion-no-margin">
     <ion-item>
       <ion-label position="stacked">Título de la Publicación</ion-label>
-      <ion-input placeholder="Escribir título..." [(ngModel)]="titleData"></ion-input>
+      <ion-input placeholder="Escribir título..."  maxlength="150" [(ngModel)]="titleData"></ion-input>
     </ion-item>
   </ion-list>
   <ckeditor [editor]="Editor" [config]="config" [(ngModel)]="editorData" id="editor"></ckeditor>

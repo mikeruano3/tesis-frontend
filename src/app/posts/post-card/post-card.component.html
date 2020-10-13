@@ -28,6 +28,10 @@
         <b *ngIf="!isFullView && checkWrapping(post.content)" >
           <i>... Ver más</i>
         </b>
+        <span *ngIf="!isFullView && post?.files?.length > 0" 
+        style="font-size: 10px;" >
+        <i>{{' '+ post?.files?.length + (post?.files?.length > 1 ? ' archivos adjuntos' : ' archivo adjunto')}}
+        </i></span>
       </p>
 
       <ion-list  *ngIf="isFullView && post?.files?.length > 0" mode="ios" class="ion-no-padding">

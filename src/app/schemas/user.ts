@@ -6,8 +6,9 @@ export class UserSchema {
     email: string
     password: string
     fullname: string
-    profesion: string
-    city: string
+    profession: string
+    direction: string
+    university: string
     image: string
     role: RoleSchema
     createdAt: string

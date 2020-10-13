@@ -2,8 +2,8 @@ import { Component, OnInit, NgZone } from '@angular/core';
 import { AuthService } from '../../auth/auth.service';
 import { TokenStorageService } from '../../auth/token-storage.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { RoleSchema } from 'src/app/schemas/role';
+import { NavigationExtras, Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -12,62 +12,66 @@ import { RoleSchema } from 'src/app/schemas/role';
 })
 export class LoginPage implements OnInit {
   loginForm: FormGroup
-  isLoggedIn = false;
   isLoginFailed = false;
   errorMessage = '';
-  role: RoleSchema;
-
+  
   constructor(private authService: AuthService, 
     private tokenStorage: TokenStorageService,
     private router: Router,
     public fb: FormBuilder,
+    public alertController: AlertController,
     private zone: NgZone
   ) {
     this.loginForm = this.fb.group({
-      username: [null, Validators.required],
+      email: [null, Validators.required],
       password:[null,Validators.compose([Validators.required, Validators.minLength(0)])]
     })
   }
 
-  ngOnInit() {
-    if (this.tokenStorage.getToken()) {
-      this.isLoggedIn = true;
-      this.role = this.tokenStorage.getUserData().role;
-    }
-  }
+  ngOnInit() {}
 
   onFormSubmit() {
     if (!this.loginForm.valid) {
       return
     }
+    
     this.authService.login(this.loginForm.value)
       .subscribe(
-        resdata => {
-          console.log(resdata)
-          if(resdata.status === "true"){
-            this.tokenStorage.saveToken(resdata.data.accessToken);
-            this.tokenStorage.saveUser(resdata.data);
+        async (resData) => {
+          console.log(resData);
+          
+          if(resData.status === "true"){
+            await this.tokenStorage.saveToken(resData.data.accessToken);
+            await this.tokenStorage.saveUserSchema(resData.data.userData);
             
             this.isLoginFailed = false;
-            this.isLoggedIn = true;
             this.zone.run(() => {
               this.loginForm.reset();
-              this.router.navigate(['/home']);
+              this.router.navigate(['/tablinks/users-home'], { state:  { clearHistory: true }} as NavigationExtras);
             })
           }else{
-            this.errorMessage = resdata.message;
+            this.presentAlert('Alerta', 'No se ha podido iniciar sesión', resData.message)
+            this.errorMessage = resData.message;
             this.isLoginFailed = true;
           }
         },
         err => {
+          this.presentAlert('Alerta', 'No se ha podido iniciar sesión', err.error.message)
           this.errorMessage = err.error.message;
           this.isLoginFailed = true;
         }
     );
   }
 
-  logout(){
-    this.tokenStorage.signOut()
+  async presentAlert(header:string, subHeader:string, message:string) {
+    const alert = await this.alertController.create({
+      //cssClass: 'my-custom-class',
+      header: header,
+      subHeader: subHeader,
+      message: message,
+      buttons: ['OK']
+    });
+    await alert.present();
   }
 
 }

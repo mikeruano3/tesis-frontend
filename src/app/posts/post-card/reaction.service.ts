@@ -26,12 +26,12 @@ export class ReactionService {
   }
 
   /**************** REACTIONS **************** */
-  checkReaction(post: PostSchema, reactionType: number) {
+  async checkReaction(post: PostSchema, reactionType: number) {
     console.log('post');
     console.log(post);
 
     let genericFilterBody: GenericFilterBody
-    let user = this.tokenStorageService.getUserData()
+    let user = await this.tokenStorageService.getUserSchema()
     if (user) {
       this.searchLoggedUserReaction(post, user).subscribe(data => {
 

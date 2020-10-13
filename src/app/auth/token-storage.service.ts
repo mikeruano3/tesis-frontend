@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { UserSchema } from '../schemas/user';
+import { Storage } from '@ionic/storage';
 
 const TOKEN_KEY = 'auth-token';
 const USER_KEY = 'auth-user';
@@ -8,37 +9,27 @@ const USER_KEY = 'auth-user';
   providedIn: 'root'
 })
 export class TokenStorageService {
+  constructor(private storage: Storage) { }
 
-  constructor() { }
-
-  signOut(): void {
-    window.sessionStorage.clear();
+  async signOut(): Promise<any> {
+    await this.storage.set(TOKEN_KEY, null)
+    await this.storage.set(USER_KEY, null)
   }
 
-  public saveToken(token: string): void {
-    window.sessionStorage.removeItem(TOKEN_KEY);
-    window.sessionStorage.setItem(TOKEN_KEY, token);
+  public async saveToken(token: string): Promise<any> {
+    return await this.storage.set(TOKEN_KEY, token)
   }
 
-  public getToken(): string {
-    return sessionStorage.getItem(TOKEN_KEY);
+  public async getToken(): Promise<String> {
+    return await this.storage.get(TOKEN_KEY)
   }
 
-  public saveUser(user:UserSchema): void {
-    window.sessionStorage.removeItem(USER_KEY);
-    window.sessionStorage.setItem(USER_KEY, JSON.stringify(user));
+  public async saveUserSchema(data:UserSchema): Promise<any> {
+    return await this.storage.set(USER_KEY, JSON.stringify(data))
   }
 
-  public getUser(): UserSchema {
-    return JSON.parse(sessionStorage.getItem(USER_KEY)) as UserSchema;
+  public async getUserSchema(): Promise<UserSchema> {
+    return JSON.parse(await this.storage.get(USER_KEY)) as UserSchema
   }
 
-  public getUserData(): UserSchema {
-    let rawData = sessionStorage.getItem(USER_KEY)
-    if(!rawData){
-      return null
-    }
-    let tokenData = JSON.parse(rawData)
-    return tokenData.userData as UserSchema;
-  }
 }

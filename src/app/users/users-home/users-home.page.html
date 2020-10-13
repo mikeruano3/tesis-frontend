@@ -1,29 +1,67 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>
-      Usuario
-    </ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Usuario</ion-title>
   </ion-toolbar>
 </ion-header>
 
-  <ion-content class="auth-form">
-    <ion-grid>
-      <ion-row>
-        <ion-col align-self-center>
-          <ion-text class="ios hydrated" style="text-align: center;">
-            <h3>Perfil de usuario</h3>
-          </ion-text>
+<ion-content class="auth-form">
+  <ion-grid>
+    <ion-row>
+      <ion-col align-self-center>
+        <ion-text class="ios hydrated" style="text-align: center;">
+          <h3>
+            Perfil de usuario
+          </h3>
+        </ion-text>
+        <section *ngIf="userData">
+          <ion-grid>
+            <ion-row style="margin: 0%; padding: 0%;">
+              <ion-col size="2">
+                <ion-avatar>
+                  <img src="/assets/img/profile.jpg">
+                </ion-avatar>
+              </ion-col>
+              <ion-col size="8" offset="2">
+                <ion-label>{{ userData?.username ? userData.username : 'Anónimo' }}</ion-label>
+                <ion-label>
+                  <p>Email: {{ userData?.email }}</p>
+                </ion-label>
+                <ion-button shape="round" size="small" color="primary" (click)="editUserData()">
+                  <span style="text-transform:none!important;">Editar</span>
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+          <ion-label>
+            <h6><i>Nombre completo: </i>{{ userData?.fullname }}</h6>
+          </ion-label>
+          <ion-label>
+            <h6><i>Profession: </i> {{ userData?.profession }}</h6>
+          </ion-label>
+          <ion-label>
+            <h6><i>Direccion: </i> {{ userData?.direction }}</h6>
+          </ion-label>
+          <ion-label>
+            <h6><i>Universidad: </i> {{ userData?.university }}</h6>
+          </ion-label>
+          <ion-label>
+            <h6><i>Creado: </i> {{ getDate(userData?.createdAt) }}</h6>
+          </ion-label>
+          <ion-button type="submit" color="danger" (click)="logout()" expand="block">Logout</ion-button>
+        </section>
+        
+        <section *ngIf="!userData">
           <span class="divider line"></span>
-          
-
           <ion-button [routerLink]="['/register']" expand="block" color="primary">Registrarse</ion-button>
-  
           <span class="divider line one-line">o</span>
-  
           <span class="already">Ya tiene un nombre de usuario?</span>
-  
           <ion-button [routerLink]="['/login']" expand="block" color="danger">Iniciar sesión</ion-button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-content>
+        </section>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
