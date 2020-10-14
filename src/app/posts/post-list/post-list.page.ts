@@ -41,6 +41,9 @@ export class PostListPage implements OnInit {
         this.pageTitle = navigationState.pageTitle
         this.pageSubTitle = navigationState.pageSubTitle
       }
+      if(this.router.url == '/tablinks/contact'){
+        this.setContactPageData()
+      }
     });
    }
 
@@ -142,6 +145,21 @@ export class PostListPage implements OnInit {
       }
     };
     this.router.navigate(['/post-editor'], navigationExtras);
+  }
+
+  /*** CONTACT WORK */
+  setContactPageData(){
+    let requestBody:GenericFilterBody = {} as GenericFilterBody
+    requestBody.query = {
+      postClasification: APPCONSTANTS.CATEGORIES.CONTACTS,
+    }
+    requestBody.populate = 'reactions'
+    this.requestBody = requestBody as GenericFilterBody
+    //this.newPostCategoryId
+    this.newPostClasification = APPCONSTANTS.CATEGORIES.CONTACTS,
+    //this.newPostUniversity
+    this.pageTitle = 'Contactos Útiles'
+    this.pageSubTitle = 'Publica tu información para que los usuarios te puedan contactar'
   }
 
 }
