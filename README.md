@@ -41,6 +41,14 @@ npx cap add android
 ```
 
 ## Production Build CAPACITOR
+#### Ionic Build
+```
+ionic build --prod
+```
+#### Copy built files
+```
+npx cap copy android
+```
 #### Open IDE to build, run, and deploy
 ```
 npx cap open android
