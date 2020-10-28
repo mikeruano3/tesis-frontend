@@ -51,13 +51,13 @@ export class LoginPage implements OnInit {
             })
           }else{
             this.presentAlert('Alerta!', 'No se ha podido iniciar sesión', '')
-            this.errorMessage = resData;
+            this.errorMessage = resData.message;
             this.isLoginFailed = true;
           }
         },
         err => {
-          this.presentAlert('Alerta', 'No se ha podido iniciar sesión', err.error.message)
-          this.errorMessage = err;
+          this.presentAlert('Alerta', 'No se ha podido iniciar sesión', err.error?.message)
+          this.errorMessage = err.error?.message;
           this.isLoginFailed = true;
         }
     );

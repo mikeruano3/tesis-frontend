@@ -184,6 +184,7 @@ export class GenericRedirection {
             university: material_university
         }
         requestBody.populate = 'reactions'
+        requestBody.populate2 = 'user'
         
         let navigationExtras: NavigationExtras = {
             state: {

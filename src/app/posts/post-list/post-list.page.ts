@@ -154,6 +154,8 @@ export class PostListPage implements OnInit {
       postClasification: APPCONSTANTS.CATEGORIES.CONTACTS,
     }
     requestBody.populate = 'reactions'
+    requestBody.populate2 = 'user'
+    
     this.requestBody = requestBody as GenericFilterBody
     //this.newPostCategoryId
     this.newPostClasification = APPCONSTANTS.CATEGORIES.CONTACTS,

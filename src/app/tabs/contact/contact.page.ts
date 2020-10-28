@@ -19,6 +19,7 @@ export class ContactPage implements OnInit {
       postClasification: APPCONSTANTS.CATEGORIES.CONTACTS,
     }
     requestBody.populate = 'reactions'
+    requestBody.populate2 = 'user'
     
     let navigationExtras: NavigationExtras = {
         state: {
