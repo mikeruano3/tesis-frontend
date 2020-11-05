@@ -70,17 +70,35 @@ export class AddCategoryPage implements OnInit {
     this.publishing = true
 
     // add links to topImage and avatarImg
+    let avatarResult:any = null
     if(this.props?.avatarImg && this.categoryData?.avatarImgFileRef?.firestoreDownloadLink){
       this.categoryData.avatarImg = this.categoryData.avatarImgFileRef.firestoreDownloadLink
+      avatarResult = await this.dataService.saveOne(APPCONSTANTS.SCHEMAS.FILES_SCHEMA, this.categoryData.avatarImgFileRef).toPromise()
+          .catch(err=>{this.publishing = false })
+      if(!avatarResult?._id){
+        this.publishing = false
+        this.presentAlert('ERROR!', 'Por favor intente de nuevo') 
+        return
+      }
     }
+
+    let topImgResult:any = null
     if(this.props?.topImg && this.categoryData?.topImgFileRef?.firestoreDownloadLink){
       this.categoryData.topImg = this.categoryData.topImgFileRef.firestoreDownloadLink
+      topImgResult = await this.dataService.saveOne(APPCONSTANTS.SCHEMAS.FILES_SCHEMA, this.categoryData.topImgFileRef).toPromise()
+          .catch(err=>{this.publishing = false })
+      if(!topImgResult?._id){
+        this.publishing = false
+        this.presentAlert('ERROR!', 'Por favor intente de nuevo') 
+        return
+      }
     }
+    // Add category
     let serverData = {
       ...this.categoryData,
-      avatarImgFileRef: undefined,
-      topImgFileRef: undefined,
-      categoryKeyword: this.props.newCategoryKeyword
+      categoryKeyword: this.props.newCategoryKeyword,
+      avatarImgFileRef: avatarResult?._id,
+      topImgFileRef: topImgResult?._id
     } as CategorySchema
 
     //console.log(serverData);
