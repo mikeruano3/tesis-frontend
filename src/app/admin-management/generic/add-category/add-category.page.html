@@ -1,0 +1,127 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <ion-list lines="full" mode="ios"
+    class="ion-no-margin ion-no-padding ios list-ios list-lines-full list-ios-lines-full hydrated">
+    <ion-list-header>
+      {{ props?.pageTitle }}
+    </ion-list-header>
+    <form #categoryForm="ngForm" (ngSubmit)="onFormSubmit(categoryForm)">
+
+      <ion-item  lines="full" *ngIf="props.parentCategory">
+        <ion-label position="stacked">Categoría padre</ion-label>
+        <ion-select [value]="categoryData.parentCategory" [compareWith]="compareWith" okText="Ok" cancelText="Cerrar" 
+            [(ngModel)]="categoryData.parentCategory" name="parentCategory" #parentCategory="ngModel" [required]="props.parentCategory">
+          <ion-select-option [value]="catItem._id" *ngFor="let catItem of parentCategoryList">
+            {{ catItem.title }}
+          </ion-select-option>
+        </ion-select>
+        <p *ngIf="!parentCategory.valid && !parentCategory.pristine || 
+            !parentCategory.valid && categoryForm.submitted" class="warning-text">La categoría es requerida</p>
+      </ion-item>
+
+      <ion-item  lines="full" *ngIf="props.university">
+        <ion-label position="stacked">Universidad</ion-label>
+        <ion-select  [value]="categoryData.university" [compareWith]="compareWith" okText="Ok" cancelText="Cerrar"
+            [(ngModel)]="categoryData.university" name="university" #university="ngModel" [required]="props.university">
+          <ion-select-option [value]="unItem._id" *ngFor="let unItem of universityCategoryList">
+            {{ unItem.title }}
+          </ion-select-option>
+        </ion-select>
+        <p *ngIf="!university.valid && !university.pristine || 
+            !university.valid && categoryForm.submitted" class="warning-text">La universidad es requerida</p>
+      </ion-item>
+      
+      <ion-item *ngIf="props.avatarImg">
+        <ion-label position="stacked">Imagen del avatar</ion-label>
+        <p *ngIf="!categoryData['avatarImgFileRef'] && categoryForm.submitted" 
+          class="warning-text">Seleccione una imagen y presione el botón "Subir"</p>
+        <app-image-cropper
+          [uploadFolderName]="firebaseUploadFolderName"
+          [uploadedFileHandler]="categoryData"
+          uploadedPropertyName="avatarImgFileRef"
+          [aspectRatio]="1/1"
+          (onSaveParentPost)="saveFunction($event)">
+        </app-image-cropper>
+      </ion-item>
+
+      <ion-item  lines="full" *ngIf="props.avatarTitle">
+        <ion-label position="floating">Título del avatar</ion-label>
+        <ion-input type="text" [(ngModel)]="categoryData.avatarTitle" 
+          name="avatarTitle" #avatarTitle="ngModel" [required]="props.avatarTitle">
+        </ion-input>
+        <p *ngIf="!avatarTitle.valid && !avatarTitle.pristine || 
+            !avatarTitle.valid && categoryForm.submitted" class="warning-text">El título del avatar es requerido</p>
+      </ion-item>
+
+      <ion-item  lines="full" *ngIf="props.avatarSubtitle">
+        <ion-label position="floating">Subtítulo del avatar</ion-label>
+        <ion-input type="text" [(ngModel)]="categoryData.avatarSubtitle" 
+          name="avatarSubtitle" #avatarSubtitle="ngModel" [required]="props.avatarSubtitle">
+        </ion-input>
+        <p *ngIf="!avatarSubtitle.valid && !avatarSubtitle.pristine || 
+            !avatarSubtitle.valid && categoryForm.submitted" class="warning-text">El subtítulo del avatar es requerido</p>
+      </ion-item>
+
+      <ion-item *ngIf="props.topImg">
+        <ion-label position="stacked">Imagen superior</ion-label>
+        <p *ngIf="!categoryData['topImgFileRef'] && categoryForm.submitted" 
+          class="warning-text">Seleccione una imagen y presione el botón "Subir"</p>
+        <app-image-cropper
+          [uploadFolderName]="firebaseUploadFolderName"
+          [uploadedFileHandler]="categoryData"
+          uploadedPropertyName="topImgFileRef"
+          (onSaveParentPost)="saveFunction($event)">
+        </app-image-cropper>
+      </ion-item>
+
+      <ion-item  lines="full" *ngIf="props.title">
+        <ion-label position="floating">Título</ion-label>
+        <ion-input type="text" [(ngModel)]="categoryData.title" 
+          name="title" #title="ngModel" [required]="props.title">
+        </ion-input>
+        <p *ngIf="!title.valid && !title.pristine || 
+            !title.valid && categoryForm.submitted" class="warning-text">El título es requerido</p>
+      </ion-item>
+
+      <ion-item  lines="full" *ngIf="props.subtitle">
+        <ion-label position="floating">Subtítulo</ion-label>
+        <ion-input type="text" [(ngModel)]="categoryData.subtitle" 
+          name="subtitle" #subtitle="ngModel" [required]="props.subtitle">
+        </ion-input>
+        <p *ngIf="!subtitle.valid && !subtitle.pristine || 
+            !subtitle.valid && categoryForm.submitted" class="warning-text">El subtítulo es requerido</p>
+      </ion-item>
+
+      <ion-item  lines="full" *ngIf="props.link">
+        <ion-label position="floating">Link</ion-label>
+        <ion-input type="text" [(ngModel)]="categoryData.link" 
+          name="link" #link="ngModel" [required]="props.link">
+        </ion-input>
+        <p *ngIf="!link.valid && !link.pristine || 
+            !link.valid && categoryForm.submitted" class="warning-text">El link es requerido</p>
+      </ion-item>
+
+      <ion-row>
+        <ion-col>
+          <div class="ion-text-center ion-padding-bottom">
+            <ion-text *ngIf="publishing">
+              Publicando ... <ion-spinner name="lines-small"></ion-spinner>
+            </ion-text>
+          </div>
+          <ion-button *ngIf="!publishing" type="submit" color="primary" expand="block">
+            Publicar
+          </ion-button>
+        </ion-col>
+      </ion-row>
+
+    </form>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,94 @@
+<ion-row *ngIf="!uploadedFileHandler[uploadedPropertyName]">
+    <input class="display-none" type="file" id="file1" style="display:none" accept="image/*"
+        (change)="handleFileInput($event)" />
+
+    <ion-row>
+        <ion-button color="light" size="small" (click)="clickUpload()" style="text-transform:none!important;">
+            Adjuntar Imagen
+            <ion-icon name="document-outline"></ion-icon>
+        </ion-button>
+    </ion-row>
+
+    <ion-row *ngIf="imageFile && !uploadedFileHandler[uploadedPropertyName]">
+        <ion-text>
+            <p>Por favor recorte la imagen y presione el botón "Subir"</p>
+        </ion-text>
+    </ion-row>
+
+    <image-cropper *ngIf="imageFile" [imageFile]="imageFile" maintainAspectRatio="true" [aspectRatio]="aspectRatio"
+        autoCrop="true" format="png" (imageCropped)="imageCropped($event)" outputType="base64">
+    </image-cropper>
+
+    <ion-row *ngIf="croppedImage">
+        <ion-text>
+            <p>Vista previa del recorte</p>
+        </ion-text>
+        <img [src]="croppedImage">
+
+        <ion-button color="primary" *ngIf="!(uploadState | async)" size="small" (click)="uploadFileToFirebase()">Subir
+        </ion-button>
+        <ion-row>
+            <div *ngIf="uploadState | async; let state">
+                <ion-button color="warning" size="small" (click)="task.pause()" [disabled]="state === 'paused'">
+                    Pausar</ion-button>
+                <ion-button color="danger" size="small" (click)="cancelUpload()"
+                    [disabled]="!(state === 'paused' || state === 'running')">
+                    Cancelar</ion-button>
+                <ion-button color="success" size="small" (click)="task.resume()" [disabled]="state === 'running'">
+                    Reanudar</ion-button>
+            </div>
+        </ion-row>
+        <ion-row *ngIf="uploadProgress | async as uploadPer">
+            <ion-progress-bar *ngIf="uploadPer !== 100" style="padding: 2%;" [value]="uploadPer"></ion-progress-bar>
+        </ion-row>
+    </ion-row>
+</ion-row>
+
+<ion-row *ngIf="uploadedFileHandler[uploadedPropertyName]">
+    <ion-row  class="ion-padding-top" >
+        <img [src]="uploadedFileHandler[uploadedPropertyName].firestoreDownloadLink">
+    </ion-row>
+    <ion-row>
+        <br />
+        <ion-button color="primary" 
+            (click)="openBrowserLinks(uploadedFileHandler[uploadedPropertyName].firestoreDownloadLink)">
+            Abrir <ion-icon name="open-outline"></ion-icon>
+        </ion-button>
+        <ion-button color="danger" (click)="deleteFileFromFirebase(uploadedFileHandler[uploadedPropertyName])">
+            Reintentar <ion-icon name="trash-outline"></ion-icon>
+        </ion-button>
+        <ion-spinner *ngIf="uploadedFileHandler[uploadedPropertyName].isCurrentlyDeleting" name="lines-small">
+        </ion-spinner>
+        <ion-row>
+            <p class="file-name-style">
+                <ion-icon name="document-outline"></ion-icon>
+                {{uploadedFileHandler[uploadedPropertyName].fileName}}
+            </p>
+        </ion-row>
+    </ion-row>
+</ion-row>
+
+<!--
+<ion-row *ngIf="base64Image">
+    <ion-col size="3">
+        <ion-button fill="outline" (click)="move(0, -10)">
+            <ion-icon name="chevron-up-outline" slot="icon-only"></ion-icon>
+        </ion-button>
+    </ion-col>
+    <ion-col size="3">
+        <ion-button fill="outline" (click)="move(0, 10)">
+            <ion-icon name="chevron-down-outline" slot="icon-only"></ion-icon>
+        </ion-button>
+    </ion-col>
+    <ion-col size="3">
+        <ion-button fill="outline" (click)="move(-10, 0)">
+            <ion-icon name="chevron-back-outline" slot="icon-only"></ion-icon>
+        </ion-button>
+    </ion-col>
+    <ion-col size="3">
+        <ion-button fill="outline" (click)="move(10, 0)">
+            <ion-icon name="chevron-forward-outline" slot="icon-only"></ion-icon>
+        </ion-button>
+    </ion-col>
+</ion-row>
+-->

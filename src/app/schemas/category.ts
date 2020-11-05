@@ -2,6 +2,7 @@ export class CategorySchema {
     _id: string
     parentCategory : string
     childCategories : []
+    university: string
     categoryKeyword : string
     avatarImg : string
     avatarTitle : string
@@ -9,4 +10,7 @@ export class CategorySchema {
     topImg : string
     title : string
     subtitle : string
+    link:string
+    avatarImgFileRef: any
+    topImgFileRef: any
 }

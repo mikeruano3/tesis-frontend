@@ -8,12 +8,16 @@ export class FixedCourseDescription {
         parentCategory :null,
         childCategories : [],
         categoryKeyword : null,
+        university:null,
         avatarImg : null,
         avatarTitle : null,
         avatarSubtitle : null,
         topImg : null,
         title : null,
-        subtitle : null
+        subtitle : null, 
+        link:null,
+        topImgFileRef: null,
+        avatarImgFileRef: null,
     }
     public fixedItemList:CategorySchema[]
     public materialEstudio:CategorySchema

@@ -40,10 +40,6 @@ const routes: Routes = [
     loadChildren: () => import('./home-landing/home-landing.module').then( m => m.HomeLandingPageModule)
   },
   {
-    path: 'career-overview',
-    loadChildren: () => import('./career-mgt/career-overview/career-overview.module').then( m => m.CareerOverviewPageModule)
-  },
-  {
     path: 'post-list',
     loadChildren: () => import('./posts/post-list/post-list.module').then( m => m.PostListPageModule)
   },
@@ -74,6 +70,10 @@ const routes: Routes = [
   {
     path: 'contact',
     loadChildren: () => import('./tabs/contact/contact.module').then( m => m.ContactPageModule)
+  },
+  {
+    path: 'admin-management',
+    loadChildren: () => import('./admin-management/admin-management.module').then( m => m.AdminManagementPageModule)
   },
 ];
 

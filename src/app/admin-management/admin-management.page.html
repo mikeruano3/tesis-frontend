@@ -1,17 +1,26 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Career Overview</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Admin Management</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-<ion-list></ion-list>
   <ion-grid [fixed]="true" class="ion-grid-padding-xs">
     <ion-row justify-content-center>
+      <ion-col size="12">
+        <div class="ion-text-center">
+          <h4>Panel de Administración</h4>
+        </div>
+      </ion-col>
       <ion-col size="6">
         <ion-card>
           <ion-card-content>
-            <h2>Material de estudio</h2>
+            <h2>Agregar Carrera</h2>
+
+            <ion-button (click)="agregarCarrera()" expand="block" color="primary" size="small">Abrir</ion-button>
           </ion-card-content>
         </ion-card>
       </ion-col>
