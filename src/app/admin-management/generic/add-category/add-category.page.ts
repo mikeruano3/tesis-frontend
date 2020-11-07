@@ -114,6 +114,8 @@ export class AddCategoryPage implements OnInit {
       await this.savePostToLocalStorage({} as CategorySchema)
       this.presentAlert('Éxito!', 'Los datos han sido guardados!') 
       this.goback()
+    }else{
+      this.presentAlert('Error!', 'Por favor intente de nuevo!') 
     }
   }
   /**** SELECT OPTION */

@@ -26,14 +26,118 @@ export class AdminManagementPage implements OnInit {
 
       parentCategory: true,
       university: true,
-      avatarImg: true,
-      avatarTitle: true,
-      avatarSubtitle: true,
+      avatarImg: false,
+      avatarTitle: false,
+      avatarSubtitle: false,
       topImg: true,
       title: true,
       subtitle: true,
+      link:false,
+      pinned: false
+    }
+    let navigationExtras: NavigationExtras = {
+      state: props
+    }
+    this.router.navigate([ '/admin-management/add-category' ], navigationExtras);
+  }
+
+  agregarCategoria(){
+    let props:CategoryGenericProps = { 
+      pageTitle: 'Agregar Categoría',
+      origin: 'NEW',
+      
+      fetchParentCategoryFilterKeyWord: null,
+      localStorageRefName: 'categoria-post',
+      newCategoryKeyword: APPCONSTANTS.CATEGORIES.CAREER_CATEGORIES,
+
+      parentCategory: false,
+      university: true,
+      avatarImg: false,
+      avatarTitle: false,
+      avatarSubtitle: false,
+      topImg: true,
+      title: true,
+      subtitle: true,
+      link:false,
+      pinned: false
+    }
+    let navigationExtras: NavigationExtras = {
+      state: props
+    }
+    this.router.navigate([ '/admin-management/add-category' ], navigationExtras);
+  }
+
+  agregarUniversidad(){
+    let props:CategoryGenericProps = { 
+      pageTitle: 'Agregar Universidad',
+      origin: 'NEW',
+      
+      fetchParentCategoryFilterKeyWord: null,
+      localStorageRefName: 'universidad-post',
+      newCategoryKeyword: APPCONSTANTS.CATEGORIES.UNIVERSITIES,
+
+      parentCategory: false,
+      university: false,
+      avatarImg: true,
+      avatarTitle: true,
+      avatarSubtitle: false,
+      topImg: true,
+      title: true,
+      subtitle: true,
+      link:false,
+      pinned: false
+    }
+    let navigationExtras: NavigationExtras = {
+      state: props
+    }
+    this.router.navigate([ '/admin-management/add-category' ], navigationExtras);
+  }
+
+  agregarPaginasOficiales(){
+    let props:CategoryGenericProps = { 
+      pageTitle: 'Agregar Páginas Oficiales',
+      origin: 'NEW',
+      
+      fetchParentCategoryFilterKeyWord: APPCONSTANTS.CATEGORIES.CAREERS,
+      localStorageRefName: 'paginas-post',
+      newCategoryKeyword: APPCONSTANTS.CATEGORIES.CAREER_SECTIONS.PAGINAS_OFICIALES,
+
+      parentCategory: true,
+      university: true,
+      avatarImg: true,
+      avatarTitle: true,
+      avatarSubtitle: true,
+      topImg: false,
+      title: true,
+      subtitle: true,
       link:true,
-      pinned: true
+      pinned: false
+    }
+    let navigationExtras: NavigationExtras = {
+      state: props
+    }
+    this.router.navigate([ '/admin-management/add-category' ], navigationExtras);
+  }
+
+  agregarPensum(){
+    let props:CategoryGenericProps = { 
+      pageTitle: 'Agregar Pénsum',
+      origin: 'NEW',
+      
+      fetchParentCategoryFilterKeyWord: APPCONSTANTS.CATEGORIES.CAREERS,
+      localStorageRefName: 'pensum-post',
+      newCategoryKeyword: APPCONSTANTS.CATEGORIES.CAREER_SECTIONS.PENSUM_ESTUDIOS,
+
+      parentCategory: true,
+      university: true,
+      avatarImg: true,
+      avatarTitle: true,
+      avatarSubtitle: true,
+      topImg: false,
+      title: true,
+      subtitle: true,
+      link:true,
+      pinned: false
     }
     let navigationExtras: NavigationExtras = {
       state: props
