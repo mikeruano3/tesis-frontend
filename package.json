@@ -14,6 +14,9 @@
   },
   "private": true,
   "dependencies": {
+    "@angular/cli": "~10.0.5",
+    "@angular/compiler": "~10.0.0",
+    "@angular/compiler-cli": "~10.0.0",
     "@angular/common": "~10.0.0",
     "@angular/core": "~10.0.0",
     "@angular/fire": "^6.0.4",
@@ -25,6 +28,7 @@
     "@capacitor/core": "^2.4.2",
     "@ckeditor/ckeditor5-angular": "^1.2.3",
     "@ckeditor/ckeditor5-build-classic": "^22.0.0",
+    "@ionic/app-scripts": "2.1.4",
     "@ionic-native/base64": "^5.28.0",
     "@ionic-native/core": "^5.0.0",
     "@ionic-native/file-chooser": "^5.28.0",
@@ -42,13 +46,11 @@
     "ngx-image-cropper": "^3.2.1",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",
-    "zone.js": "~0.10.3"
+    "zone.js": "~0.10.3",
+    "typescript": "^3.9.5"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.1002.0",
-    "@angular/cli": "~10.0.5",
-    "@angular/compiler": "~10.0.0",
-    "@angular/compiler-cli": "~10.0.0",
     "@angular/language-service": "~10.0.0",
     "@capacitor/cli": "^2.4.2",
     "@ionic/angular-toolkit": "^2.3.0",
@@ -74,8 +76,7 @@
     "karma-jasmine-html-reporter": "^1.5.0",
     "protractor": "~7.0.0",
     "ts-node": "~8.3.0",
-    "tslint": "~6.1.0",
-    "typescript": "^3.9.5"
+    "tslint": "~6.1.0"
   },
   "description": "An Ionic project",
   "cordova": {
@@ -93,5 +94,9 @@
       "browser",
       "android"
     ]
+  },
+  "engines": {
+    "node": "12.19.0",
+    "npm": "6.14.8"
   }
 }
