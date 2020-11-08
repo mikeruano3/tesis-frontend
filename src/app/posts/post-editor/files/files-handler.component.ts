@@ -24,6 +24,7 @@ export class FilesHandlerComponent implements OnInit {
   @Input() public uploadFolderName: string;
   singleFile: File;
   @Input() public uploadedFilesHandler : UploadedFilesHandler
+  @Input() public isEditingFiles: boolean;
 
   ref: AngularFireStorageReference;
   task: AngularFireUploadTask;
@@ -54,12 +55,16 @@ export class FilesHandlerComponent implements OnInit {
     private fileChooser: FileChooser,
     private storage: Storage) { }
 
-  ngOnInit(): void {
-    this.checkLocalStorageOrCreate(this.localStorageRefName).then( 
-      data=>{
-        this.uploadedFilesHandler.uploadedFilesShowToUser = data.files
-      }
-    )
+  async ngOnInit() {
+    if(this.isEditingFiles){
+      // this was setted on previous page, this holds the editing file data
+      let newLocal = { files : this.uploadedFilesHandler.uploadedFilesShowToUser } as LocalFileReference
+      await this.storage.set(this.localStorageRefName, newLocal);
+    }else{
+      this.checkLocalStorageOrCreate(this.localStorageRefName).then( 
+        data=>{ this.uploadedFilesHandler.uploadedFilesShowToUser = data.files }
+      )
+    }
   }
 
   async uploadFileToFirebase() {
@@ -148,6 +153,7 @@ export class FilesHandlerComponent implements OnInit {
       header: 'Alerta',
       subHeader: subHeader,
       message: message,
+      mode: 'ios',
       buttons: ['OK']
     });
     await alert.present();

@@ -25,12 +25,12 @@
   <ion-list lines="full" class="ion-no-margin">
     <ion-item>
       <ion-label position="stacked">Título de la Publicación</ion-label>
-      <ion-input placeholder="Escribir título..."  maxlength="150" [(ngModel)]="titleData"></ion-input>
+      <ion-input placeholder="Escribir título..."  maxlength="150" [(ngModel)]="postData.title"></ion-input>
     </ion-item>
   </ion-list>
-  <ckeditor [editor]="Editor" [config]="config" [(ngModel)]="editorData" id="editor"></ckeditor>
-  <ion-grid>
-    <app-files-handler [localStorageRefName]="localStorageRefName"  style="width: 100%"
+  <ckeditor [editor]="Editor" [config]="config" [(ngModel)]="postData.content" id="editor"></ckeditor>
+  <ion-grid *ngIf="localStorageRefName">
+    <app-files-handler [localStorageRefName]="localStorageRefName"  style="width: 100%" [isEditingFiles]="isEditingPost"
       [uploadFolderName]="'user-uploaded-files'" [uploadedFilesHandler]="uploadedFilesHandler">
     </app-files-handler>
   </ion-grid>

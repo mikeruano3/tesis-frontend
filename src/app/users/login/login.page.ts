@@ -69,6 +69,7 @@ export class LoginPage implements OnInit {
       header: header,
       subHeader: subHeader,
       message: message,
+      mode: 'ios',
       buttons: ['OK']
     });
     await alert.present();

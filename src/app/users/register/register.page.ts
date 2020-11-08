@@ -117,6 +117,7 @@ export class RegisterPage implements OnInit {
       header: header,
       subHeader: subHeader,
       message: message,
+      mode: 'ios',
       buttons: ['OK']
     });
     await alert.present();

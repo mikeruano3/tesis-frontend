@@ -9,9 +9,15 @@
             <img [src]="processProfilePic(post.user)">
           </ion-avatar>
         </ion-col>
-        <ion-col size="9">
+        <ion-col [size]="isFullView ? 8 : 9">
           <h5 class="user-title-style">{{ processName(post.user) }}</h5>
           <p  class="datetime-style">{{ substractTime(post.createdAt) }}</p>
+        </ion-col>
+        <ion-col *ngIf="isFullView" size="1">
+          <ion-row>
+            <ion-icon name="ellipsis-vertical-outline" size="large" (click)="presentActionSheet(post)">
+            </ion-icon>
+          </ion-row>
         </ion-col>
       </ion-row>
 
@@ -44,7 +50,7 @@
         <ion-slides [options]="slideOpts" pager="true">
           <ion-slide *ngFor="let uploadedFile of post?.files" 
             class=" border:4px solid white; border-radius:2%;" style="width: 100%; height: 100%;">
-            <ion-label class="ion-no-padding">
+            <ion-label class="ion-no-padding" *ngIf="uploadedFile.firestoreDownloadLink">
               <a href="#" style="font-size: 12px; margin: 5px; padding: 0%;"
                 (click)="openBrowserLinks(uploadedFile.firestoreDownloadLink)">
                 Abrir <ion-icon name="open-outline"></ion-icon>

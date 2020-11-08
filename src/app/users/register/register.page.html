@@ -23,12 +23,15 @@
       <ion-label position="floating">Email <span style="font-size: 10px">
         <i>(Se usará para iniciar sesión)</i></span>
       </ion-label>
-      <ion-input type="text" formControlName="email" required></ion-input>
+      <ion-input type="text" formControlName="email" required  pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+      </ion-input>
     </ion-item>
     <ion-label class="sc-ion-label-ios-h sc-ion-label-ios-s ios hydrated" color="danger"
       *ngIf="registerForm.controls.email.touched" style="text-align:center;">
       <h5 *ngIf="registerForm.controls.email.hasError('required')">
         El email es requerido</h5>
+      <h5 *ngIf="registerForm.controls.email.hasError('pattern')">
+        El email no cumple el patrón</h5>
     </ion-label>
 
     <ion-item lines="full">

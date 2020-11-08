@@ -39,6 +39,11 @@ export class PostsService {
     return this.http.put<any[]>(`${environment.apiUrl}/api/collections/${collectionId}/update`, data)
       .pipe();
   }
+
+  deleteOne(collectionId: string, id: any): Observable<any> {
+    return this.http.delete<any[]>(`${environment.apiUrl}/api/collections/${collectionId}/delete/${id}`, id)
+      .pipe();
+  }
   
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {

@@ -8,7 +8,7 @@
 <ion-label *ngIf="singleFile?.name"><p>{{singleFile?.name}}</p></ion-label>
 
 <ion-row *ngIf="!!singleFile">
-    <ion-button color="primary" size="small"(click)="uploadFileToFirebase()">Upload</ion-button>
+    <ion-button color="primary" size="small"(click)="uploadFileToFirebase()">Subir</ion-button>
     <ion-row>
         <div *ngIf="uploadState | async; let state">
             <ion-button color="warning" size="small" (click)="task.pause()" [disabled]="state === 'paused'">

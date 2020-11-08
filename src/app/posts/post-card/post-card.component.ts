@@ -12,6 +12,7 @@ import { Observable } from 'rxjs';
 import { ReactionService } from "./reaction.service";
 import { CommentService } from './comment.service';
 import { Router, NavigationExtras } from '@angular/router';
+import { PostHandlerService } from './post-handler.service';
 
 @Component({
   selector: 'app-post-card',
@@ -38,7 +39,8 @@ export class PostCardComponent implements OnInit {
     public tokenStorageService: TokenStorageService,
     public reactionService:ReactionService,
     public commentService:CommentService,
-    private router: Router
+    private router: Router,
+    private postHandler: PostHandlerService
   ) {
   }
 
@@ -133,5 +135,9 @@ export class PostCardComponent implements OnInit {
 
   openBrowserLinks(link:string){
     window.open(link, '_system', 'location=yes'); return false;
+  }
+
+  async presentActionSheet(post: PostSchema){
+    await this.postHandler.presentActionSheet(post)
   }
 }

@@ -79,6 +79,7 @@ export class ImageCropComponent implements OnInit {
             header: 'Alerta',
             subHeader: subHeader,
             message: message,
+            mode: 'ios',
             buttons: ['OK']
         });
         await alert.present();

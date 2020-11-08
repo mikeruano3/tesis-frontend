@@ -52,7 +52,7 @@ export class PostListPage implements OnInit {
 
   async presentLoading() {
     const loading = await this.loadingController.create({
-      cssClass: 'my-custom-class', message: 'Por favor espere...', duration: 5000
+      cssClass: 'my-custom-class', message: 'Por favor espere...', duration: 5000, mode: 'ios'
     });
     await loading.present();
     const { role, data } = await loading.onDidDismiss();
