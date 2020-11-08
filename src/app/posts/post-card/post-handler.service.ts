@@ -52,8 +52,8 @@ export class PostHandlerService {
     
     let loggedInUser = await this.tokenStorageService.getUserSchema()
     // primero verificar si el post tiene usuario para que si sale null, no lo pueda editar cualquier anonimo
-    // post?.user?._id && 
-    if( loggedInUser?._id == post?.user?._id) 
+    //
+    if(  post?.user?._id && loggedInUser?._id == post?.user?._id) 
     { buttons = [editButton, deleteButton, cancelButton] } else { buttons = [reportButton, cancelButton] }
 
     const actionSheet = await this.actionSheetController.create({
