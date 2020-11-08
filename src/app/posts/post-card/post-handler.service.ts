@@ -45,8 +45,8 @@ export class PostHandlerService {
     }
     let reportButton = {
       text: 'Reportar', icon: 'megaphone',
-      handler: () => {
-        console.log('Report clicked');
+      handler: () => { 
+        this.presentAlertReporte(post)
       }
     }
     
@@ -84,6 +84,21 @@ export class PostHandlerService {
       }
     };
     this.router.navigate(['/post-editor'], navigationExtras);
+  }
+
+  async reportPost(post: PostSchema, reportReason: string){
+    if(!post._id){
+      return
+    }
+    let queryUpdate = {
+      query: {
+        "_id": post._id
+      },
+      data: {
+        "$inc": { "reportedCount": 1 }
+      }
+    }
+    await this.postsService.updateOne(APPCONSTANTS.SCHEMAS.POSTS_SCHEMA, queryUpdate).toPromise()
   }
 
   /*** COMMONS */
@@ -127,6 +142,36 @@ export class PostHandlerService {
 
   goback() {
     this.navCtrl.pop();
+  }
+
+  async presentAlertReporte(post:PostSchema) {
+    let reportReason:string = ''
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Reportar',
+      inputs: [
+        {
+          name: 'reason',
+          id: 'reason',
+          type: 'textarea',
+          placeholder: 'Razón del reporte'
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (data) => { reportReason = data}
+        }, {
+          text: 'Ok',
+          handler: () => {
+            this.reportPost(post, reportReason)
+          }
+        }
+      ]
+    });
+    await alert.present();
   }
 
 }
