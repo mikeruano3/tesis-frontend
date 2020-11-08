@@ -28,7 +28,6 @@
     "@capacitor/core": "^2.4.2",
     "@ckeditor/ckeditor5-angular": "^1.2.3",
     "@ckeditor/ckeditor5-build-classic": "^22.0.0",
-    "@ionic/app-scripts": "2.1.4",
     "@ionic-native/base64": "^5.28.0",
     "@ionic-native/core": "^5.0.0",
     "@ionic-native/file-chooser": "^5.28.0",
