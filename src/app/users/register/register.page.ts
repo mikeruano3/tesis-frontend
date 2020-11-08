@@ -1,7 +1,7 @@
 import { Component, Input, NgZone, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { AlertController, LoadingController } from '@ionic/angular';
 import { TokenStorageService } from '../../auth/token-storage.service';
 import { UserSchema } from '../../schemas/user';
 import { AuthService } from '../../auth/auth.service';
@@ -27,6 +27,7 @@ export class RegisterPage implements OnInit {
     public fb: FormBuilder,
     public alertController: AlertController,
     private tokenStorage: TokenStorageService,
+    private loadingController: LoadingController,
     private zone: NgZone) { 
     this.clearForm({} as UserSchema)
     let params = this.route.queryParams.subscribe(params => {
@@ -71,7 +72,9 @@ export class RegisterPage implements OnInit {
     if(this.registerForm.invalid){
       return
     }
+    this.presentLoading()
     let regData = await this.authService.registerAppUser(this.registerForm.value).toPromise()
+    this.dismissLoading()
     console.log(regData);
     if(regData?.status == "true" || regData?.status == true){
       await this.presentAlert('Éxito', '', 'Usuario creado exitosamente!')
@@ -94,9 +97,9 @@ export class RegisterPage implements OnInit {
     if(this.registerForm.value.password == null){
       this.registerForm.value['password'] = undefined
     }
-    console.log(this.registerForm.value);
-    
+    this.presentLoading()
     let regData = await this.authService.updateAppUser(this.userData._id, this.registerForm.value).toPromise()
+    this.dismissLoading()
     console.log(regData);
     if(regData?.status == "true" || regData?.status == true){
       await this.presentAlert('Éxito', 'Usuario actualizado exitosamente!', 'Los cambios se aplicarán al reiniciar la sesión')
@@ -121,6 +124,18 @@ export class RegisterPage implements OnInit {
       buttons: ['OK']
     });
     await alert.present();
+  }
+
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      cssClass: 'my-custom-class', message: 'Por favor espere...', duration: 5000, mode: 'ios'
+    });
+    await loading.present();
+    const { role, data } = await loading.onDidDismiss();
+  }
+
+  async dismissLoading(){
+    await this.loadingController.dismiss()
   }
 
 }

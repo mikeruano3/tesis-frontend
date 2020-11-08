@@ -48,7 +48,17 @@ export class UsersHomePage implements OnInit {
       state: {
         userData: this.userData
       }
-    };
+    }
     this.router.navigate(['/register'], navigationExtras);
   }
+
+  async openAdminDashboard(){
+    let navigationExtras: NavigationExtras = {
+      state: {
+        userData: this.userData
+      }
+    }
+    this.router.navigate(['/admin-management'], navigationExtras);
+  }
+  
 }

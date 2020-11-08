@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { PostsService } from '../post.service';
 import { PostSchema } from '../../schemas/post';
-import { GenericFilterBody } from 'src/app/shared/services/data.service';
+import { GenericFilterBody } from '../../shared/services/data.service';
 import { APPCONSTANTS } from '../../constants/app-constants';
 import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
+import { TokenStorageService } from '../../auth/token-storage.service';
 
 @Component({
   selector: 'app-post-list',
@@ -29,7 +30,7 @@ export class PostListPage implements OnInit {
   pageSubTitle:string
 
   constructor(private route: ActivatedRoute, private router: Router,private postsService: PostsService,
-      public loadingController: LoadingController) {
+      public loadingController: LoadingController, private tokenStorageService: TokenStorageService) {
     this.route.queryParams.subscribe(params => {
       let navigationState = this.router.getCurrentNavigation().extras.state
       if (navigationState) 
@@ -136,7 +137,16 @@ export class PostListPage implements OnInit {
 
   /** NEW POST WORK ***/
 
-  showNewPost(){
+  async showNewPost(){
+    let user = await this.tokenStorageService.getUserSchema()
+    if(!user?._id){
+      this.navigateToLogin()
+    }else{
+      this.navigateToPostEditor()
+    }
+  }
+
+  navigateToPostEditor(){
     let navigationExtras: NavigationExtras = {
       state: {
           newPostCategoryId: this.newPostCategoryId,
@@ -144,7 +154,14 @@ export class PostListPage implements OnInit {
           newPostUniversity: this.newPostUniversity
       }
     };
-    this.router.navigate(['/post-editor'], navigationExtras);
+    this.router.navigate(['/post-editor'], navigationExtras)
+  }
+
+  navigateToLogin(){
+    let navigationExtras: NavigationExtras = {
+      state: { redirectToPreviousPage: true }
+    }
+    this.router.navigate(['/login'], navigationExtras)
   }
 
   /*** CONTACT WORK */

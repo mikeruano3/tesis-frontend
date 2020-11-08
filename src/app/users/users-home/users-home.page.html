@@ -21,7 +21,7 @@
             <ion-row style="margin: 0%; padding: 0%;">
               <ion-col size="2">
                 <ion-avatar>
-                  <img src="/assets/img/profile.jpg">
+                  <img [src]="userData?.image ? userData?.image : '/assets/img/profile.jpg'">
                 </ion-avatar>
               </ion-col>
               <ion-col size="8" offset="2">
@@ -50,6 +50,8 @@
           <ion-label>
             <h6><i>Creado: </i> {{ getDate(userData?.createdAt) }}</h6>
           </ion-label>
+          <ion-button type="submit" color="primary" *ngIf="userData?.role?.roleType == 1"
+            (click)="openAdminDashboard()" expand="block">Panel de Administración</ion-button>
           <ion-button type="submit" color="danger" (click)="logout()" expand="block">Logout</ion-button>
         </section>
         

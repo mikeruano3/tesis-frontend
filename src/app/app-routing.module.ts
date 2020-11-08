@@ -5,7 +5,6 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () => import('./home-tabs/home-tabs.module').then( m => m.HomeTabsPageModule)
-    //loadChildren: () => import('./admin-management/admin-management.module').then( m => m.AdminManagementPageModule)
   },
   { 
     path: 'home', 

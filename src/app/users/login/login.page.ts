@@ -2,8 +2,8 @@ import { Component, OnInit, NgZone } from '@angular/core';
 import { AuthService } from '../../auth/auth.service';
 import { TokenStorageService } from '../../auth/token-storage.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { NavigationExtras, Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
+import { AlertController, LoadingController, NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -14,17 +14,29 @@ export class LoginPage implements OnInit {
   loginForm: FormGroup
   isLoginFailed = false;
   errorMessage = '';
+  redirectToPreviousPage:boolean
   
   constructor(private authService: AuthService, 
     private tokenStorage: TokenStorageService,
-    private router: Router,
-    public fb: FormBuilder,
+    private router: Router, private route: ActivatedRoute, 
+    public fb: FormBuilder, private navCtrl: NavController,
+    private loadingController: LoadingController,
     public alertController: AlertController,
     private zone: NgZone
   ) {
     this.loginForm = this.fb.group({
       email: [null, Validators.required],
       password:[null,Validators.compose([Validators.required, Validators.minLength(0)])]
+    })
+
+    this.route.queryParams.subscribe(async(params) => {
+      let navigationState = this.router.getCurrentNavigation().extras.state
+      if (navigationState) 
+      {
+        if(navigationState.redirectToPreviousPage){
+          this.redirectToPreviousPage = navigationState.redirectToPreviousPage
+        }
+      }
     })
   }
 
@@ -34,11 +46,12 @@ export class LoginPage implements OnInit {
     if (!this.loginForm.valid) {
       return
     }
-    
+    this.presentLoading()
     this.authService.login(this.loginForm.value)
       .subscribe(
         async (resData) => {
-          console.log(resData);
+          this.dismissLoading()
+          //console.log(resData);
           
           if(resData.status === true){
             await this.tokenStorage.saveToken(resData.data.accessToken);
@@ -47,7 +60,11 @@ export class LoginPage implements OnInit {
             this.isLoginFailed = false;
             this.zone.run(() => {
               this.loginForm.reset();
-              this.router.navigate(['/tablinks/users-home'], { state:  { clearHistory: true }} as NavigationExtras);
+              if(this.redirectToPreviousPage){
+                this.navCtrl.pop()
+              }else{
+                this.router.navigate(['/tablinks/users-home'], { state:  { clearHistory: true }} as NavigationExtras);  
+              }
             })
           }else{
             this.presentAlert('Alerta!', 'No se ha podido iniciar sesión', '')
@@ -56,6 +73,7 @@ export class LoginPage implements OnInit {
           }
         },
         err => {
+          this.dismissLoading()
           this.presentAlert('Alerta', 'No se ha podido iniciar sesión', err.error?.message)
           this.errorMessage = err.error?.message;
           this.isLoginFailed = true;
@@ -74,5 +92,18 @@ export class LoginPage implements OnInit {
     });
     await alert.present();
   }
+
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      cssClass: 'my-custom-class', message: 'Iniciando sesión...', duration: 5000, mode: 'ios'
+    });
+    await loading.present();
+    const { role, data } = await loading.onDidDismiss();
+  }
+
+  async dismissLoading(){
+    await this.loadingController.dismiss()
+  }
+
 
 }
