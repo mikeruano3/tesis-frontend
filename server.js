@@ -15,6 +15,10 @@ app.use(function(req, res, next) {
 })
  
 app.use(express.static('www'))
+app.all('/*', function(req, res, next) {
+  // Just send the index.html for other files to support HTML5Mode
+  res.sendFile('www/index.html', { root: __dirname });
+})
 app.set('port', process.env.PORT || 5000)
 
 app.listen(app.get('port'), function () {
