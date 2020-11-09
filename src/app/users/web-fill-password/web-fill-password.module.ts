@@ -4,9 +4,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ForgotPasswordPageRoutingModule } from './forgot-password-routing.module';
+import { WebFillPasswordPageRoutingModule } from './web-fill-password-routing.module';
 
-import { ForgotPasswordPage } from './forgot-password.page';
+import { WebFillPasswordPage } from './web-fill-password.page';
 
 @NgModule({
   imports: [
@@ -14,8 +14,8 @@ import { ForgotPasswordPage } from './forgot-password.page';
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
-    ForgotPasswordPageRoutingModule
+    WebFillPasswordPageRoutingModule
   ],
-  declarations: [ForgotPasswordPage]
+  declarations: [WebFillPasswordPage]
 })
-export class ForgotPasswordPageModule {}
+export class WebFillPasswordPageModule {}

@@ -75,6 +75,11 @@ const routes: Routes = [
     path: 'admin-management',
     loadChildren: () => import('./admin-management/admin-management.module').then( m => m.AdminManagementPageModule)
   },
+  {
+    path: 'web-reset-password/:id',
+    loadChildren: () => import('./users/web-fill-password/web-fill-password.module').then( m => m.WebFillPasswordPageModule)
+  },
+
 ];
 
 @NgModule({
