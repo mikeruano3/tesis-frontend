@@ -33,7 +33,7 @@ export class HomeLandingPage implements OnInit {
   /*** MOST COMMON CARRER PANEL */
   slideOpts = {
     initialSlide: 1,
-    slidesPerView: 3,
+    slidesPerView: 2,
     freeMode: true,
     navigation: true,
     watchSlidesProgress: true,
@@ -51,6 +51,8 @@ export class HomeLandingPage implements OnInit {
       clickable: true
     },
   }
+
+  slideOptsCat = { ...this.slideOpts, slidesPerView: 1}
   
   constructor(
     private dataService: DataService,

@@ -8,7 +8,7 @@
 </ion-header>
 
 
-<ion-content class="post-home">
+<ion-content class="post-home" color="light">
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
@@ -38,7 +38,7 @@
 
   <!-- fab placed to the bottom start -->
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-      <ion-fab-button (click)="showNewPost()">
+      <ion-fab-button (click)="showNewPost()" color="medium">
         <ion-icon name="add"></ion-icon>
       </ion-fab-button>
   </ion-fab>
