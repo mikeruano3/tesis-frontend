@@ -28,6 +28,10 @@ export class UsersHomePage implements OnInit {
   ngOnInit() { 
     this.getUserInfo() 
   }
+  
+  ionViewWillEnter(){
+    this.getUserInfo() 
+  }
 
   logout(){
     this.userData = null

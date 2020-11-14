@@ -35,4 +35,9 @@ export class AuthService {
   sendPasswordData(data: { password:string, token:string }): Observable<any> {
     return this.http.post(AUTH_API + 'reset-password-data', data, httpOptions).pipe()
   }
+
+  confirmEmail(token:string ): Observable<any> {
+    return this.http.get(AUTH_API + 'confirm-email/' + token, httpOptions).pipe()
+  }
+  
 }
