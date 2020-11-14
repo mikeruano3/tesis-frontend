@@ -56,6 +56,9 @@
         </section>
         
         <section *ngIf="!userData">
+          <div style="margin: 0%; padding: 0%;">
+            <ion-img src="assets/img/logo.png" style="width:55%; margin: auto; display: block;"></ion-img>
+          </div>
           <span class="divider line"></span>
           <ion-button [routerLink]="['/register']" expand="block" color="primary">Registrarse</ion-button>
           <span class="divider line one-line">o</span>

@@ -35,7 +35,7 @@
     </ion-label>
 
     <ion-item lines="full">
-      <ion-label position="floating">Password</ion-label>
+      <ion-label position="floating">Contraseña</ion-label>
       <ion-input type="password" formControlName="password" [required] = "!isEditing"></ion-input>
     </ion-item>
     <ion-label class="sc-ion-label-ios-h sc-ion-label-ios-s ios hydrated" color="danger"
@@ -44,6 +44,18 @@
         La contraseña es requerida</h5>
       <h5 *ngIf="registerForm.hasError('minlength', 'password')">
         La contraseña debe tener al menos 6 caracteres</h5>
+    </ion-label>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Confirmar contraseña</ion-label>
+      <ion-input type="password" formControlName="confirmpassword" [required] = "!isEditing"></ion-input>
+    </ion-item>
+    <ion-label class="sc-ion-label-ios-h sc-ion-label-ios-s ios hydrated" color="danger"
+      *ngIf="registerForm.controls.confirmpassword.touched" style="text-align:center;">
+      <h5 *ngIf="registerForm.controls.confirmpassword.hasError('required')">
+        La confirmación es requerida</h5>
+      <h5 *ngIf="registerForm.controls.confirmpassword.value != registerForm.controls.password.value">
+        Las contraseñas no coinciden</h5>
     </ion-label>
 
     <ion-item lines="full">
