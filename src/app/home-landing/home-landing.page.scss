@@ -1,17 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Prompt&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
 
 .upper-title-style{
   //color: rgb(224, 224, 224); text-shadow: black 0.1em 0.1em 0.2em
   color: #FFFFFF;
-  text-shadow: 2px 2px 5px #474747;
-  font-family: 'Prompt', sans-serif;
-  margin-top: -65%;
+  //text-shadow: 2px 2px 5px #474747;
+  font-family: 'Montserrat', sans-serif;
+  margin-top: 5%//-65%;
 }
 
 .title-style{
   //color: #FFFFFF;
   text-shadow: 2px 2px 5px #bbbbbb;
-  font-family: 'Prompt', sans-serif;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.card-text{
+  color: white;
+  font-family: 'Montserrat', sans-serif;
 }
 
 $slides-height: 30px;
@@ -36,7 +42,7 @@ ion-slides{
 ion-card, .card-ios, .card-md{
   display: flex;
   flex-direction: column;
-  margin: 2px;
+  margin: 10px 10px 0 10px;
   
   background: #0575E6;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to right, #021B79, #0575E6);  /* Chrome 10-25, Safari 5.1-6 */
@@ -44,9 +50,9 @@ ion-card, .card-ios, .card-md{
 }
 
 ion-card-content{
-  margin: 0 !important;
-  padding: 3px !important;
-  height: 50px;
+  margin: 0px !important;
+  padding: 0px !important;
+  //height: 50px;
 }
 
 .category-background{
