@@ -10,6 +10,10 @@ const routes: Routes = [
   {
     path: 'add-category',
     loadChildren: () => import('./generic/add-category/add-category.module').then( m => m.AddCategoryPageModule)
+  },
+  {
+    path: 'list-category',
+    loadChildren: () => import('./generic/list-category/list-category.module').then( m => m.ListCategoryPageModule)
   }
 ];
 

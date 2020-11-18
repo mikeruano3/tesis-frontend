@@ -17,12 +17,13 @@ export class AdminManagementPage implements OnInit {
 
   agregarCarrera(){
     let props:CategoryGenericProps = { 
-      pageTitle: 'Agregar Carrera',
+      pageTitle: 'Carrera',
       origin: 'NEW',
       
       fetchParentCategoryFilterKeyWord: APPCONSTANTS.CATEGORIES.CAREER_CATEGORIES,
       localStorageRefName: 'carrera-post',
       newCategoryKeyword: APPCONSTANTS.CATEGORIES.CAREERS,
+      editCategoryData:null,
 
       parentCategory: true,
       university: true,
@@ -38,17 +39,18 @@ export class AdminManagementPage implements OnInit {
     let navigationExtras: NavigationExtras = {
       state: props
     }
-    this.router.navigate([ '/admin-management/add-category' ], navigationExtras);
+    this.router.navigate([ '/admin-management/list-category' ], navigationExtras);
   }
 
   agregarCategoria(){
     let props:CategoryGenericProps = { 
-      pageTitle: 'Agregar Categoría',
+      pageTitle: 'Categoría',
       origin: 'NEW',
       
       fetchParentCategoryFilterKeyWord: null,
       localStorageRefName: 'categoria-post',
       newCategoryKeyword: APPCONSTANTS.CATEGORIES.CAREER_CATEGORIES,
+      editCategoryData:null,
 
       parentCategory: false,
       university: true,
@@ -64,17 +66,18 @@ export class AdminManagementPage implements OnInit {
     let navigationExtras: NavigationExtras = {
       state: props
     }
-    this.router.navigate([ '/admin-management/add-category' ], navigationExtras);
+    this.router.navigate([ '/admin-management/list-category' ], navigationExtras);
   }
 
   agregarUniversidad(){
     let props:CategoryGenericProps = { 
-      pageTitle: 'Agregar Universidad',
+      pageTitle: 'Universidad',
       origin: 'NEW',
       
       fetchParentCategoryFilterKeyWord: null,
       localStorageRefName: 'universidad-post',
       newCategoryKeyword: APPCONSTANTS.CATEGORIES.UNIVERSITIES,
+      editCategoryData:null,
 
       parentCategory: false,
       university: false,
@@ -90,17 +93,18 @@ export class AdminManagementPage implements OnInit {
     let navigationExtras: NavigationExtras = {
       state: props
     }
-    this.router.navigate([ '/admin-management/add-category' ], navigationExtras);
+    this.router.navigate([ '/admin-management/list-category' ], navigationExtras);
   }
 
   agregarPaginasOficiales(){
     let props:CategoryGenericProps = { 
-      pageTitle: 'Agregar Páginas Oficiales',
+      pageTitle: 'Páginas Oficiales',
       origin: 'NEW',
       
       fetchParentCategoryFilterKeyWord: APPCONSTANTS.CATEGORIES.CAREERS,
       localStorageRefName: 'paginas-post',
       newCategoryKeyword: APPCONSTANTS.CATEGORIES.CAREER_SECTIONS.PAGINAS_OFICIALES,
+      editCategoryData:null,
 
       parentCategory: true,
       university: true,
@@ -116,17 +120,18 @@ export class AdminManagementPage implements OnInit {
     let navigationExtras: NavigationExtras = {
       state: props
     }
-    this.router.navigate([ '/admin-management/add-category' ], navigationExtras);
+    this.router.navigate([ '/admin-management/list-category' ], navigationExtras);
   }
 
   agregarPensum(){
     let props:CategoryGenericProps = { 
-      pageTitle: 'Agregar Pénsum',
+      pageTitle: 'Pénsum',
       origin: 'NEW',
       
       fetchParentCategoryFilterKeyWord: APPCONSTANTS.CATEGORIES.CAREERS,
       localStorageRefName: 'pensum-post',
       newCategoryKeyword: APPCONSTANTS.CATEGORIES.CAREER_SECTIONS.PENSUM_ESTUDIOS,
+      editCategoryData:null,
 
       parentCategory: true,
       university: true,
@@ -142,7 +147,7 @@ export class AdminManagementPage implements OnInit {
     let navigationExtras: NavigationExtras = {
       state: props
     }
-    this.router.navigate([ '/admin-management/add-category' ], navigationExtras);
+    this.router.navigate([ '/admin-management/list-category' ], navigationExtras);
   }
 
 }

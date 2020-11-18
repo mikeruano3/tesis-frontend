@@ -54,8 +54,16 @@ export class DataService {
       );
   }
 
-  public updateOne(collectionId: string, data: any): Observable<any> {
+  public updateOne(collectionId: string, data: {query:any, data:any}): Observable<any> {
     return this.http.put<any[]>(`${environment.apiUrl}/api/collections/${collectionId}/update`, data)
+      .pipe(
+        tap(courses => {/*console.log('Fetched!')*/}),
+        catchError(this.handleError<any[]>('Save', []))
+      );
+  }
+
+  public deleteOne(collectionId: string, id: any): Observable<any> {
+    return this.http.delete<any[]>(`${environment.apiUrl}/api/collections/${collectionId}/delete/${id}`, id)
       .pipe(
         tap(courses => {/*console.log('Fetched!')*/}),
         catchError(this.handleError<any[]>('Save', []))

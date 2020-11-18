@@ -35,7 +35,7 @@ export class PostsService {
       .pipe();
   }
 
-  updateOne(collectionId: string, data: any): Observable<any> {
+  updateOne(collectionId: string, data: {query:any, data:any}): Observable<any> {
     return this.http.put<any[]>(`${environment.apiUrl}/api/collections/${collectionId}/update`, data)
       .pipe();
   }

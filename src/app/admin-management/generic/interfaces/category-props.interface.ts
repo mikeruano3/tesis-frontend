@@ -1,3 +1,5 @@
+import { CategorySchema } from 'src/app/schemas/category';
+
 export interface CategoryGenericProps {
     pageTitle:string
     origin:string
@@ -5,6 +7,7 @@ export interface CategoryGenericProps {
     fetchParentCategoryFilterKeyWord:string
     localStorageRefName: string
     newCategoryKeyword:string
+    editCategoryData:CategorySchema
 
     parentCategory:boolean
     university:boolean

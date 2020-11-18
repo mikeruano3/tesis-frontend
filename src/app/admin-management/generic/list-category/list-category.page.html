@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar class="ios hydrated">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ios title-ios hydrated">Listar {{props?.pageTitle}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-searchbar type="search" debounce="500" color="light"
+  (ionChange)="getItems($event)" [placeholder]="'Buscar '+ props?.pageTitle" animated mode="ios">
+  </ion-searchbar>
+
+  <ion-list class="ios list-ios hydrated">
+    <ion-item *ngFor="let catItem of findedItems; index as i" class="item-label item ios in-list ion-focusable hydrated">
+      <ion-label class="sc-ion-label-ios-h sc-ion-label-ios-s ios hydrated">
+        <h2>{{catItem?.title}}</h2>
+      </ion-label>
+
+      <div class="item-note" item-end>
+        <button ion-button clear>
+          <ion-icon name="create" style="zoom:2.0" (click)="editItem(catItem)"></ion-icon>
+        </button>
+        <button ion-button clear>
+          <ion-icon name="trash" style="zoom:2.0" (click)="presentAlertConfirm(catItem)"></ion-icon>
+        </button>
+      </div>
+    </ion-item>
+  </ion-list>
+
+  <!-- fab placed to the bottom start -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="addNew()">
+      <ion-fab-button>
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+  </ion-fab>
+
+</ion-content>

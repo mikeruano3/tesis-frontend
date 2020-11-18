@@ -46,6 +46,8 @@ export class AddCategoryPage implements OnInit {
     if(this.props?.origin == 'NEW'){
         this.categoryData = await this.getLocalDraftFromStorage()
         console.log(this.categoryData);   
+    }else if(this.props?.origin == 'EDIT'){
+        this.categoryData = this.props?.editCategoryData
     }
   }
 
@@ -71,7 +73,8 @@ export class AddCategoryPage implements OnInit {
 
     // add links to topImage and avatarImg
     let avatarResult:any = null
-    if(this.props?.avatarImg && this.categoryData?.avatarImgFileRef?.firestoreDownloadLink){
+    if(this.props?.avatarImg && this.categoryData?.avatarImgFileRef?.firestoreDownloadLink
+      && !this.categoryData?.avatarImgFileRef?._id){
       this.categoryData.avatarImg = this.categoryData.avatarImgFileRef.firestoreDownloadLink
       avatarResult = await this.dataService.saveOne(APPCONSTANTS.SCHEMAS.FILES_SCHEMA, this.categoryData.avatarImgFileRef).toPromise()
           .catch(err=>{this.publishing = false })
@@ -83,7 +86,8 @@ export class AddCategoryPage implements OnInit {
     }
 
     let topImgResult:any = null
-    if(this.props?.topImg && this.categoryData?.topImgFileRef?.firestoreDownloadLink){
+    if(this.props?.topImg && this.categoryData?.topImgFileRef?.firestoreDownloadLink
+      && !this.categoryData?.topImgFileRef?._id){
       this.categoryData.topImg = this.categoryData.topImgFileRef.firestoreDownloadLink
       topImgResult = await this.dataService.saveOne(APPCONSTANTS.SCHEMAS.FILES_SCHEMA, this.categoryData.topImgFileRef).toPromise()
           .catch(err=>{this.publishing = false })
@@ -102,15 +106,26 @@ export class AddCategoryPage implements OnInit {
     } as CategorySchema
 
     //console.log(serverData);
-    let result = await this.dataService.saveOne(APPCONSTANTS.SCHEMAS.CATEGORIES_SCHEMA, serverData).toPromise()
+    let result
+    if(this.props?.origin == 'NEW'){
+      result = await this.dataService.saveOne(APPCONSTANTS.SCHEMAS.CATEGORIES_SCHEMA, serverData).toPromise()
       .catch(err=>{
         this.publishing = false    
       })
+    }else if(this.props?.origin == 'EDIT' && serverData._id){
+      let queryUpdate = { query: { _id: serverData._id }, data: serverData }
+      result = {_id: serverData._id}
+      await this.dataService.updateOne(APPCONSTANTS.SCHEMAS.CATEGORIES_SCHEMA, queryUpdate).toPromise()
+      .catch(err=>{
+        result = null
+        this.publishing = false    
+      })
+    }
     //console.log(result);
     
     this.publishing = false
 
-    if (result._id) {
+    if (result?._id) {
       await this.savePostToLocalStorage({} as CategorySchema)
       this.presentAlert('Éxito!', 'Los datos han sido guardados!') 
       this.goback()
