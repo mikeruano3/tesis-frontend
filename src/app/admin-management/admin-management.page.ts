@@ -54,7 +54,7 @@ export class AdminManagementPage implements OnInit {
 
       parentCategory: false,
       university: true,
-      avatarImg: false,
+      avatarImg: true,
       avatarTitle: false,
       avatarSubtitle: false,
       topImg: true,

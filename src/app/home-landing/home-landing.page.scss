@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Prompt&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');
 
 .upper-title-style{
   //color: rgb(224, 224, 224); text-shadow: black 0.1em 0.1em 0.2em
@@ -11,7 +11,7 @@
 
 .title-style{
   //color: #FFFFFF;
-  text-shadow: 2px 2px 5px #bbbbbb;
+  //text-shadow: 2px 2px 5px #bbbbbb;
   font-family: 'Montserrat', sans-serif;
 }
 
@@ -96,7 +96,7 @@ ion-card-content{
 }
 
 .bg-2{
-  background: #28ba60;
+  background: #4298B5; //#28ba60;
 }
 
 .bg-3{
@@ -105,4 +105,38 @@ ion-card-content{
 
 .bg-4{
   background: #1c2b2d;
+}
+
+.bg-5{
+  background: #01426A;
+}
+
+ion-label{
+  text-transform:none!important;
+}
+
+ion-card{
+  padding: 0%;
+  margin: 2% 2% 2% 2%;
+  height: 100%;
+}
+
+ion-card-header{
+  padding: 0%;
+  margin: 0;
+  padding-bottom: 0%;
+}
+
+ion-card-title{
+  padding: 0 3% 0 3%;
+}
+
+ion-card-content{
+  margin: 0% 1% 0 1%;
+  text-align: center;
+  width: 100%;
+}
+
+.sc-ion-searchbar-md-h {
+  --box-shadow: none !important;
 }
