@@ -7,7 +7,8 @@
         <ion-img src="assets/img/logo.png" style="width:55%; margin: auto; display: block;"></ion-img>
       </div>
     </ion-title>
-    <ion-row>
+    <ion-row class="bg-2 line"></ion-row>
+    <ion-row class="bg-5">
       <ion-searchbar type="search" debounce="500" color="light" [ngStyle]="{'margin-top': !isCarrerItemAvailable ? '0%' : '10%'}" 
        class="ion-text-center" (ionChange)="getCareerItems($event)" placeholder="Buscar carrera" mode="ios">
       </ion-searchbar>
@@ -35,7 +36,7 @@
       </ion-segment-button>
     </ion-segment>
     <ion-list class="bg-5" [ngSwitch]="selectedSegment"> <!--instagram-bg-->
-    <div *ngSwitchCase="'cat'">
+    <div *ngSwitchCase="'cat'" style="margin-top: 1%;">
       <ion-title class="title-style ion-text-center"  mode="md"> <!--orange-bg-->
         <h4 style="margin: 0%; color: white;">Carreras</h4>
       </ion-title>
@@ -81,7 +82,7 @@
       </ion-grid>
     </div>
 
-    <div *ngSwitchCase="'mat'">
+    <div *ngSwitchCase="'mat'" style="margin-top: 1%;">
       <ion-title class="title-style ion-text-center"  mode="md"> <!--green-bg-->
         <h4 style="margin: 0%; color: white;">Material de Estudio</h4>
       </ion-title>
@@ -124,7 +125,7 @@
       </ion-grid>
     </div>
 
-    <div *ngSwitchCase="'exp'">
+    <div *ngSwitchCase="'exp'" style="margin-top: 1%;">
       <ion-title class="title-style ion-text-center"  mode="md"> <!--stellar-bg-->
         <h4 style="margin: 0%; color: white;">Experiencias de egresados</h4>
       </ion-title>
