@@ -8,9 +8,9 @@
 </ion-header>
 
 
-<ion-content fullscreen class="single-post-home">
-  <img object-fit: cover [src]="props.upperImageSrc" style="margin-top: 0%;" *ngIf="props.upperImageSrc">
-  <section>
+<ion-content fullscreen class="single-post-home" color="light">
+  <!--<img object-fit: cover [src]="props.upperImageSrc" style="margin-top: 0%;" *ngIf="props.upperImageSrc">-->
+  <section class="ion-text-center">
       <h2 style="margin: 0 2% 1% 2%; padding: 0%;" *ngIf="props.upperTitle">{{ props.upperTitle }}</h2>
       <p style="margin: 0 2% 0% 2%; padding: 0%; font-size: 15px;" *ngIf="props.upperSubtitle"><i>{{ props.upperSubtitle }}</i></p>
   </section>
@@ -29,11 +29,11 @@
     </ion-grid>
   </section>
   <section>
-    <ion-searchbar type="search" debounce="500" color="light" *ngIf="props.dataFilterProperty"
+    <ion-searchbar type="search" debounce="500" *ngIf="props.dataFilterProperty"
       (ionChange)="getItems($event)" [placeholder]="props.dataFilterPlaceholder" animated>
     </ion-searchbar>
   </section>
-  <ion-list>
+  <ion-list color="light">
     <ion-grid [fixed]="true">
       <ion-row justify-content-center>
         <ion-col [size]="props.colSize"  *ngFor="let item of findedItems;">

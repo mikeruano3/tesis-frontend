@@ -7,7 +7,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content color="light">
   <ion-list lines="full" class="ion-no-margin ion-no-padding ios list-ios list-lines-full list-ios-lines-full hydrated">
     <form [formGroup]="loginForm" (ngSubmit)="onFormSubmit()">
       <ion-item lines="full">
@@ -48,6 +48,17 @@
           <a [routerLink]="['/forgot-password']" style="text-align:center;">
             <h6>¿Olvidó su contraseña?</h6>
           </a>
+        </ion-col>
+      </ion-row>
+
+      <ion-row style="text-align:center;">
+        <ion-col>
+          <div class="ion-text-center">
+            <p><i>¿No tiene una cuenta?</i></p>
+          </div>
+          <div class="ion-text-center">
+            <ion-button [routerLink]="['/register']" size="small">Registrarse</ion-button>
+          </div>
         </ion-col>
       </ion-row>
     </form>

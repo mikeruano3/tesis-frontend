@@ -1,7 +1,7 @@
 import { Component, Input, NgZone, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AlertController, LoadingController } from '@ionic/angular';
+import { AlertController, LoadingController, NavController } from '@ionic/angular';
 import { TokenStorageService } from '../../auth/token-storage.service';
 import { UserSchema } from '../../schemas/user';
 import { AuthService } from '../../auth/auth.service';
@@ -24,7 +24,7 @@ export class RegisterPage implements OnInit {
   constructor(private authService: AuthService,
     private router: Router,
     private route: ActivatedRoute,
-    public fb: FormBuilder,
+    public fb: FormBuilder, private navCtrl: NavController,
     public alertController: AlertController,
     private tokenStorage: TokenStorageService,
     private loadingController: LoadingController,
@@ -45,11 +45,12 @@ export class RegisterPage implements OnInit {
 
   clearForm(user:UserSchema){
     let passvalidator = this.isEditing == true ? [] : Validators.compose([Validators.required, Validators.minLength(5)])
-
+    let confirmpassvalidator = this.isEditing == true ? [] : Validators.compose([Validators.required])
     this.registerForm = this.fb.group({
       username: [user?.username, Validators.required],
       email: [user?.email, Validators.required],
       password:[undefined, passvalidator],
+      confirmpassword:[undefined, confirmpassvalidator],
       fullname: [user?.fullname, Validators.required],
       profession: [user?.profession],
       direction: [user?.direction],
@@ -69,7 +70,8 @@ export class RegisterPage implements OnInit {
 
   async onFormFirstRegisterSubmit() {
     this.isSignUpFailed = false; this.errorMessage = '';
-    if(this.registerForm.invalid){
+    if((this.registerForm.value.password != this.registerForm.value.confirmpassword)
+      || this.registerForm.invalid) {
       return
     }
     this.presentLoading()
@@ -77,10 +79,11 @@ export class RegisterPage implements OnInit {
     this.dismissLoading()
     console.log(regData);
     if(regData?.status == "true" || regData?.status == true){
-      await this.presentAlert('Éxito', '', 'Usuario creado exitosamente!')
+      await this.presentAlert('Éxito', 'Usuario creado exitosamente!', 
+        'Para confirmar su cuenta, por favor revise la bandeja de entrada de su correo')
       this.zone.run(() => {
         this.registerForm.reset()
-        this.router.navigate([this.userHome]);
+        this.navCtrl.pop()
       })
     }else{
       this.errorMessage = regData?.message;
@@ -105,7 +108,7 @@ export class RegisterPage implements OnInit {
       await this.presentAlert('Éxito', 'Usuario actualizado exitosamente!', 'Los cambios se aplicarán al reiniciar la sesión')
       this.zone.run(() => {
         this.registerForm.reset()
-        this.router.navigate([this.userHome]);
+        this.navCtrl.pop()
       })
     }else{
       this.errorMessage = regData?.message;

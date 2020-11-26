@@ -1,12 +1,18 @@
-<ion-content>
+<ion-content color="light">
   <div>
-    <ion-img src="/assets/img/home-landing/campus.jpg" *ngIf="!isCarrerItemAvailable"></ion-img>
+    <!--<ion-img src="/assets/img/home-landing/campus.jpg" *ngIf="!isCarrerItemAvailable"></ion-img>-->
     <ion-title class="ion-text-center upper-title-style"  *ngIf="!isCarrerItemAvailable" mode="md">
-      <h2 style="margin: 0%; width: 100%;"><b>Yo entro a la U</b></h2>
+      <!--<h2 style="margin: 0%; width: 100%;"><b>Yo entro a la U</b></h2>-->
+      <div style="margin: 0%; padding: 0%;">
+        <ion-img src="assets/img/logo.png" style="width:55%; margin: auto; display: block;"></ion-img>
+      </div>
     </ion-title>
-    <ion-searchbar type="search" debounce="500" color="light" [ngStyle]="{'margin-top': !isCarrerItemAvailable ? '0%' : '10%'}"
-      (ionChange)="getCareerItems($event)" placeholder="Buscar carrera" animated mode="ios">
-    </ion-searchbar>
+    <ion-row class="bg-2 line"></ion-row>
+    <ion-row class="bg-5">
+      <ion-searchbar type="search" debounce="500" color="light" [ngStyle]="{'margin-top': !isCarrerItemAvailable ? '0%' : '10%'}" 
+       class="ion-text-center" (ionChange)="getCareerItems($event)" placeholder="Buscar carrera" mode="ios">
+      </ion-searchbar>
+    </ion-row>
   </div>
   
   <ion-list class="ios list-ios hydrated" *ngIf="isCarrerItemAvailable">
@@ -17,69 +23,151 @@
 
   <div *ngIf="!isCarrerItemAvailable">
     <!-- ESTO SE MUESTRA AL INICIO Y SI NO HAY ELEMENTOS ENCONTRADOS -->
-  
-    <ion-list class="bg-4"> <!--instagram-bg-->
-      <ion-title class="title-style bg-1"  mode="md"> <!--orange-bg-->
-        <h4 style="margin: 0%;">Categorías de carreras</h4>
+    <ion-segment color="primary" scrollable value="cat" mode="md" 
+      style="overflow-x: hidden;" (ionChange)="segmentChanged($event)" >
+      <ion-segment-button value="cat" layout="icon-end">
+        <ion-label>Categorías</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="mat" layout="icon-end">
+        <ion-label>Material</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="exp" layout="icon-end">
+        <ion-label>Experiencias</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+    <ion-list class="bg-5" [ngSwitch]="selectedSegment"> <!--instagram-bg-->
+    <div *ngSwitchCase="'cat'" style="margin-top: 1%;">
+      <ion-title class="title-style ion-text-center"  mode="md"> <!--orange-bg-->
+        <h4 style="margin: 0%; color: white;">Carreras</h4>
       </ion-title>
-      <ion-title class="title-style bg-1"  mode="md">
-        <p style="margin: 0%; font-size: 10px;" (click)="verMasPosts()">Selecciona una categoría...</p>
+      <ion-title class="title-style ion-text-center"  mode="md">
+        <p style="margin: 0%; color: white; font-size: 10px;" (click)="verMasPosts()">Selecciona una categoría...</p>
       </ion-title>
-      <ion-spinner name="dots" *ngIf="categoryList?.length < 1" style="width: 100%"></ion-spinner>
-      <ion-slides [options]="slideOpts" pager="true" mode="ios" style="width: 100%;" class="bg-1">
+      <ion-spinner name="dots" *ngIf="categoryList?.length < 1" style="width: 100%" color="light"></ion-spinner>
+      <!--<ion-slides [options]="slideOpts" pager="true" mode="ios" style="width: 100%;" class="">
         <ion-slide *ngFor="let catItem of categoryList" (click)="handleCategoriesClick(catItem)">
-          <ion-card>
-            <img [src]="catItem.topImg" />
+          <ion-card class="bg-2">
+            < !--<img [src]="catItem.topImg" />-- >
             <ion-card-content>
               <ion-row>
-                 <h5 style="color: white;">{{catItem.title}}</h5>
+                <ion-col size="4">
+                  <img [src]="catItem.topImg" style="border-radius: 10%;"/>      
+                </ion-col>
+                <ion-col size="8">
+                  <h5 class="card-text ion-text-align-left">{{catItem.title}}</h5>
+                  <h6 class="card-text ion-text-align-left" style="font-size: 10px;">Click aquí</h6>
+                </ion-col>
               </ion-row>
             </ion-card-content>
           </ion-card>
         </ion-slide>
       </ion-slides>
+      -->
+      <ion-grid [fixed]="true">
+        <ion-row>
+          <ion-col size="6" *ngFor="let item of categoryList" (click)="handleCategoriesClick(item)">
+            <ion-card class="bg-2">
+              <ion-card-content>
+                <ion-row>
+                  <ion-col>
+                    <img [src]="item.avatarImg" style="border-radius: 10%;"/>  
+                  </ion-col>
+                </ion-row>
+                  <h5 class="card-text">{{item.title}}</h5>
+                  <h6 class="card-text" style="font-size: 10px;">Click aquí</h6>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
 
-      <ion-title class="title-style bg-2"  mode="md"> <!--green-bg-->
-        <h4 style="margin: 0%;">Material de Estudio</h4>
+    <div *ngSwitchCase="'mat'" style="margin-top: 1%;">
+      <ion-title class="title-style ion-text-center"  mode="md"> <!--green-bg-->
+        <h4 style="margin: 0%; color: white;">Material de Estudio</h4>
       </ion-title>
-      <ion-title class="title-style bg-2"  mode="md">
-        <p style="margin: 0%; font-size: 10px;" (click)="verMasPosts()">Ver más...</p>
+      <ion-title class="title-style ion-text-center"  mode="md">
+        <p style="margin: 0%; color: white; font-size: 10px;" (click)="verMasPosts()">Ver más...</p>
       </ion-title>
-      <ion-spinner name="dots" *ngIf="materialList?.length < 1" style="width: 100%"></ion-spinner>
-      <ion-slides [options]="slideOpts" pager="true" mode="ios" style="width: 100%;" class="bg-2">
+      <ion-spinner name="dots" *ngIf="materialList?.length < 1" style="width: 100%" color="light"></ion-spinner>
+      <!--
+      <ion-slides [options]="slideOpts" pager="true" mode="ios" style="width: 100%;" class="">
         <ion-slide *ngFor="let item of materialList" (click)="handlePostClick(item)">
-          <ion-card>
+          <ion-card class="bg-1">
             <img src="/assets/img/home-landing/material.jpg"/>
-            <ion-card-content style="height: 100px;">
+            <ion-card-content style="height: 50px;">
               <ion-row>
-                <h5 style="color: white;">{{item.title}}</h5>
-                <p style="color: white;" [innerHTML]="item.content"></p>
+                <h5 class="card-text">{{item.title}}</h5>
+                < !--<p class="card-text" [innerHTML]="item.content"></p>-- >
               </ion-row>
             </ion-card-content>
           </ion-card>
         </ion-slide>
       </ion-slides>
-  
-      <ion-title class="title-style bg-3"  mode="md"> <!--stellar-bg-->
-        <h4 style="margin: 0%;">Experiencias de egresados</h4>
+      -->
+      <ion-grid [fixed]="true">
+        <ion-row>
+          <ion-col size="6" *ngFor="let item of materialList" (click)="handlePostClick(item)">
+            <ion-card class="bg-2">
+              <ion-card-content>
+                <ion-row>
+                  <ion-col>
+                    <img src="/assets/img/home-landing/material.jpg" style="border-radius: 10%;"/>  
+                  </ion-col>
+                </ion-row>
+                  <h5 class="card-text">{{item.title}}</h5>
+                  <h6 class="card-text" style="font-size: 11px;">{{item?.postCategory?.title}}</h6>
+                  <h6 class="card-text" style="font-size: 9px;"><i>Click aquí</i> </h6>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+
+    <div *ngSwitchCase="'exp'" style="margin-top: 1%;">
+      <ion-title class="title-style ion-text-center"  mode="md"> <!--stellar-bg-->
+        <h4 style="margin: 0%; color: white;">Experiencias de egresados</h4>
       </ion-title>
-      <ion-title class="title-style bg-3"  mode="md">
-        <p style="margin: 0%; font-size: 10px;" (click)="verMasPosts()">Ver más...</p>
+      <ion-title class="title-style ion-text-center"  mode="md">
+        <p style="margin: 0%;  color: white; font-size: 10px;" (click)="verMasPosts()">Ver más...</p>
       </ion-title>
-      <ion-spinner name="dots" *ngIf="experiencesList?.length < 1" style="width: 100%"></ion-spinner>
-      <ion-slides [options]="slideOpts" pager="true" mode="ios" style="width: 100%;" class="bg-3">
+      <ion-spinner name="dots" *ngIf="experiencesList?.length < 1" style="width: 100%" color="light"></ion-spinner>
+      <!--
+      <ion-slides [options]="slideOpts" pager="true" mode="ios" style="width: 100%;" class="">
         <ion-slide *ngFor="let item of experiencesList" (click)="handlePostClick(item)">
-          <ion-card>
+          <ion-card class="bg-2">
             <img src="/assets/img/home-landing/expe.jpg"/>
-            <ion-card-content style="height: 100px;">
+            <ion-card-content style="height: 50px;">
               <ion-row>
-                <h5 style="color: white;">{{item.title}}</h5>
-                <p style="color: white;" [innerHTML]="item.content"></p>
+                <h5 class="card-text">{{item.title}}</h5>
+                < !--<p style="color: white;" [innerHTML]="item.content"></p>-- >
               </ion-row>
             </ion-card-content>
           </ion-card>
         </ion-slide>
       </ion-slides>
+      -->
+
+      <ion-grid [fixed]="true">
+        <ion-row>
+          <ion-col size="6" *ngFor="let item of experiencesList" (click)="handlePostClick(item)">
+            <ion-card class="bg-2">
+              <ion-card-content>
+                <ion-row>
+                  <ion-col>
+                    <img src="/assets/img/home-landing/expe.jpg" style="border-radius: 10%;"/>  
+                  </ion-col>
+                </ion-row>
+                  <h5 class="card-text">{{item.title}}</h5>
+                  <h6 class="card-text" style="font-size: 11px;">{{item?.postCategory?.title}}</h6>
+                  <h6 class="card-text" style="font-size: 9px;"><i>Click aquí</i> </h6>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
     </ion-list>
   </div>
 

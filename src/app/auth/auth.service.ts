@@ -27,4 +27,17 @@ export class AuthService {
   updateAppUser(id:string, data:any): Observable<any> {
     return this.http.put(AUTH_API + 'update-app-user/' + id, data, httpOptions).pipe()
   }
+
+  sendResetPassword(data: { email:string }): Observable<any> {
+    return this.http.post(AUTH_API + 'send-reset-password', data, httpOptions).pipe()
+  }
+
+  sendPasswordData(data: { password:string, token:string }): Observable<any> {
+    return this.http.post(AUTH_API + 'reset-password-data', data, httpOptions).pipe()
+  }
+
+  confirmEmail(token:string ): Observable<any> {
+    return this.http.get(AUTH_API + 'confirm-email/' + token, httpOptions).pipe()
+  }
+  
 }

@@ -124,7 +124,11 @@ export class ImageCropComponent implements OnInit {
           fileMetadata['isCurrentlyDeleting'] = undefined
           this.deleteFileFromLocal()
         }).catch( err =>{
-          this.presentAlert('ARCHIVO NO BORRADO!', 'Por favor intente de nuevo!')
+            if(err?.code == 'storage/object-not-found'){
+                this.deleteFileFromLocal()
+            }else{
+                this.presentAlert('ARCHIVO NO BORRADO!', 'Por favor intente de nuevo!')
+            }
           fileMetadata['isCurrentlyDeleting'] = undefined
         })    
     }

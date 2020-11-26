@@ -7,11 +7,11 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content fullscreen>
+<ion-content fullscreen color="light">
   <ion-list lines="full" mode="ios"
     class="ion-no-margin ion-no-padding ios list-ios list-lines-full list-ios-lines-full hydrated">
     <ion-list-header>
-      {{ props?.pageTitle }}
+      {{  props?.origin == 'NEW' ? 'Agregar ' + props?.pageTitle : 'Editar ' + props?.pageTitle }}
     </ion-list-header>
     <form #categoryForm="ngForm" (ngSubmit)="onFormSubmit(categoryForm)">
 

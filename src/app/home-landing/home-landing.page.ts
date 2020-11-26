@@ -33,7 +33,7 @@ export class HomeLandingPage implements OnInit {
   /*** MOST COMMON CARRER PANEL */
   slideOpts = {
     initialSlide: 1,
-    slidesPerView: 3,
+    slidesPerView: 2,
     freeMode: true,
     navigation: true,
     watchSlidesProgress: true,
@@ -51,7 +51,10 @@ export class HomeLandingPage implements OnInit {
       clickable: true
     },
   }
-  
+
+  slideOptsCat = { ...this.slideOpts, slidesPerView: 1}
+  selectedSegment:string = 'cat'
+
   constructor(
     private dataService: DataService,
     private route: ActivatedRoute, private router: Router
@@ -130,6 +133,7 @@ export class HomeLandingPage implements OnInit {
     reqCareersBody.query = {
       postClasification: APPCONSTANTS.CATEGORIES.CAREER_SECTIONS.MATERIAL_ESTUDIO,
     }
+    reqCareersBody.populate = 'postCategory'
     reqCareersBody.sort = { pinned: -1, reactionCount: -1, createdAt: -1 }
     reqCareersBody.limit = 10
 
@@ -142,6 +146,7 @@ export class HomeLandingPage implements OnInit {
     reqCareersBody.query = {
       postClasification: APPCONSTANTS.CATEGORIES.CAREER_SECTIONS.EXPERIENCIAS_EGRESADOS,
     }
+    reqCareersBody.populate = 'postCategory'
     reqCareersBody.sort = { pinned: -1, reactionCount: -1, createdAt: -1 }
     reqCareersBody.limit = 10
 
@@ -175,4 +180,7 @@ export class HomeLandingPage implements OnInit {
     this.router.navigate(['/tablinks/career-list']);
   }
 
+  segmentChanged(event){
+    this.selectedSegment = event?.detail?.value
+  } 
 }

@@ -1,5 +1,5 @@
 {
-  "appId": "io.ionic.starter",
+  "appId": "yoentroalau.app",
   "appName": "YoEntroALaU",
   "bundledWebRuntime": false,
   "npmClient": "npm",
@@ -13,7 +13,7 @@
     "preferences": {
       "ScrollEnabled": "false",
       "BackupWebStorage": "none",
-      "SplashMaintainAspectRatio": "true",
+      "SplashMaintainAspectRatio": "false",
       "FadeSplashScreenDuration": "300",
       "SplashShowOnlyFirstTime": "false",
       "SplashScreen": "screen",
